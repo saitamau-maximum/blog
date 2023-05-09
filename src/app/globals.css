@@ -23,6 +23,9 @@
 
   --z-index-header: 100;
   --z-index-hero: 2;
+
+  --bp-sp: 768px;
+  --bp-pc: 1024px;
 }
 
 body {
@@ -36,5 +39,5 @@ body {
 
 .dark body {
   color: var(--color-gray-50);
-  background-color: var(--color-gray-950);
+  background-color: var(--color-gray-900);
 }

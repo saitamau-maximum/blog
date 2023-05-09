@@ -1,0 +1,47 @@
+.tocList {
+  max-height: 70vh;
+  height: fit-content;
+  overflow-y: auto;
+  padding: 0;
+}
+
+.tocTitle {
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
+
+.tocWrapper {
+  list-style: none;
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.tocTop {
+  padding: 0 !important;
+}
+
+.tocItem {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.tocItemLink {
+  color: var(--color-gray-400) !important;
+  text-decoration: none;
+}
+
+.tocItemLink:hover {
+  text-decoration: underline;
+}
+
+:global(.light) .tocActive {
+  color: var(--color-gray-800) !important;
+}
+
+:global(.dark) .tocActive {
+  color: var(--color-gray-50) !important;
+}

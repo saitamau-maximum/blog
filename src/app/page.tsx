@@ -1,29 +1,25 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import { TEXT } from "@/constants/text";
+import { Hero } from "./component/hero";
 
 export default function Home() {
   return (
     <>
-      <div className={styles.hero}>
-        <div className={styles.heroBg} />
+      <Hero>
         <div className={styles.heroContent}>
           <Image
             className={styles.heroIcon}
             src="/images/avatar.png"
             alt="Maximum's ICON"
-            width={200}
-            height={200}
+            width={160}
+            height={160}
           />
-          <div>
-            <p className={styles.heroMessage}>{TEXT.TOP_WELCOME_MESSAGE}</p>
-          </div>
+          <p className={styles.heroMessage}>{TEXT.TOP_WELCOME_MESSAGE}</p>
         </div>
-      </div>
+      </Hero>
       <div className={styles.container}>
-        <div className={styles.main}>
-          <p className={styles.sectionTitle}>Coming Soon...</p>
-        </div>
+        <p className={styles.sectionTitle}>Coming Soon...</p>
       </div>
     </>
   );

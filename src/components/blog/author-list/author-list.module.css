@@ -1,0 +1,28 @@
+.authorList {
+  padding: 0;
+  margin: 0 auto;
+  list-style: none;
+  width: fit-content;
+}
+
+.authorItem {
+  display: contents;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+  text-decoration: none;
+}
+
+.authorImage {
+  border-radius: 50%;
+}
+
+.authorName {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-gray-50);
+}

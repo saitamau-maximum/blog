@@ -1,4 +1,5 @@
 import { createElement, Fragment } from "react";
+import { z } from "zod";
 import refractorC from "refractor/lang/c";
 import refractorCpp from "refractor/lang/cpp";
 import refractorDiff from "refractor/lang/diff";
@@ -27,6 +28,7 @@ import { unified } from "unified";
 
 import { Anchor } from "./rehype/anchor";
 import { Image } from "./rehype/image";
+import { ERROR } from "@/constants/error";
 
 refractor.register(refractorRust);
 refractor.register(refractorTypescript);
@@ -97,4 +99,87 @@ export const parseHTMLToReactJSX = (htmlContent: string) => {
       Fragment,
     }); //                   [hast -> jsx] hast(HTML抽象構文木)を一部ReactJSXに変換
   return processor.processSync(htmlContent).result;
+};
+
+const parseFrontmatter = (frontmatter: string) => {
+  const wrappedFrontmatter = frontmatter
+    .replace(/(\w+):/g, '"$1":')
+    .replace(/\n/g, ",\n");
+  try {
+    const jsonFrontmatter = JSON.parse(`{${wrappedFrontmatter}}`);
+    return jsonFrontmatter;
+  } catch (e) {
+    return null;
+  }
+};
+
+const frontmatterRegex = /^---\n([\s\S]+?)\n---\n/;
+
+const frontmatterSchema = z.object({
+  title: z.string({
+    required_error: ERROR.MARKDOWN_PARSER.FRONTMATTER_TITLE_REQUIRED,
+  }),
+  description: z.string({
+    required_error: ERROR.MARKDOWN_PARSER.FRONTMATTER_DESCRIPTION_REQUIRED,
+  }),
+  date: z
+    .string({
+      required_error: ERROR.MARKDOWN_PARSER.FRONTMATTER_DATE_REQUIRED,
+    })
+    .regex(/^\d{4}-\d{2}-\d{2}$/g, {
+      message: ERROR.MARKDOWN_PARSER.FRONTMATTER_DATE_FORMAT,
+    }),
+  authors: z
+    .array(z.string(), {
+      required_error: ERROR.MARKDOWN_PARSER.FRONTMATTER_AUTHORS_REQUIRED,
+    })
+    .min(1, {
+      message: ERROR.MARKDOWN_PARSER.FRONTMATTER_AUTHORS_LEAST_ONE,
+    }),
+  tags: z
+    .array(z.string(), {
+      required_error: ERROR.MARKDOWN_PARSER.FRONTMATTER_TAGS_REQUIRED,
+    })
+    .min(1, {
+      message: ERROR.MARKDOWN_PARSER.FRONTMATTER_TAGS_LEAST_ONE,
+    }),
+});
+
+type Frontmatter = z.infer<typeof frontmatterSchema>;
+
+export const parseStrToMarkdown = (
+  str: string,
+  filename: string
+): { frontmatter: Frontmatter; content: string } | null => {
+  const frontmatter = frontmatterRegex.exec(str);
+  if (!frontmatter) {
+    console.error(`[${filename}]`, ERROR.MARKDOWN_PARSER.FRONTMATTER_NOT_FOUND);
+    return null;
+  }
+  const jsonFrontmatter = parseFrontmatter(frontmatter[1]);
+  if (!jsonFrontmatter) {
+    console.error(
+      `[${filename}]`,
+      ERROR.MARKDOWN_PARSER.FRONTMATTER_PARSE_ERROR,
+      ERROR.MARKDOWN_PARSER.FRONTMATTER_CORRECT_FORMAT
+    );
+    return null;
+  }
+  const frontmatterData = frontmatterSchema.safeParse(jsonFrontmatter);
+  if (!frontmatterData.success) {
+    console.error(
+      `[${filename}]`,
+      ERROR.MARKDOWN_PARSER.FRONTMATTER_SCHEMA_ERROR,
+      "\n" +
+        frontmatterData.error.issues
+          .map((issue) => `- ${issue.message}`)
+          .join("\n")
+    );
+    return null;
+  }
+  const content = str.replace(frontmatterRegex, "");
+  return {
+    frontmatter: frontmatterData.data,
+    content,
+  };
 };

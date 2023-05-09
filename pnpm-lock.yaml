@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@types/mdast': ^3.0.11
   '@types/node': 18.15.13
   '@types/react': 18.0.38
   '@types/react-dom': 18.0.11
@@ -8,6 +9,7 @@ specifiers:
   eslint: 8.39.0
   eslint-config-next: 13.3.1
   katex: ^0.16.4
+  mdast: ^3.0.0
   next: 13.3.1
   react: 18.2.0
   react-dom: 18.2.0
@@ -27,9 +29,11 @@ specifiers:
   remark-slug: ^7.0.1
   typescript: 5.0.4
   unified: ^10.1.2
+  unist-util-visit: ^4.1.2
   zod: ^3.21.4
 
 dependencies:
+  '@types/mdast': 3.0.11
   '@types/node': 18.15.13
   '@types/react': 18.0.38
   '@types/react-dom': 18.0.11
@@ -37,6 +41,7 @@ dependencies:
   eslint: 8.39.0
   eslint-config-next: 13.3.1_iacogk7kkaymxepzhgcbytyi7q
   katex: 0.16.7
+  mdast: 3.0.0
   next: 13.3.1_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -56,6 +61,7 @@ dependencies:
   remark-slug: 7.0.1
   typescript: 5.0.4
   unified: 10.1.2
+  unist-util-visit: 4.1.2
   zod: 3.21.4
 
 packages:
@@ -2068,6 +2074,11 @@ packages:
     resolution: {integrity: sha512-V4Zn/ncyN1QNSqSBxTrMOLpjr+IKdHl2v3KVLoWmDPscP4r9GcCi71gjgvUV1SFSKh92AjAG4peFuBl2/YgCJg==}
     dependencies:
       '@types/mdast': 3.0.11
+    dev: false
+
+  /mdast/3.0.0:
+    resolution: {integrity: sha512-xySmf8g4fPKMeC07jXGz971EkLbWAJ83s4US2Tj9lEdnZ142UP5grN73H1Xd3HzrdbU5o9GYYP/y8F9ZSwLE9g==}
+    deprecated: '`mdast` was renamed to `remark`'
     dev: false
 
   /merge2/1.4.1:

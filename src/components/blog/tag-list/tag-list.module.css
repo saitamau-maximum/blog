@@ -1,0 +1,19 @@
+.tagList {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.tagItem {
+  display: contents;
+}
+
+.tag {
+  text-decoration: none;
+  padding: 0.25rem 1rem;
+  border-radius: 999px;
+  border: 2px solid var(--color-gray-50);
+  color: var(--color-gray-50);
+}

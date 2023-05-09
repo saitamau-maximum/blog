@@ -10,6 +10,8 @@ import refractorJson from "refractor/lang/json";
 import refractorPython from "refractor/lang/python";
 import refractorRust from "refractor/lang/rust";
 import refractorTypescript from "refractor/lang/typescript";
+import refactorHtml from "refractor/lang/xml-doc";
+import refractorCSS from "refractor/lang/css";
 import { refractor } from "refractor/lib/core.js";
 import rehypeKatex from "rehype-katex";
 import rehypeParse from "rehype-parse";
@@ -24,6 +26,7 @@ import remarkMath from "remark-math";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import remarkSlug from "remark-slug";
+import remarkCustomDirectives from "./remark/directive";
 import { unified } from "unified";
 
 import { Anchor } from "./rehype/anchor";
@@ -40,6 +43,8 @@ refractor.register(refractorCpp);
 refractor.register(refractorGo);
 refractor.register(refractorDiff);
 refractor.register(refractorJson);
+refractor.register(refactorHtml);
+refractor.register(refractorCSS);
 
 const rehypePrism = rehypePrismGenerator(refractor);
 
@@ -57,18 +62,19 @@ interface TocItem {
 }
 
 const mdHtmlProcessor = unified()
-  .use(remarkParse) //     [md    -> mdast] Markdownをmdast(Markdown抽象構文木)に変換
-  .use(remarkSlug) //      [mdast -> mdast] Headingにid付与（Toc Anchor用）
-  .use(remarkGfm) //       [mdast -> mdast] table等の拡張md記法変換
-  .use(remarkMath) //      [mdast -> mdast] mathブロックを変換
-  .use(remarkDirective) // [mdast -> mdast] directiveブロックを変換
-  .use(remarkCodeTitle) // [mdast -> mdast] codeブロックへタイトル等の構文拡張
-  .use(remarkRehype) //    [mdast -> hast ] mdast(Markdown抽象構文木)をhast(HTML抽象構文木)に変換
-  .use(rehypeKatex) //     [mdast -> hast ] mathブロックをkatex.jsに対応
+  .use(remarkParse) //            [md    -> mdast] Markdownをmdast(Markdown抽象構文木)に変換
+  .use(remarkSlug) //             [mdast -> mdast] Headingにid付与（Toc Anchor用）
+  .use(remarkGfm) //              [mdast -> mdast] table等の拡張md記法変換
+  .use(remarkMath) //             [mdast -> mdast] mathブロックを変換
+  .use(remarkDirective) //        [mdast -> mdast] directiveブロックを変換
+  .use(remarkCustomDirectives) // [mdast -> mdast] directiveブロックを拡張
+  .use(remarkCodeTitle) //        [mdast -> mdast] codeブロックへタイトル等の構文拡張
+  .use(remarkRehype) //           [mdast -> hast ] mdast(Markdown抽象構文木)をhast(HTML抽象構文木)に変換
+  .use(rehypeKatex) //            [mdast -> hast ] mathブロックをkatex.jsに対応
   .use(rehypePrism, {
-    ignoreMissing: true,
-  })
-  .use(rehypeStringify); // [hast  -> html ] hast(HTML抽象構文木)をHTMLに変換
+    ignoreMissing: false,
+  }) //                           [hast  -> hast ] codeブロックをPrism.jsに対応
+  .use(rehypeStringify); //       [hast  -> html ] hast(HTML抽象構文木)をHTMLに変換
 
 const tocProcessor = unified()
   .use(remarkParse) //      [md    -> mdast] Markdownをmdast(Markdown抽象構文木)に変換

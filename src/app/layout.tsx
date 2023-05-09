@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import "./globals.css";
 import { Noto_Sans_JP } from "next/font/google";
+import { Header } from "./component/header";
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
@@ -27,7 +28,10 @@ export default function RootLayout({
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script src="/fouc.js" />
       </head>
-      <body className={notoSansJP.className}>{children}</body>
+      <body className={notoSansJP.className}>
+        <Header />
+        <main>{children}</main>
+      </body>
     </html>
   );
 }

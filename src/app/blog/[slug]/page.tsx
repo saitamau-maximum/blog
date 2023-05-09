@@ -2,11 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import styles from "./page.module.css";
-import {
-  parseHTMLToReactJSX,
-  parseMarkdownToHTML,
-  parseStrToMarkdown,
-} from "@/lib/markdown";
+import { parseMarkdownToHTML, parseStrToMarkdown } from "@/lib/markdown";
 import { readdir, readFile } from "fs/promises";
 import path from "path";
 import { Hero } from "@/components/hero";
@@ -14,6 +10,7 @@ import { AuthorList } from "@/components/blog/author-list";
 import { TagList } from "@/components/blog/tag-list";
 import { Toc } from "@/components/blog/toc";
 import { Article } from "@/components/blog/article";
+import { ThemeSwitch } from "@/components/theme-switch";
 
 interface Props {
   params: {
@@ -91,8 +88,11 @@ export default async function BlogDetail({ params }: Props) {
       <div className={styles.container}>
         <Article content={blog.body.content} />
         <aside className={styles.aside}>
-          <div className={styles.toc}>
-            <Toc toc={blog.body.toc} />
+          <div className={styles.stickies}>
+            <div className={styles.toc}>
+              <Toc toc={blog.body.toc} />
+            </div>
+            <ThemeSwitch />
           </div>
         </aside>
       </div>

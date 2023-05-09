@@ -1,0 +1,22 @@
+.hero {
+  padding-top: var(--size-header-height);
+  background: var(--color-accent-gradient);
+  position: relative;
+  z-index: var(--z-index-hero);
+  border-radius: 0 0 1rem 1rem;
+  overflow: hidden;
+  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5);
+}
+
+.heroBg {
+  background-image: url("/images/noize.webp");
+  background-repeat: repeat;
+  opacity: 0.1;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}

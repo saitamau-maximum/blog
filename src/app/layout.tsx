@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import "./globals.css";
 import { Noto_Sans_JP } from "next/font/google";
 import { Header } from "./component/header";
+import { TEXT } from "@/constants/text";
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
@@ -10,11 +11,10 @@ const notoSansJP = Noto_Sans_JP({
 
 export const metadata = {
   title: {
-    default: "Maximum Blog",
-    template: "%s | Maximum Blog",
+    default: TEXT.SITE_TITLE,
+    template: `%s | ${TEXT.SITE_TITLE}`,
   },
-  description:
-    "埼玉大学プログラミングサークル Maximum のブログです。活動内での発見や学びを発信しています。",
+  description: TEXT.SITE_DESCRIPTION,
 } satisfies Metadata;
 
 export default function RootLayout({

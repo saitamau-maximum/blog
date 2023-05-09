@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import { TEXT } from "@/constants/text";
-import { Hero } from "./component/hero";
+import { Hero } from "../components/hero";
 
 export default function Home() {
   return (

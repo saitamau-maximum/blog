@@ -20,6 +20,9 @@
   --color-gray-50: rgb(249 250 251);
 
   --size-header-height: 8rem;
+
+  --z-index-header: 100;
+  --z-index-hero: 2;
 }
 
 body {

@@ -5,6 +5,7 @@ const nextConfig = {
   },
   images: {
     domains: ["github.com"],
+    unoptimized: true,
   },
   output: "export",
   trailingSlash: true,

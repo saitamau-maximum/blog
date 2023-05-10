@@ -21,18 +21,22 @@
 }
 
 .stickyHeader {
+  --sticky-header-vertical-padding: 2rem;
+  --sticky-header-min-vertical-margin: 1rem;
   position: fixed;
   background: var(--color-accent-gradient);
-  margin: 1rem;
-  width: calc(100% - 1rem * 2);
+  margin: 1rem auto;
+  left: 0;
+  right: 0;
+  width: calc(100% - var(--sticky-header-min-vertical-margin) * 2 - var(--sticky-header-vertical-padding) * 2);
+  max-width: var(--size-content-max-width);
   border-radius: 999px;
   overflow: hidden;
   display: flex;
   justify-content: space-between;
   align-items: center;
   opacity: 0;
-  padding: 0 2rem;
-  box-sizing: border-box;
+  padding: 0 var(--sticky-header-vertical-padding);
   z-index: var(--z-index-header);
   height: calc(var(--size-header-height) * 0.5);
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.25);

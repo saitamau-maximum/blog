@@ -38,7 +38,7 @@
 .container {
   display: flex;
   width: 100%;
-  max-width: 75rem;
+  max-width: var(--size-content-max-width);
   margin: 2rem auto;
   gap: var(--side-article-aside-gap);
 }

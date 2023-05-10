@@ -18,8 +18,6 @@ interface Props {
   };
 }
 
-export const dynamic = "force-static",
-  dynamicParams = false;
 const BLOGS_DIR_PATH = path.join(process.cwd(), "blog");
 
 export async function generateStaticParams() {
@@ -73,7 +71,7 @@ export default async function BlogDetail({ params }: Props) {
 
   return (
     <>
-      <Hero>
+      <Hero title={blog.meta.title}>
         <div className={styles.heroContainer}>
           <div className={styles.heroLeft}>
             <h1 className={styles.title}>{blog.meta.title}</h1>

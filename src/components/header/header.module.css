@@ -23,8 +23,11 @@
 .stickyHeader {
   position: fixed;
   background: var(--color-accent-gradient);
-  margin: 1rem;
+  margin: 1rem auto;
+  left: 0;
+  right: 0;
   width: calc(100% - 1rem * 2);
+  max-width: 1024px;
   border-radius: 999px;
   overflow: hidden;
   display: flex;

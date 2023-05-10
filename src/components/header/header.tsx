@@ -4,15 +4,17 @@ import styles from "./header.module.css";
 import { Logo } from "./logo";
 import { useHeader } from "@/hooks";
 
-const slideinKeyframes = [
+const SLIDEIN_KF = [
   { transform: "translateY(-30%)", opacity: 0 },
   { transform: "translateY(0)", opacity: 1 },
 ];
 
-const slideoutKeyframes = [
+const SLIDEOUT_KF = [
   { transform: "translateY(0)", opacity: 1 },
   { transform: "translateY(-30%)", opacity: 0 },
 ];
+
+const ANIMATION_DURATION = 100;
 
 export const Header = () => {
   const topRef = useRef<HTMLDivElement>(null);
@@ -25,21 +27,20 @@ export const Header = () => {
     const stickyHeader = stickyHeaderRef.current;
     if (!top || !hero || !stickyHeader) return;
     top.style.height = `${hero.clientHeight}px`;
-    if (!stickyHeader) return;
     const observer = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) {
           if (!stickyHeader.classList.contains(styles.stickyHeaderVisible))
             return;
-          const animation = stickyHeader.animate(slideoutKeyframes, {
-            duration: 100,
+          const animation = stickyHeader.animate(SLIDEOUT_KF, {
+            duration: ANIMATION_DURATION,
           });
           animation.onfinish = () => {
             stickyHeader.classList.remove(styles.stickyHeaderVisible);
           };
         } else {
           stickyHeader.classList.add(styles.stickyHeaderVisible);
-          stickyHeader.animate(slideinKeyframes, { duration: 100 });
+          stickyHeader.animate(SLIDEIN_KF, { duration: ANIMATION_DURATION });
         }
       },
       { threshold: [1] }

@@ -3,6 +3,7 @@ import "./globals.css";
 import { Noto_Sans_JP } from "next/font/google";
 import { Header } from "../components/header";
 import { TEXT } from "@/constants/text";
+import { HeaderProvider } from "@/hooks";
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
@@ -29,8 +30,10 @@ export default function RootLayout({
         <script src="/fouc.js" />
       </head>
       <body className={notoSansJP.className}>
-        <Header />
-        <main>{children}</main>
+        <HeaderProvider>
+          <Header />
+          <main>{children}</main>
+        </HeaderProvider>
       </body>
     </html>
   );

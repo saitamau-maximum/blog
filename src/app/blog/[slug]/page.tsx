@@ -32,7 +32,7 @@ export async function generateStaticParams() {
     })
   );
 
-  return slugs.map((slug) => ({ params: { slug } }));
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

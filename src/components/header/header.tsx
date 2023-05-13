@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./header.module.css";
 import { Logo } from "./logo";
 import { useHeader } from "@/hooks";
+import Link from "next/link";
 
 const SLIDEIN_KF = [
   { transform: "translateY(-30%)", opacity: 0 },
@@ -53,11 +54,15 @@ export const Header = () => {
     <>
       <div className={styles.top} ref={topRef}></div>
       <header className={styles.header}>
-        <Logo />
+        <Link href="/">
+          <Logo />
+        </Link>
       </header>
       <header className={styles.stickyHeader} ref={stickyHeaderRef}>
         <div className={styles.stickyHeaderBg} />
-        <Logo />
+        <Link href="/">
+          <Logo />
+        </Link>
         <span className={styles.title}>{title}</span>
       </header>
     </>

@@ -1,0 +1,28 @@
+.buttonList {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .buttonList {
+    flex-direction: column;
+  }
+}
+
+.githubIcon {
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+:global(.dark) .githubIcon {
+  color: var(--color-gray-50);
+}
+
+:global(.light) .githubIcon {
+  color: var(--color-gray-700);
+}
+

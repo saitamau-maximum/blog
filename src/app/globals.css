@@ -20,12 +20,18 @@
   --color-gray-50: rgb(249 250 251);
 
   --size-header-height: 8rem;
+  --size-sticky-header-height: 4rem;
+  --size-sticky-header-vertical-margin: 1rem;
+
   --size-aside-width: 20rem;
-  --side-article-aside-gap: 1rem;
+  --size-article-horizontal-padding: 1rem;
+  --size-aside-gap: 1rem;
   --size-content-max-width: 75rem;
 
   --z-index-header: 100;
   --z-index-hero: 2;
+
+  --icon-button-size: 3rem;
 
   --bp-sp: 768px;
   --bp-pc: 1024px;

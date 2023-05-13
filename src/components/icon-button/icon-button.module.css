@@ -1,0 +1,56 @@
+.iconButton {
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: var(--icon-button-size);
+  width: var(--icon-button-size);
+  position: relative;
+}
+
+@media (hover: hover) {
+  .iconButton:hover {
+    opacity: 0.8;
+  }
+
+  .iconButton:hover::after {
+    display: block;
+    content: attr(aria-label);
+    background-color: var(--color-gray-700);
+    color: var(--color-gray-50);
+    font-size: 0.625rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    position: absolute;
+    bottom: calc(100% + 0.5rem);
+    white-space: nowrap;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+
+  :global(.dark) .iconButton:hover::after {
+    background-color: var(--color-gray-50);
+    color: var(--color-gray-700);
+  }
+}
+
+:global(.dark) .iconButton {
+  background-color: var(--color-gray-700);
+}
+
+:global(.light) .iconButton {
+  background-color: var(--color-gray-50);
+}
+
+@media (max-width: 1024px) {
+  :global(.dark) .iconButton {
+    background-color: var(--color-gray-600);
+  }
+
+  :global(.light) .iconButton {
+    background-color: var(--color-gray-100);
+  }
+}

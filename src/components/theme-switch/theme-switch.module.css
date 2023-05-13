@@ -1,28 +1,3 @@
-.themeSwitch {
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 3rem;
-  width: 3rem;
-}
-
-:global(.dark) .themeSwitch {
-  background-color: var(--color-gray-700);
-}
-
-:global(.light) .themeSwitch {
-  background-color: var(--color-gray-50);
-}
-
-@media (hover: hover) {
-  .themeSwitch:hover {
-    opacity: 0.8;
-  }
-}
-
 .sun {
   color: var(--color-gray-50);
   display: none;

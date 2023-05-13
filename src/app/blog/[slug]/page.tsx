@@ -10,7 +10,8 @@ import { AuthorList } from "@/components/blog/author-list";
 import { TagList } from "@/components/blog/tag-list";
 import { Toc } from "@/components/blog/toc";
 import { Article } from "@/components/blog/article";
-import { ThemeSwitch } from "@/components/theme-switch";
+import { BlogButtonList } from "@/components/blog/button-list";
+import { URL } from "@/constants/url";
 
 interface Props {
   params: {
@@ -90,7 +91,9 @@ export default async function BlogDetail({ params }: Props) {
             <div className={styles.toc}>
               <Toc toc={blog.body.toc} />
             </div>
-            <ThemeSwitch />
+            <BlogButtonList
+              repositoryUrl={URL.GITHUB_REPOSITORY_BLOG_URL(blog.meta.slug)}
+            />
           </div>
         </aside>
       </div>

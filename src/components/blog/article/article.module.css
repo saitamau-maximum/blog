@@ -1,8 +1,14 @@
 .content {
-  width: calc(100% - (var(--side-article-aside-gap) + var(--size-aside-width)));
+  width: calc(100% - var(--size-aside-gap) - var(--size-aside-width));
   padding: 2rem;
   border-radius: 0.5rem;
   box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+  .content {
+    width: 100%;
+  }
 }
 
 :global(.light) .content {

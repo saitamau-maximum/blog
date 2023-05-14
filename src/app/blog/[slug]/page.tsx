@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: blog.meta.description,
     authors: blog.meta.authors.map((author) => ({
       name: author,
-      url: `https://github.com/${author}`,
+      url: URL.GITHUB_PROFILE_URL(author),
     })),
   };
 }

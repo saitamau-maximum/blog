@@ -4,15 +4,11 @@ import Link from "next/link";
 import styles from "./author-list.module.css";
 import { useState } from "react";
 import { MdExpandMore } from "react-icons/md";
+import { URL } from "@/constants/url";
 
 interface Props {
   authors: string[];
 }
-
-const GITHUB_PROFILE_URL = (username: string) =>
-  `https://github.com/${username}`;
-const GITHUB_PROFILE_IMAGE_URL = (username: string) =>
-  `https://github.com/${username}.png`;
 
 const MAX_DISPLAY_AUTHORS = 2;
 
@@ -30,12 +26,12 @@ export const AuthorList = ({ authors }: Props) => {
             <li key={author} className={styles.authorItem}>
               <Link
                 className={styles.author}
-                href={GITHUB_PROFILE_URL(author)}
+                href={URL.GITHUB_PROFILE_URL(author)}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <Image
-                  src={GITHUB_PROFILE_IMAGE_URL(author)}
+                  src={URL.GITHUB_PROFILE_IMAGE_URL(author)}
                   alt={author}
                   width={48}
                   height={48}

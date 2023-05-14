@@ -57,7 +57,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: calc(var(--size-header-height) * 0.5);
+  height: var(--size-sticky-header-height);
 
   background-image: url("/images/noize.webp");
   background-repeat: repeat;

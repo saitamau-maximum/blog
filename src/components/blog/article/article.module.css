@@ -3,6 +3,7 @@
   padding: 2rem;
   border-radius: 0.5rem;
   box-sizing: border-box;
+  line-height: 1.9;
 }
 
 @media (max-width: 1024px) {

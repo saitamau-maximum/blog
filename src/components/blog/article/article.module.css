@@ -106,10 +106,25 @@
 .content table th,
 .content table td {
   padding: 0.5rem 1rem;
-  border: 1px solid var(--color-gray-500);
+  border-width: 1px;
+  border-style: solid;
 }
 
-.content table th {
+:global(.light) .content table th,
+:global(.light) .content table td {
+  border-color: var(--color-gray-200);
+}
+
+:global(.dark) .content table th,
+:global(.dark) .content table td {
+  border-color: var(--color-gray-600);
+}
+
+:global(.light) .content table th {
+  background-color: var(--color-gray-200);
+}
+
+:global(.dark) .content table th {
   background-color: var(--color-gray-600);
 }
 

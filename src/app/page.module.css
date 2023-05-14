@@ -12,7 +12,7 @@
 
 @media (max-width: 480px) {
   .heroContent {
-    flex-direction: column;
+    display: none;
   }
 }
 

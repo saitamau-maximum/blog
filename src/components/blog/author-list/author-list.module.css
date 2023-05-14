@@ -1,4 +1,7 @@
 .authorList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   padding: 0;
   margin: 0 auto;
   list-style: none;
@@ -12,7 +15,6 @@
 .author {
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
   gap: 1rem;
   text-decoration: none;
 }
@@ -25,4 +27,53 @@
   font-size: 1.25rem;
   font-weight: 500;
   color: var(--color-gray-50);
+}
+
+.moreButton {
+  text-align: center;
+  margin: auto;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  border: none;
+  background: none;
+  color: var(--color-gray-50);
+  font-size: 1rem;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+}
+
+@media (hover: hover) {
+  .moreButton:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+}
+
+@media (max-width: 1024px) {
+  .authorList {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .authorImage {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .authorImage {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .author {
+    gap: 0.5rem;
+  }
+
+  .authorName {
+    font-size: 1rem;
+  }
 }

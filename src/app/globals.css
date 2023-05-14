@@ -24,7 +24,6 @@
   --size-sticky-header-vertical-margin: 1rem;
 
   --size-aside-width: 20rem;
-  --size-article-horizontal-padding: 1rem;
   --size-aside-gap: 1rem;
   --size-content-max-width: 75rem;
 
@@ -35,6 +34,12 @@
 
   --bp-sp: 768px;
   --bp-pc: 1024px;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --size-header-height: 4rem;
+  }
 }
 
 body {

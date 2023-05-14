@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import styles from "./header.module.css";
 import { Logo } from "./logo";
 import { useHeader } from "@/hooks";

@@ -1,0 +1,28 @@
+.cardList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 1rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .cardList {
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  }
+}
+
+.cardListEmpty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.cardListEmptyMessage {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-gray-100);
+}

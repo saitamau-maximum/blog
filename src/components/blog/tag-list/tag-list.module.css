@@ -3,6 +3,7 @@
   margin: 0;
   list-style: none;
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
@@ -16,4 +17,5 @@
   border-radius: 999px;
   border: 2px solid var(--color-gray-50);
   color: var(--color-gray-50);
+  white-space: nowrap;
 }

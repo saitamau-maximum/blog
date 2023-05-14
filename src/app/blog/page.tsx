@@ -5,8 +5,7 @@ import { readdir, readFile } from "fs/promises";
 import path from "path";
 import { Hero } from "@/components/hero";
 import { BlogCardList } from "@/components/blog/card-list";
-
-const BLOGS_DIR_PATH = path.join(process.cwd(), "blog");
+import { URL } from "@/constants/url";
 
 export const metadata = {
   title: "Blog",
@@ -14,10 +13,10 @@ export const metadata = {
 } satisfies Metadata;
 
 async function getBlogs() {
-  const files = await readdir(BLOGS_DIR_PATH);
+  const files = await readdir(URL.BLOG_DIR_PATH);
   const blogs = await Promise.all(
     files.map(async (file) => {
-      const filePath = path.join(BLOGS_DIR_PATH, file);
+      const filePath = URL.BLOG_FILE_PATH(file);
       const content = await readFile(filePath, "utf-8");
       const res = parseStrToMarkdown(content, filePath);
       if (!res) return null;

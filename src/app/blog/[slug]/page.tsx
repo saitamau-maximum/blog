@@ -19,15 +19,16 @@ interface Props {
   };
 }
 
-const BLOGS_DIR_PATH = path.join(process.cwd(), "blog");
-
 export async function generateStaticParams() {
-  const files = await readdir(BLOGS_DIR_PATH);
+  const files = await readdir(URL.BLOG_DIR_PATH);
   const slugs = await Promise.all(
     files.map(async (file) => {
-      const fp = path.join(BLOGS_DIR_PATH, file);
-      const RELATIVE_PATH = path.relative(BLOGS_DIR_PATH, path.dirname(fp));
-      const slug = path.join(RELATIVE_PATH, path.basename(fp, ".md"));
+      const filepath = URL.BLOG_FILE_PATH(file);
+      const RELATIVE_PATH = path.relative(
+        URL.BLOG_DIR_PATH,
+        path.dirname(filepath)
+      );
+      const slug = path.join(RELATIVE_PATH, path.basename(filepath, ".md"));
       const connectedSlug = slug.replace(path.sep, "-");
       return connectedSlug;
     })
@@ -51,8 +52,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 async function getBlog(slug: string) {
   const filename = `${slug}.md`;
-  const fp = path.join(BLOGS_DIR_PATH, filename);
-  const str = await readFile(fp, "utf-8");
+  const filepath = URL.BLOG_FILE_PATH(filename);
+  const str = await readFile(filepath, "utf-8");
   const res = parseStrToMarkdown(str, filename);
   if (!res) notFound();
 

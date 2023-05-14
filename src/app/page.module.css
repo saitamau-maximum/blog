@@ -29,13 +29,43 @@
 }
 
 .container {
-  margin: 0 auto;
+  margin: 1rem auto;
   width: 100%;
-  max-width: var(--bp-pc);
-  padding: 10rem 2rem;
+  padding: 0 1rem;
+  max-width: var(--size-content-max-width);
   box-sizing: border-box;
 }
 
 .sectionTitle {
   text-align: center;
+}
+
+.moreLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  width: fit-content;
+  text-decoration: none;
+  margin: 0.5rem auto;
+}
+
+@media (hover: hover) {
+  :global(.light) .moreLink:hover {
+    background-color: var(--color-gray-100);
+  }
+
+  :global(.dark) .moreLink:hover {
+    background-color: var(--color-gray-900);
+  }
+}
+
+:global(.light) .moreLink {
+  color: var(--color-gray-600);
+}
+
+:global(.dark) .moreLink {
+  color: var(--color-gray-100);
 }

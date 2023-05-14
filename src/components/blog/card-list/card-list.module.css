@@ -3,14 +3,8 @@
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   gap: 1rem;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0;
   width: 100%;
-}
-
-@media (max-width: 480px) {
-  .cardList {
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-  }
 }
 
 .cardListEmpty {

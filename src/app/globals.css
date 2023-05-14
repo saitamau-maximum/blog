@@ -19,7 +19,7 @@
   --color-gray-100: rgb(243 244 246);
   --color-gray-50: rgb(249 250 251);
 
-  --size-header-height: 8rem;
+  --size-header-height: 6rem;
   --size-sticky-header-height: 4rem;
   --size-sticky-header-vertical-margin: 1rem;
 
@@ -40,6 +40,14 @@
   :root {
     --size-header-height: 4rem;
   }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(
+    var(--size-sticky-header-vertical-margin) * 2 +
+      var(--size-sticky-header-height)
+  );
 }
 
 body {

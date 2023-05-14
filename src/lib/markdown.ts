@@ -12,6 +12,7 @@ import refractorRust from "refractor/lang/rust";
 import refractorTypescript from "refractor/lang/typescript";
 import refactorHtml from "refractor/lang/xml-doc";
 import refractorCSS from "refractor/lang/css";
+import refactorBash from "refractor/lang/bash";
 import { refractor } from "refractor/lib/core.js";
 import rehypeKatex from "rehype-katex";
 import rehypeParse from "rehype-parse";
@@ -45,6 +46,7 @@ refractor.register(refractorDiff);
 refractor.register(refractorJson);
 refractor.register(refactorHtml);
 refractor.register(refractorCSS);
+refractor.register(refactorBash);
 
 const rehypePrism = rehypePrismGenerator(refractor);
 

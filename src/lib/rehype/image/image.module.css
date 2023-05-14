@@ -12,7 +12,6 @@
   overflow: hidden;
   box-sizing: border-box;
   cursor: pointer;
-  filter: drop-shadow(0 0 0.25rem rgba(0, 0, 0, 0.5));
 }
 
 .expanded {
@@ -56,5 +55,4 @@
   object-fit: contain;
   max-height: calc(100dvh - 2rem);
   text-align: center;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
 }

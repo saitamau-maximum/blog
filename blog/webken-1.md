@@ -3,7 +3,7 @@ title: "【第1回】Webって何？触ってみよう"
 description: "Webの基礎を学び、HTMLとCSSを使ってWebページを作ってみます。体験形式で進めていきます。"
 date: "2023-04-24"
 authors: ["sor4chi"]
-tags: ["webken", "html", "css"]
+tags: ["Web研究会", "html", "css"]
 ---
 ## はじめに
 

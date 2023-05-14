@@ -3,7 +3,7 @@ title: "【第1回】はじめてのAtCoderとC++"
 description: "演算や変数、標準入出力などのC++の文法とAtCoderの使い方を学びます。"
 date: "2023-04-25"
 authors: ["kasa021"]
-tags: ["algorithm", "atcoder", "競技プログラミング", "cpp"]
+tags: ["入門講習会", "algorithm", "atcoder", "競技プログラミング", "cpp"]
 ---
 
 ## AtCoder アカウントを作成しよう

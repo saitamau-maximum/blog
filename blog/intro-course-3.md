@@ -3,7 +3,7 @@ title: "【第3回】これまでの復習をしよう"
 description: "第1/2回入門講習で学んだC++をAtCoderを使って復習しましょう。"
 date: "2023-05-09"
 authors: ["yukikamome316"]
-tags: ["algorithm", "atcoder", "競技プログラミング", "cpp"]
+tags: ["入門講習会", "algorithm", "atcoder", "競技プログラミング", "cpp"]
 ---
 
 # 第3回 入門講習会

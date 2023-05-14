@@ -3,7 +3,7 @@ title: "【第2回】はじめてのAtCoderとC++(2)"
 description: "関数・ループ・配列など、競プロでよく使われるより実践的なC++の使い方を紹介します。"
 date: "2023-05-01"
 authors: ["kasa021"]
-tags: ["algorithm", "atcoder", "競技プログラミング", "cpp"]
+tags: ["入門講習会", "algorithm", "atcoder", "競技プログラミング", "cpp"]
 ---
 
 ## STL の関数

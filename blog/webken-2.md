@@ -3,7 +3,7 @@ title: "【第2回】 実際に使えるサイトを作ろう"
 description: "今回はJavascriptを使ってサイトに動きをつけます。演習を通してブラウザ上で「計算機」を作ってみましょう。"
 date: "2023-05-01"
 authors: ["sor4chi"]
-tags: ["webken", "javascript"]
+tags: ["Web研究会", "javascript"]
 ---
 ## JavaScriptとは
 

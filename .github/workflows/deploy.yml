@@ -43,6 +43,8 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
+      - name: Playwright setup
+        run: pnpm run pw-install
       - name: Build with Next.js
         run: pnpm build
       - name: Upload artifact

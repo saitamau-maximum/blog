@@ -1,11 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
   images: {
     domains: ["github.com"],
     unoptimized: true,
+  },
+  experimental: {
+    serverComponentsExternalPackages: ["rehype-mermaidjs"],
   },
   output: "export",
   trailingSlash: true,

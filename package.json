@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "pw-install": "playwright install chromium",
     "lint": "next lint"
   },
   "dependencies": {
@@ -18,12 +19,14 @@
     "eslint-config-next": "13.3.1",
     "katex": "^0.16.4",
     "mdast": "^3.0.0",
-    "next": "13.3.1",
+    "next": "13.4.2",
+    "playwright": "^1.33.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
     "refractor": "^4.8.1",
     "rehype-katex": "^6.0.3",
+    "rehype-mermaidjs": "^1.0.1",
     "rehype-parse": "^8.0.4",
     "rehype-prism-plus": "^1.5.1",
     "rehype-react": "^7.2.0",

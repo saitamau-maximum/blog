@@ -1,9 +1,10 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./header.module.css";
 import { Logo } from "./logo";
 import { useHeader } from "@/hooks";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const SLIDEIN_KF = [
   { transform: "translateY(-30%)", opacity: 0 },
@@ -18,19 +19,17 @@ const SLIDEOUT_KF = [
 const ANIMATION_DURATION = 100;
 
 export const Header = () => {
-  const topRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
   const stickyHeaderRef = useRef<HTMLElement>(null);
-  const { title } = useHeader();
+  const { title, heroAreaRef } = useHeader();
 
   useEffect(() => {
-    const top = topRef.current;
-    const hero = document.querySelector("#hero-area");
+    const hero = heroAreaRef.current;
     const stickyHeader = stickyHeaderRef.current;
-    if (!top || !hero || !stickyHeader) return;
-    top.style.height = `${hero.clientHeight}px`;
+    if (!hero || !stickyHeader) return;
     const observer = new IntersectionObserver(
       ([e]) => {
-        if (e.isIntersecting) {
+        if (e.intersectionRatio > 0) {
           if (!stickyHeader.classList.contains(styles.stickyHeaderVisible))
             return;
           const animation = stickyHeader.animate(SLIDEOUT_KF, {
@@ -44,15 +43,14 @@ export const Header = () => {
           stickyHeader.animate(SLIDEIN_KF, { duration: ANIMATION_DURATION });
         }
       },
-      { threshold: [1] }
+      { threshold: [0, 1] }
     );
-    observer.observe(top);
-    return () => observer.unobserve(top);
-  }, []);
+    observer.observe(hero);
+    return () => observer.unobserve(hero);
+  }, [heroAreaRef, pathname]);
 
   return (
     <>
-      <div className={styles.top} ref={topRef}></div>
       <header className={styles.header}>
         <Link href="/">
           <Logo />

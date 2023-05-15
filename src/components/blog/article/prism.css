@@ -464,7 +464,7 @@ pre {
   margin-left: -16px;
   margin-right: -16px;
   background-color: rgba(55, 65, 81, 0.5); /* Set highlight bg color */
-  border-left: 4px solid rgb(59, 130, 246); /* Set highlight accent border color */
+  border-left: 5px solid rgb(59, 130, 246); /* Set highlight accent border color */
 }
 
 .line-number::before {

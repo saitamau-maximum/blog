@@ -170,6 +170,11 @@ export const parseStrToMarkdown = (
   str: string,
   filename: string
 ): { frontmatter: Frontmatter; content: string } | null => {
+  if (filename === "tag.md") {
+    console.error(`[${filename}]`, ERROR.MARKDOWN_PARSER.TAG_MD_NOT_ALLOWED);
+    return null;
+  }
+
   const frontmatter = frontmatterRegex.exec(str);
   if (!frontmatter) {
     console.error(`[${filename}]`, ERROR.MARKDOWN_PARSER.FRONTMATTER_NOT_FOUND);

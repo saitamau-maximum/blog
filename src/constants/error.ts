@@ -22,5 +22,7 @@ tags: ["tag1", "tag2"]
     FRONTMATTER_AUTHORS_LEAST_ONE: "authorsは1人以上必要です。",
     FRONTMATTER_TAGS_REQUIRED: "tagsが必要です。",
     FRONTMATTER_TAGS_LEAST_ONE: "tagsは1つ以上必要です。",
+    TAG_MD_NOT_ALLOWED:
+      "File名がURLになる仕様上、`/blog/tag`と重複する`tag.md`の作成は許可されていません。",
   },
 };

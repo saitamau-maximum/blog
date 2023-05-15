@@ -11,6 +11,13 @@ import { MdArrowForward } from "react-icons/md";
 
 const LATEST_BLOGS_COUNT = 6;
 
+export const HOME_BREADCRUMBS = [
+  {
+    title: "Home",
+    href: "/",
+  },
+];
+
 async function getLatestBlogs() {
   const files = await readdir(URL.BLOG_DIR_PATH);
   const blogs = await Promise.all(
@@ -40,7 +47,7 @@ export default async function Home() {
 
   return (
     <>
-      <Hero>
+      <Hero breadcrumbs={HOME_BREADCRUMBS}>
         <div className={styles.heroContent}>
           <Image
             className={styles.heroIcon}

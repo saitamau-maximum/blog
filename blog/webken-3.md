@@ -114,7 +114,7 @@ git init
 では、ファイルを作成してみましょう。
 main.cppというファイルを作成し、以下の内容を書き込んでください。
 
-```cpp
+```cpp:main.cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -176,8 +176,8 @@ git log
 を実行すると、以下のようなログが表示されます。
 
 ```txt
-commit <id>
-Author: <username + email>
+commit <commitのハッシュ>
+Author: <username> <email>
 Date:   <date>
 
     Hello Worldと表示するプログラムを作成
@@ -221,14 +221,14 @@ git log
 以下のようなログが表示されます。
 
 ```txt
-commit <id>
-Author: <username + email>
+commit <commitのハッシュ>
+Author: <username> <email>
 Date:   <date>
 
     Hello WorldをHello Maximumに修正
 
-commit <id>
-Author: <username + email>
+commit <commitのハッシュ>
+Author: <username> <email>
 Date:   <date>
 
     Hello Worldと表示するプログラムを作成

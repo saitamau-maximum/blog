@@ -40,7 +40,7 @@
   display: flex;
   width: calc(100% - var(--size-article-horizontal-padding) * 2);
   max-width: var(--size-content-max-width);
-  margin: 2rem auto;
+  margin: 1rem auto;
   padding: 0 var(--size-article-horizontal-padding);
   gap: var(--size-aside-gap);
 }

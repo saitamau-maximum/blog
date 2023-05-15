@@ -12,12 +12,21 @@ import { Toc } from "@/components/blog/toc";
 import { Article } from "@/components/blog/article";
 import { BlogButtonList } from "@/components/blog/button-list";
 import { URL } from "@/constants/url";
+import { BLOG_LIST_BREADCRUMBS } from "../page";
 
 interface Props {
   params: {
     slug: string;
   };
 }
+
+const BLOG_DETAIL_BREADCRUMBS = (title: string, href: string) => [
+  ...BLOG_LIST_BREADCRUMBS,
+  {
+    title,
+    href,
+  },
+];
 
 export async function generateStaticParams() {
   const files = await readdir(URL.BLOG_DIR_PATH);
@@ -74,7 +83,13 @@ export default async function BlogDetail({ params }: Props) {
 
   return (
     <>
-      <Hero title={blog.meta.title}>
+      <Hero
+        title={blog.meta.title}
+        breadcrumbs={BLOG_DETAIL_BREADCRUMBS(
+          blog.meta.title,
+          `/blog/${blog.meta.slug}`
+        )}
+      >
         <div className={styles.heroContainer}>
           <div className={styles.heroLeft}>
             <h1 className={styles.title}>{blog.meta.title}</h1>

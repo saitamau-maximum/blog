@@ -255,7 +255,7 @@ git push origin main
 ## Githubでの共同開発に必要な知識
 
 Githubを使うことで、複数人で同じプログラムを開発することができます。
-さらに[Maximum](https://github.com/saitama-maximum)など、組織を作って管理権限を付与したり、プロジェクトをまとめて管理したりすることもできます。
+さらに[Maximum](https://github.com/saitamau-maximum)など、組織を作って管理権限を付与したり、プロジェクトをまとめて管理したりすることもできます。
 
 Githubでの共同開発に必要な知識を学びましょう。
 

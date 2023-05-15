@@ -18,4 +18,24 @@
   border: 2px solid var(--color-gray-50);
   color: var(--color-gray-50);
   white-space: nowrap;
+  transition: all 0.2s ease-in-out;
+}
+
+@media (hover: hover) {
+  .tag:hover {
+    background: var(--color-gray-50);
+    color: var(--color-accent-primary);
+  }
+}
+
+@media (max-width: 1024px) {
+  .tagList {
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-size: 0.875rem;
+    padding: 0.125rem 0.5rem;
+  }
 }

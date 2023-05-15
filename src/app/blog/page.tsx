@@ -6,11 +6,20 @@ import path from "path";
 import { Hero } from "@/components/hero";
 import { BlogCardList } from "@/components/blog/card-list";
 import { URL } from "@/constants/url";
+import { HOME_BREADCRUMBS } from "../page";
 
 export const metadata = {
   title: "Blog",
   description: "Blog",
 } satisfies Metadata;
+
+export const BLOG_LIST_BREADCRUMBS = [
+  ...HOME_BREADCRUMBS,
+  {
+    title: "ブログ一覧",
+    href: "/blog",
+  },
+];
 
 async function getBlogs() {
   const files = await readdir(URL.BLOG_DIR_PATH);
@@ -41,8 +50,16 @@ export default async function BlogList() {
 
   return (
     <>
-      <Hero>
-        <h1>Blogs</h1>
+      <Hero
+        breadcrumbs={BLOG_LIST_BREADCRUMBS}
+        information={`${blogs.length} posts`}
+      >
+        <div className={styles.heroContent}>
+          <h1 className={styles.title}>ブログ一覧</h1>
+          <p className={styles.description}>
+            サークルの公開している講習会資料や、技術のアウトプットなどを掲載しています。
+          </p>
+        </div>
       </Hero>
       <div className={styles.container}>
         <BlogCardList blogs={blogs} />

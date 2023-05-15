@@ -15,6 +15,7 @@ import refractorCSS from "refractor/lang/css";
 import refactorBash from "refractor/lang/bash";
 import { refractor } from "refractor/lib/core.js";
 import rehypeKatex from "rehype-katex";
+import rehypeMermaid from "rehype-mermaidjs";
 import rehypeParse from "rehype-parse";
 import rehypePrismGenerator from "rehype-prism-plus/generator";
 import rehypeReact from "rehype-react";
@@ -72,6 +73,12 @@ const mdHtmlProcessor = unified()
   .use(remarkCustomDirectives) // [mdast -> mdast] directiveブロックを拡張
   .use(remarkCodeTitle) //        [mdast -> mdast] codeブロックへタイトル等の構文拡張
   .use(remarkRehype) //           [mdast -> hast ] mdast(Markdown抽象構文木)をhast(HTML抽象構文木)に変換
+  .use(rehypeMermaid, {
+    strategy: "inline-svg",
+    mermaidConfig: {
+      fontFamily: "sans-serif, monospace",
+    },
+  }) //          [hast  -> hast ] mermaidブロックをmermaid.jsに対応
   .use(rehypeKatex) //            [mdast -> hast ] mathブロックをkatex.jsに対応
   .use(rehypePrism, {
     ignoreMissing: false,
@@ -85,10 +92,14 @@ const tocProcessor = unified()
     keys: ["data"],
   });
 
-export const parseMarkdownToHTML = (mdContent: string) => {
+export const parseMarkdownToHTML = async (mdContent: string) => {
+  const [content, toc] = await Promise.all([
+    await mdHtmlProcessor.process(mdContent),
+    await tocProcessor.run(tocProcessor.parse(mdContent)),
+  ]);
   return {
-    content: mdHtmlProcessor.processSync(mdContent).toString(),
-    toc: tocProcessor.runSync(tocProcessor.parse(mdContent)) as TocItem[],
+    content: content.toString(),
+    toc: toc as TocItem[],
   };
 };
 

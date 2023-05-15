@@ -6,6 +6,10 @@
   line-height: 1.9;
 }
 
+.content svg * {
+  line-height: 1;
+}
+
 @media (max-width: 1024px) {
   .content {
     width: 100%;
@@ -151,4 +155,14 @@
 
 .content :global(.remark-code-container) {
   margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content svg[id^="mermaid-"] {
+  background-color: var(--color-gray-100);
+  border: 1px solid var(--color-gray-300);
+  border-radius: 0.5rem;
+  text-align: center;
 }

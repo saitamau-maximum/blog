@@ -43,9 +43,9 @@ $A$ から偶数を取り出した列を、空白区切りで1行に出力せよ
 ### 解答例
 簡易的なフローチャートと、実際のプログラムは以下の通りです。
 
-```txt:mermaid
+```mermaid
 flowchart LR
-    Start([Start])-->A["要素を配列Aに格納<br>(要素数N)"]
+    Start([Start])-->A["要素を配列Aに格納 < br > (要素数N)"]
     A-->B[i = 0]
     B-->C[/i < N\]
     C-->|true|D{"A[i]が偶数"}
@@ -138,7 +138,7 @@ $S$
 
 ただし、 $i = 0,\ 1,\ 2$ であることに注意してください。
 
-```txt:mermaid
+```mermaid
 ---
 title: i = 0 (2i = 0, 2i + 1 = 1)
 ---
@@ -151,7 +151,7 @@ graph LR
 
 ```
 
-```txt:mermaid
+```mermaid
 ---
 title: i = 1 (2i = 2, 2i + 1 = 3)
 ---
@@ -166,7 +166,7 @@ graph LR
 
 ```
 
-```txt:mermaid
+```mermaid
 ---
 title: i = 2 (2i = 4, 2i + 1 = 5)
 ---
@@ -181,7 +181,7 @@ graph LR
 
 ```
 
-```txt:mermaid
+```mermaid
 ---
 title: Result
 ---
@@ -282,9 +282,9 @@ int main() {
 実は、もう少し簡単な方法として、「`if`文の中で変化するものだけを配列に入れて`for`文を回す」というものがあります。
 
 簡易的なフローチャートは以下の通りです:
-```txt:mermaid
+```mermaid
 flowchart TD
-    Start([Start])-->Nを受け取る-->A[指定されているキーワードを<br>配列keywordsに格納する]
+    Start([Start])-->Nを受け取る-->A[指定されているキーワードを < br > 配列keywordsに格納する]
     A-->B[i = 0]-->while[/i < N\]
     while-->|true|C[文字列を受け取ってwordに格納]
     while-->|false|Noと出力-->End([End])

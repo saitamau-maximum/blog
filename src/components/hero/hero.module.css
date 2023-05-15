@@ -65,11 +65,11 @@
 
 @media (hover: hover) {
   :global(.light) .link:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: var(--color-gray-200);
   }
 
   :global(.dark) .link:hover {
-    background-color: rgba(255, 255, 255, 0.25);
+    background-color: var(--color-gray-900);
   }
 }
 

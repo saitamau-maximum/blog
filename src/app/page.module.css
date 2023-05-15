@@ -54,7 +54,7 @@
 
 @media (hover: hover) {
   :global(.light) .moreLink:hover {
-    background-color: var(--color-gray-100);
+    background-color: var(--color-gray-200);
   }
 
   :global(.dark) .moreLink:hover {

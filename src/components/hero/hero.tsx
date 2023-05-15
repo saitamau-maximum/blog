@@ -16,7 +16,7 @@ type BreadcrumbItem = {
 interface Props {
   title?: string;
   children?: ReactNode;
-  information?: ReactNode;
+  information?: string;
   breadcrumbs: BreadcrumbItem[];
 }
 
@@ -66,7 +66,7 @@ export const Hero = ({ children, information, title, breadcrumbs }: Props) => {
             </>
           ))}
         </div>
-        {information}
+        <span className={styles.information}>{information}</span>
       </div>
     </>
   );

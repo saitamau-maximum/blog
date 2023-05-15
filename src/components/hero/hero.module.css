@@ -52,7 +52,7 @@
 }
 
 :global(.light) .breadcrumbItem {
-  color: var(--color-gray-900);
+  color: var(--color-gray-600);
 }
 
 :global(.dark) .breadcrumbItem {
@@ -71,4 +71,12 @@
   :global(.dark) .link:hover {
     background-color: rgba(255, 255, 255, 0.25);
   }
+}
+
+:global(.dark) .information {
+  color: var(--color-gray-50);
+}
+
+:global(.light) .information {
+  color: var(--color-gray-600);
 }

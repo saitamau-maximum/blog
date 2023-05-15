@@ -66,8 +66,7 @@ STLには以前紹介したように便利な関数がありました．今回�
 
 ### priority_queue
 - 優先度付きキューと呼ばれるデータ構造
-- `priority_queue`を用いると，値を追加して，追加した順に値を取り出す処理ができる
-- FIFO(First In First Out)先に入れたものが先に出てくる
+- `priority_queue`を用いると，追加した値のうち大きい順に取り出す処理ができる
 
 `priority_queue`の宣言
 
@@ -88,7 +87,7 @@ STLには以前紹介したように便利な関数がありました．今回�
 ### stack
 - キューとは違い，後入れ先出し(LIFO)のデータ構造
 
-`atack`の宣言
+`stack`の宣言
 
 `stack<型> 変数名;`
 
@@ -356,8 +355,7 @@ int main(){
 
 ## priority_queue
 - 優先度付きキューと呼ばれるデータ構造
-- `priority_queue`を用いると，値を追加して，追加した順に値を取り出す処理ができる
-- FIFO(First In First Out)先に入れたものが先に出てくる
+- `priority_queue`を用いると，追加した値のうち大きい順に取り出す処理ができる
 
 `priority_queue`の宣言
 
@@ -451,6 +449,7 @@ int main(){
 }
 ```
 </details>
+
 ## deque
 - 両端キューと呼ばれるデータ構造
 - `queue`の操作と`stack`の操作のどちらも行える

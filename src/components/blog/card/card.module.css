@@ -91,7 +91,15 @@
   font-size: 0.75rem;
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
-  background-color: var(--color-gray-600);
-  color: var(--color-gray-100);
   white-space: nowrap;
+}
+
+:global(.light) .cardTagItem {
+  background-color: var(--color-gray-200);
+  color: var(--color-gray-600);
+}
+
+:global(.dark) .cardTagItem {
+  background-color: var(--color-gray-600);
+  color: var(--color-gray-200);
 }

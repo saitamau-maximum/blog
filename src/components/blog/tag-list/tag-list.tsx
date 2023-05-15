@@ -6,7 +6,7 @@ interface Props {
   tags: string[];
 }
 
-const BLOG_LIST_BY_TAG_URL = (tag: string) => `/tag/${tag}`;
+const BLOG_LIST_BY_TAG_URL = (tag: string) => `/blog/tag/${tag}`;
 
 export const TagList = ({ tags }: Props) => {
   return (

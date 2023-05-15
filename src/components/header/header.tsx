@@ -43,7 +43,7 @@ export const Header = () => {
           stickyHeader.animate(SLIDEIN_KF, { duration: ANIMATION_DURATION });
         }
       },
-      { threshold: [0, 1] }
+      { threshold: [0, 0.25, 0.5, 0.75, 1] }
     );
     observer.observe(hero);
     return () => observer.unobserve(hero);

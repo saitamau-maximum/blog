@@ -56,10 +56,11 @@ async function getBlog(slug: string) {
   const str = await readFile(filepath, "utf-8");
   const res = parseStrToMarkdown(str, filename);
   if (!res) notFound();
+  const parsed = await parseMarkdownToHTML(res.content);
 
   return {
     body: {
-      ...parseMarkdownToHTML(res.content),
+      ...parsed,
     },
     meta: {
       ...res.frontmatter,

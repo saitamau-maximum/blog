@@ -22,25 +22,23 @@ export const AuthorList = ({ authors }: Props) => {
     <>
       <ul className={styles.authorList}>
         {displayAuthors.map((author) => (
-          <>
-            <li key={author} className={styles.authorItem}>
-              <Link
-                className={styles.author}
-                href={URL.GITHUB_PROFILE_URL(author)}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src={URL.GITHUB_PROFILE_IMAGE_URL(author)}
-                  alt={author}
-                  width={48}
-                  height={48}
-                  className={styles.authorImage}
-                />
-                <span className={styles.authorName}>{author}</span>
-              </Link>
-            </li>
-          </>
+          <li key={author} className={styles.authorItem}>
+            <Link
+              className={styles.author}
+              href={URL.GITHUB_PROFILE_URL(author)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                src={URL.GITHUB_PROFILE_IMAGE_URL(author)}
+                alt={author}
+                width={48}
+                height={48}
+                className={styles.authorImage}
+              />
+              <span className={styles.authorName}>{author}</span>
+            </Link>
+          </li>
         ))}
       </ul>
       {!displayMore && authors.length > MAX_DISPLAY_AUTHORS && (

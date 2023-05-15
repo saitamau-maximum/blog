@@ -7,6 +7,12 @@
   width: 100%;
 }
 
+@media (max-width: 22rem) {
+  .cardList {
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  }
+}
+
 .cardListEmpty {
   display: flex;
   justify-content: center;

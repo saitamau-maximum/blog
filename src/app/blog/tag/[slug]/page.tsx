@@ -18,7 +18,7 @@ const TITLE = (tag: string) => `「${tag}」 のブログ一覧`;
 const DESCRIPTION = (tag: string) =>
   `${tag} のタグがついたブログ一覧です。\nサークルの公開している講習会資料や、技術のアウトプットなどを掲載しています。`;
 
-export const BLOG_LIST_FILTER_BY_TAG_BREADCRUMBS = (
+const BLOG_LIST_FILTER_BY_TAG_BREADCRUMBS = (
   title: string,
   tag: string
 ) => [

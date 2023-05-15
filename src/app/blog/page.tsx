@@ -8,15 +8,19 @@ import { BlogCardList } from "@/components/blog/card-list";
 import { URL } from "@/constants/url";
 import { HOME_BREADCRUMBS } from "../page";
 
+const TITLE = "ブログ一覧";
+const DESCRIPTION =
+  "サークルの公開している講習会資料や、技術のアウトプットなどを掲載しています。";
+
 export const metadata = {
-  title: "Blog",
-  description: "Blog",
+  title: TITLE,
+  description: DESCRIPTION,
 } satisfies Metadata;
 
 export const BLOG_LIST_BREADCRUMBS = [
   ...HOME_BREADCRUMBS,
   {
-    title: "ブログ一覧",
+    title: TITLE,
     href: "/blog",
   },
 ];
@@ -55,10 +59,8 @@ export default async function BlogList() {
         information={`${blogs.length} posts`}
       >
         <div className={styles.heroContent}>
-          <h1 className={styles.title}>ブログ一覧</h1>
-          <p className={styles.description}>
-            サークルの公開している講習会資料や、技術のアウトプットなどを掲載しています。
-          </p>
+          <h1 className={styles.title}>{TITLE}</h1>
+          <p className={styles.description}>{DESCRIPTION}</p>
         </div>
       </Hero>
       <div className={styles.container}>

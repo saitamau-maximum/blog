@@ -112,7 +112,7 @@ int main() {
       cnt.at(x)++;
     } else {
       // 含まれていないなら、1を追加
-      cnt[x] = 1;
+      cnt.at(x) = 1;
     }
   }
 

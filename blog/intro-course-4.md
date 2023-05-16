@@ -1,9 +1,9 @@
 ---
 date: "2023-05-16"
 title: "【第4回】便利なデータ構造"
-author: "takashin9"
+description: ""
+authors: ["takashin9"]
 tags: ["algorithm", "atcoder", "競技プログラミング", "cpp"]
-layout: default
 ---
 
 

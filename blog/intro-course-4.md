@@ -7,6 +7,14 @@ layout: default
 ---
 
 
+## AOJに登録
+今回の講習会でAOJのジャッジシステムを使用するので，登録をお願いします．
+
+実践講習会でも利用するかもしれません．
+1. <https://onlinejudge.u-aizu.ac.jp/signup>にアクセス
+2. 必須項目を入力して送信
+    - idと名前はAtCoderと同じで大丈夫です
+3. 試しに<https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A>に提出してみましょう
 
 ## STL のコンテナ
 

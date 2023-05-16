@@ -66,7 +66,7 @@ STLには以前紹介したように便利な関数がありました．今回�
 
 ### priority_queue
 - 優先度付きキューと呼ばれるデータ構造
-- `priority_queue`を用いると，追加した値のうち大きい順に取り出す処理ができる
+- `priority_queue`を用いると，追加した値のうち**大きい順**に取り出す処理ができる
 
 `priority_queue`の宣言
 
@@ -355,7 +355,7 @@ int main(){
 
 ## priority_queue
 - 優先度付きキューと呼ばれるデータ構造
-- `priority_queue`を用いると，追加した値のうち大きい順に取り出す処理ができる
+- `priority_queue`を用いると，追加した値のうち**大きい順**に取り出す処理ができる
 
 `priority_queue`の宣言
 

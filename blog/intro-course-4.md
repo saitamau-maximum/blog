@@ -299,6 +299,73 @@ int main(){
 値が小さい順に取り出される`priority_queue`の宣言
 
 `priority_queue<型, vector<型>, greater<型>> 変数名;`
+
+### 問題文
+この問題はAOJにあります
+
+<https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_2_C>
+
+### ヒント
+<details>
+<summary></summary>
+
+クエリの入力
+```cpp
+int n, q;
+cin >> n >> q;
+vector<priority_queue<int>> pq(n);
+while (q--) {
+    int p;
+    cin >> p;
+    if (p == 0) {
+
+    }
+    if (p == 1) {
+
+    }
+    if (p == 2) {
+
+    }
+}
+```
+
+**キューが空の場合**の場合分けを忘れずに！
+</details>
+
+
+### 解答例
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int main(){
+    int n, q;
+    cin >> n >> q;
+    vector<priority_queue<int>> pq(n);
+    while (q--) {
+        int p;
+        cin >> p;
+        if (p == 0) {
+            int t, x;
+            cin >> t >> x;
+            pq.at(t).push(x);
+        }
+        if (p == 1) {
+            int t;
+            cin >> t;
+            if (!pq.at(t).empty()) cout << pq.at(t).top() << endl;
+        }
+        if (p == 2) {
+            int t;
+            cin >> t;
+            if (!pq.at(t).empty()) pq.at(t).pop();
+        }
+    }
+    return 0;
+}
+```
 ## stack
 - キューとは違い，後入れ先出し(LIFO)のデータ構造
 

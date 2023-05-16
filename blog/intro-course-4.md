@@ -381,8 +381,8 @@ int main(){
 | 操作                   | 記法                                          | 計算量 |
 | ---------------------- | --------------------------------------------- | ------ |
 | 要素の追加             | `d.push_back(value)`<br>`d.push_front(value)` | $O(1)$ |
-| 先頭の要素へのアクセス | `d.front()`<br>`d.back()`<br>`d.at(i)`        | $O(1)$ |
-| 先頭の要素を削除       | `d.pop_back()`<br>`d.pop_front()`             | $O(1)$ |
+| 要素へのアクセス       | `d.front()`<br>`d.back()`<br>`d.at(i)`        | $O(1)$ |
+| 末尾or先頭の要素を削除 | `d.pop_back()`<br>`d.pop_front()`             | $O(1)$ |
 | 要素数の取得           | `d.size()`<br>`d.empty()`                     | $O(1)$ |
 
 ### 問題文

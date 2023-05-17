@@ -48,6 +48,7 @@ console.log(2 * 2); // 4
 console.log(4 / 2); // 2
 console.log(5 % 2); // 1
 ```
+
 Cではint型同士の除算は小数点以下が切り捨てられますが、JSは動的片付け言語のため、除算では小数点以下も計算されます。
 
 ```js
@@ -175,7 +176,6 @@ switch (text) {
 }
 ```
 
-
 ### 繰り返し
 
 ```js
@@ -277,6 +277,7 @@ JSで繰り返し処理を行う場合、`for`文を使うことはほとんど�
 | [length](#length) | 配列の**要素数**を取得する | `[1, 2, 3, 4, 5] -> 5` |
 
 #### Map
+
 Mapはその配列の要素一つ一つを加工して、新しい配列を作成します。
 
 ```js
@@ -294,6 +295,7 @@ for文でいちいちindexを指定して要素を取り出すのは面倒なの
 その結果を配列にして返します。
 
 #### ForEach
+
 ForEachはその配列の要素一つ一つに対して、関数を実行します。
 
 ```js
@@ -310,6 +312,7 @@ array.forEach(log); // value: 1, value: 2, value: 3, value: 4, value: 5
 今回は`log`という関数を作成して、それを`forEach`に渡しています。
 
 #### Filter
+
 Filterはその配列の要素一つ一つに対して、関数を実行し、その結果が`true`の要素だけを取り出して、新しい配列を作成します。
 
 ```js
@@ -328,6 +331,7 @@ console.log(oddArray); // [1, 3, 5]
 ```
 
 #### Reduce
+
 Reduceはその配列の要素一つ一つに対して、関数を実行し、その結果を次の要素に渡していきます。
 最終的には一つの値を返します。
 
@@ -342,6 +346,7 @@ console.log(result); // 15
 ```
 
 #### Find
+
 Findはその配列の要素一つ一つに対して、関数を実行し、その結果が`true`になった最初の要素を返します。
 
 ```js
@@ -357,6 +362,7 @@ console.log(result); // 2
 `Filter`と違って、`find`は最初に見つかった要素だけを返します。なので今回はindex`0`から線形探索をして初めて見つかった値`2`を返します。
 
 #### Some
+
 Someはその配列の要素一つ一つに対して、関数を実行し、その結果が`true`になった要素が一つでもあれば`true`を返します。
 
 ```js
@@ -370,6 +376,7 @@ console.log(result); // true
 ```
 
 #### Every
+
 Everyはその配列の要素一つ一つに対して、関数を実行し、その結果が`true`になった要素がすべて`true`ならば`true`を返します。
 
 ```js
@@ -383,6 +390,7 @@ console.log(result); // false
 ```
 
 #### Sort
+
 Sortはその配列の要素一つ一つに対して、関数を実行し、その結果を元にソートします。
 
 ```js
@@ -515,6 +523,7 @@ console.log(object.address.country); // Japan
 ブラケット記法では、オブジェクトの変数名の後にブラケットを付け、その中にプロパティ名を文字列で記述します。
 
 特に
+
 ```js
 const object = {
     "1": "aaa",
@@ -622,6 +631,7 @@ console.log('Hello World');
 ```
 
 こういうフォルダ構成になっていればOKです。
+
 ```txt
 Webken
 └── 2
@@ -772,6 +782,7 @@ document.addEventListener('DOMContentLoaded', () => {
 今回は簡単な計算機を作ってみましょう。
 
 ### 要件
+
 - 数値を入力する2つの入力ボックスがある
 - 計算するボタンがある
 - ボタンが押されるとその2つの数値を足し算して、計算結果を表示する
@@ -796,6 +807,7 @@ document.addEventListener('DOMContentLoaded', () => {
 ```
 
 ### ヒント
+
 - 入力ボックスの値は、`document.getElementById('テキストボックスのid').value`で取得できる
 - 文字列を数値に変換するには、`parseInt()`を使う
 - 計算結果を表示するには、`document.getElementById('計算結果を表示する要素のid').textContent`を使う
@@ -931,11 +943,13 @@ document.addEventListener('DOMContentLoaded', () => {
 #### ヒント
 
 - CSSでIDがついた要素を指定するには、`#id名`を使う
+
 ```css
 #nannkano-id {
     /* ここにスタイルを書く */
 }
 ```
+
 - 背景色を変えるには、`background-color`を使う
 - 文字色を変えるには、`color`を使う
 

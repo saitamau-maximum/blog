@@ -22,12 +22,19 @@ Headingは`#`を使って記述します。`#`の数が多いほど小さい見�
 ```
 
 :::details[結果]
+
 # Heading 1
+
 ## Heading 2
+
 ### Heading 3
+
 #### Heading 4
+
 ##### Heading 5
+
 ###### Heading 6
+
 :::
 
 ## Text
@@ -129,6 +136,7 @@ Listは`-`で記述できます。
 ```
 
 :::details[結果]
+
 - List1
 - List2
 - List3
@@ -167,7 +175,6 @@ Tableは`|`で記述できます。
 | Cell4   | Cell5   | Cell6   |
 :::
 
-
 ### Code(Block)
 
 Code(Block)は`` ``` ``で囲むことで記述できます。
@@ -179,9 +186,11 @@ Code
 ~~~
 
 :::details[結果]
+
 ```
 Code
 ```
+
 :::
 
 またこのブログは[Prism.js](https://prismjs.com/)が内部で使用されています。したがって
@@ -203,6 +212,7 @@ console.log(fib(100)); // 354224848179262000000
 ~~~
 
 :::details[結果]
+
 ```js
 const fib = (n) => {
   if (n <= 1) return n;
@@ -211,6 +221,7 @@ const fib = (n) => {
 
 console.log(fib(100)); // 354224848179262000000
 ```
+
 :::
 
 #### Line Highlight
@@ -229,6 +240,7 @@ console.log(fib(100)); // 354224848179262000000
 ~~~
 
 :::details[結果]
+
 ```js{2-3,6}
 const fib = (n) => {
   if (n <= 1) return n;
@@ -237,6 +249,7 @@ const fib = (n) => {
 
 console.log(fib(100)); // 354224848179262000000
 ```
+
 :::
 
 #### Line Numbers
@@ -255,6 +268,7 @@ console.log(fib(100)); // 354224848179262000000
 ~~~
 
 :::details[結果]
+
 ```js showLineNumbers
 const fib = (n) => {
   if (n <= 1) return n;
@@ -263,6 +277,7 @@ const fib = (n) => {
 
 console.log(fib(100)); // 354224848179262000000
 ```
+
 :::
 
 #### Diff Highlight
@@ -289,6 +304,7 @@ console.log(fib(100)); // 354224848179262000000
 ~~~
 
 :::details[結果]
+
 ```diff
 - const fib = (n) => {
 -   if (n <= 1) return n;
@@ -305,6 +321,7 @@ console.log(fib(100)); // 354224848179262000000
 
 console.log(fib(100)); // 354224848179262000000
 ```
+
 :::
 
 #### 拡張構文を組み合わせる
@@ -331,6 +348,7 @@ console.log(fib(100)); // 354224848179262000000
 ~~~
 
 :::details[結果]
+
 ```diff-js{2-3,5,8,10} showLineNumbers
 - const fib = (n) => {
 -  if (n <= 1) return n;
@@ -347,6 +365,7 @@ console.log(fib(100)); // 354224848179262000000
 
 console.log(fib(100)); // 354224848179262000000
 ```
+
 :::
 
 ### Math(Block)

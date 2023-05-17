@@ -1,16 +1,18 @@
 ---
 date: "2023-05-16"
 title: "【第4回】便利なデータ構造"
-description: ""
+description: "入門講習会第4回"
 authors: ["takashin9"]
 tags: ["algorithm", "atcoder", "競技プログラミング", "cpp"]
 ---
 
 
 ## AOJに登録
+
 今回の講習会でAOJのジャッジシステムを使用するので，登録をお願いします．
 
 実践講習会でも利用するかもしれません．
+
 1. <https://onlinejudge.u-aizu.ac.jp/signup>にアクセス
 2. 必須項目を入力して送信
     - idと名前はAtCoderと同じで大丈夫です
@@ -21,39 +23,46 @@ tags: ["algorithm", "atcoder", "競技プログラミング", "cpp"]
 STLには以前紹介したように便利な関数がありました．今回は，便利なデータ構造を紹介します．
 
 ## まとめ
+
 ### map
+
 - 連想配列や辞書と呼ばれるデータ構造
 - `map`を用いると，特定の値にある値が紐付いているようなデータが扱える
 
 ### set
+
 - 重複がない要素の集合を扱うデータ構造
 - 数Aの集合と似ている
 
 ### queue
+
 - キューや待ち行列と呼ばれるデータ構造
 - `queue`を用いると，値を追加して，追加した順に値を取り出す処理ができる
 - FIFO(First In First Out)先に入れたものが先に出てくる
 
 ### priority_queue
+
 - 優先度付きキューと呼ばれるデータ構造
 - `priority_queue`を用いると，追加した値のうち**大きい順**に取り出す処理ができる
 
 ### stack
+
 - キューとは違い，後入れ先出し(LIFO)のデータ構造
 
 ### deque
+
 - 両端キューと呼ばれるデータ構造
 - `queue`の操作と`stack`の操作のどちらも行える
 - 先頭と末尾に対して追加・削除が行える配列のようなもの
 
 ## map
+
 - 連想配列や辞書と呼ばれるデータ構造
 - `map`を用いると，特定の値にある値が紐付いているようなデータが扱える
 
 `map`の宣言
 
 `map<Keyの型, Valueの型> 変数名;`
-
 
 | 操作           | 記法               | 計算量      |
 | -------------- | ------------------ | ----------- |
@@ -62,6 +71,7 @@ STLには以前紹介したように便利な関数がありました．今回�
 | 値へのアクセス | `mp.at(key)`       | $O(\log N)$ |
 | 所属判定       | `mp.count(key)`    | $O(\log N)$ |
 | 要素数の取得   | `mp.size()`        | $O(1)$      |
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -90,14 +100,15 @@ int main()
 <https://atcoder.jp/contests/apg4b/tasks/APG4b_bz>
 
 ### ヒント
+
 <details>
 <summary></summary>
 
 値と出現回数を`map`で管理してみましょう
 </details>
 
-
 ### 解答例
+
 <details>
 <summary></summary>
 
@@ -137,10 +148,11 @@ int main() {
   cout << ans << " " << max_cnt << endl;
 }
 ```
+
 </details>
 
-
 ## set
+
 - 重複がない要素の集合を扱うデータ構造
 - 数Aの集合と似ている
 
@@ -148,13 +160,13 @@ int main() {
 
 `set<型> 変数名;`
 
-
 | 操作         | 記法               | 計算量      |
 | ------------ | ------------------ | ----------- |
 | 値の追加     | `Set.insert(value)` | $O(\log N)$ |
 | 値の削除     | `Set.erase(value)`  | $O(\log N)$ |
 | 所属判定     | `Set.count(value)`  | $O(\log N)$ |
 | 要素数の取得 | `Set.size()`        | $O(1)$      |
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -176,15 +188,15 @@ int main()
 <https://atcoder.jp/contests/abc211/tasks/abc211_b>
 
 ### ヒント
+
 <details>
 <summary></summary>
 
 `set`に文字列をすべて挿入した場合，要素数はどうなりますか？
 </details>
 
-
-
 ### 解答例
+
 <details>
 <summary></summary>
 
@@ -205,9 +217,11 @@ int main() {
     cout << (st.size() == 4 ? "Yes" : "No") << endl;
 }
 ```
+
 </details>
 
 ## queue
+
 - キューや待ち行列と呼ばれるデータ構造
 - `queue`を用いると，値を追加して，追加した順に値を取り出す処理ができる
 - FIFO(First In First Out)先に入れたものが先に出てくる
@@ -215,8 +229,6 @@ int main() {
 `queue`の宣言
 
 `queue<型> 変数名;`
-
-
 
 | 操作                   | 記法              | 計算量 |
 | ---------------------- | ----------------- | ------ |
@@ -226,8 +238,11 @@ int main() {
 | 要素数の取得           | `que.size()`      | $O(1)$ |
 
 ### 問題文
+
 <https://atcoder.jp/contests/atc002/tasks/abc007_3>
+
 ### ヒント
+
 <details open>
 <summary></summary>
 
@@ -235,6 +250,7 @@ int main() {
 </details>
 
 ### 解答例
+
 <details>
 <summary>もう少しきれいに実装できると思います...</summary>
 
@@ -273,21 +289,22 @@ int main(){
         }
     }
     cout << dist[g.second][g.first] << endl;
-    
-    
+
+
     return 0;
 }
 ```
+
 </details>
 
 ## priority_queue
+
 - 優先度付きキューと呼ばれるデータ構造
 - `priority_queue`を用いると，追加した値のうち**大きい順**に取り出す処理ができる
 
 `priority_queue`の宣言
 
 `priority_queue<型> 変数名;`
-
 
 | 操作                   | 記法             | 計算量 |
 | ---------------------- | ---------------- | ------ |
@@ -301,15 +318,18 @@ int main(){
 `priority_queue<型, vector<型>, greater<型>> 変数名;`
 
 ### 問題文
+
 この問題はAOJにあります
 
 <https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_2_C>
 
 ### ヒント
+
 <details>
 <summary></summary>
 
 クエリの入力
+
 ```cpp
 int n, q;
 cin >> n >> q;
@@ -331,7 +351,6 @@ while (q--) {
 
 **キューが空の場合**の場合分けを忘れずに！
 </details>
-
 
 ### 解答例
 
@@ -366,13 +385,14 @@ int main(){
     return 0;
 }
 ```
+
 ## stack
+
 - キューとは違い，後入れ先出し(LIFO)のデータ構造
 
 `stack`の宣言
 
 `stack<型> 変数名;`
-
 
 | 操作                   | 記法             | 計算量 |
 | ---------------------- | ---------------- | ------ |
@@ -382,13 +402,16 @@ int main(){
 | 要素数の取得           | `s.size()`      | $O(1)$ |
 
 ### 問題文
+
 <https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_ay>
 
 ### ヒント
+
 <details>
 <summary></summary>
 
 クエリの入力
+
 ```cpp
 int q;
 cin >> q;
@@ -400,16 +423,18 @@ while (q--) {
 
     }
     if (p == 2) {
-        
+
     }
     if (p == 3) {
-        
+
     }
 }
 ```
+
 </details>
 
 ### 解答例
+
 <details>
 <summary></summary>
 
@@ -438,13 +463,15 @@ int main(){
             s.pop();
         }
     }
-    
+
     return 0;
 }
 ```
+
 </details>
 
 ## deque
+
 - 両端キューと呼ばれるデータ構造
 - `queue`の操作と`stack`の操作のどちらも行える
 - 先頭と末尾に対して追加・削除が行える配列のようなもの
@@ -461,13 +488,16 @@ int main(){
 | 要素数の取得           | `d.size()`<br>`d.empty()`                     | $O(1)$ |
 
 ### 問題文
+
 <https://atcoder.jp/contests/abc291/tasks/abc291_b>
 
 ### ヒント
+
 <details>
 <summary></summary>
 
 `deque`の入力は以下のようにできる
+
 ```cpp
 int n;
 cin >> n;
@@ -485,6 +515,7 @@ for (int i = 0; i < 5*n; i++) {
 </details>
 
 ### 解答例
+
 <details>
 <summary></summary>
 
@@ -512,10 +543,11 @@ int main() {
     }
     double s = 0;
     for (int x : d) s += x; //sにすべて足す
-    
+
     //おまじないをして出力
     cout << fixed << setprecision(15);
     cout << s / (3*n) << endl;
 }
 ```
+
 </details>

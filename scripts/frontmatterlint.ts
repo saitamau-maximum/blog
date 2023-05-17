@@ -9,6 +9,12 @@ const schema = z.object({
     .regex(/^".+"$/, {
       message: 'titleは"(ダブルクォーテーション)で囲ってください',
     }),
+  description: z
+    .string({ required_error: "descriptionは必須です" })
+    .min(1, { message: "descriptionは必須です" })
+    .regex(/^".+"$/, {
+      message: 'descriptionは"(ダブルクォーテーション)で囲ってください',
+    }),
   date: z
     .string({ required_error: "dateは必須です" })
     .regex(/^".+"$/, {
@@ -28,20 +34,26 @@ const schema = z.object({
       { required_error: "tagsは必須です" }
     )
     .min(1, { message: "タグは1つ以上入力してください" }),
-  author: z
-    .string({ required_error: "authorは必須です" })
-    .min(1, { message: "authorは必須です" })
-    .regex(/^".+"$/, {
-      message: 'authorは"(ダブルクォーテーション)で囲ってください',
-    }),
+  authors: z
+    .array(
+      z
+        .string()
+        .min(1, { message: "authorは必須です" })
+        .regex(/^".+"$/, {
+          message: 'authorは"(ダブルクォーテーション)で囲ってください',
+        }),
+      { required_error: "authorsは必須です" }
+    )
+    .min(1, { message: "authorsは1つ以上入力してください" }),
 });
 
 const example = `
 ---
 title: "タイトル"
+description: "説明"
 date: "2021-01-01"
 tags: ["タグ1", "タグ2"]
-author: "maximum-account"
+authors: ["github-account"]
 ---
 `.trim();
 
@@ -82,7 +94,7 @@ const parseFrontmatter = (fp: string, frontmatter: string): Error[] => {
   const matter: Record<string, string | string[]> = {};
   frontmatter.split("\n").forEach((line) => {
     const [key, value] = line.split(":");
-    if (key === "tags") {
+    if (key === "tags" || key === "authors") {
       const tags = value
         .replace(/\[|\]/g, "")
         .split(",")

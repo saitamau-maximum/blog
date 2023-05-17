@@ -8,8 +8,8 @@
     "start": "next start",
     "pw-install": "playwright install chromium",
     "lint": "next lint",
-    "lint:md": "markdownlint '**/*.md' --ignore node_modules",
-    "lint:fix:md": "markdownlint '**/*.md' --ignore node_modules --fix",
+    "lint:md": "markdownlint '**/*.md' --ignore node_modules --ignore README.md",
+    "lint:fix:md": "markdownlint '**/*.md' --ignore node_modules --ignore README.md --fix",
     "lint:frontmatter": "ts-node scripts/frontmatterlint.ts --ignore \"node_modules|README.md\""
   },
   "dependencies": {

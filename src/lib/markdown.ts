@@ -13,6 +13,7 @@ import refractorTypescript from "refractor/lang/typescript";
 import refactorHtml from "refractor/lang/xml-doc";
 import refractorCSS from "refractor/lang/css";
 import refactorBash from "refractor/lang/bash";
+import refactorSql from "refractor/lang/sql";
 import { refractor } from "refractor/lib/core.js";
 import rehypeKatex from "rehype-katex";
 import rehypeMermaid from "rehype-mermaidjs";
@@ -48,6 +49,7 @@ refractor.register(refractorJson);
 refractor.register(refactorHtml);
 refractor.register(refractorCSS);
 refractor.register(refactorBash);
+refractor.register(refactorSql);
 
 const rehypePrism = rehypePrismGenerator(refractor);
 

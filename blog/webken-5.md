@@ -505,9 +505,13 @@ node index.js
 sqlite3 database.db
 ```
 
+を実行して、sqliteのコンソールに入ります。
+
 ```sql
 .tables
 ```
+
+を実行すると、テーブルの一覧が表示されます。
 
 ```txt
 tweets  users

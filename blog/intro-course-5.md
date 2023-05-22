@@ -1,9 +1,9 @@
 ---
 date: "2023-05-23"
 title: "【第5回】計算量とbit演算"
+description: "入門講習会第5回"
 author: "kasa021"
 tags: ["入門講習会", "algorithm", "atcoder", "競技プログラミング", "cpp"]
-layout: default
 ---
 
 ## 計算量について

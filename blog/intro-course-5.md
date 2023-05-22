@@ -500,7 +500,6 @@ int main()
 # bitset
 
 - int型は $32$ bit, long long型は $64$ bitまでしか扱えない。
-- bitsetは、任意の長さのbit列を扱うことができる。
 - bitsetは、ビット演算が高速に行える。
 
 ### 宣言

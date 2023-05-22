@@ -116,7 +116,14 @@
   padding: 1rem;
   border-radius: 0.25rem;
   border-left: 0.25rem solid var(--color-accent-primary);
-  background-color: var(--color-gray-600);
+}
+
+:global(.light) .content blockquote {
+  background-color: var(--color-gray-100);
+}
+
+:global(.dark) .content blockquote {
+  background-color: var(--color-gray-600)
 }
 
 .content blockquote > :global(*:first-child) {

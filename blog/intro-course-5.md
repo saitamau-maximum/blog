@@ -141,11 +141,10 @@ int main(){
 ```
 
 このコードは $N$ を $2$ で割り続けているので、 $N$ を割る回数を $x$ とすると $N (\frac{1}{2})^x = 1$ で
-表せます。この式の両辺を $\log$ をとると、 $x=\log_ 2(N)$ となります。
+表せます。この式の両辺を $\log$ をとると、 $x=\log_2(N)$ となります。
 よって、 $O(\log N)$ であらわされます。
 計算量の $\log$ は底はなんでもいいです。底の変換公式より、 $\log_a(N)=\frac{\log_b(N)}{\log_b(a)}$ なので、定数とみなせます。
-今回は、 $\log _2(N)$ になります。
-
+今回は、 $\log_2(N)$ になります。
 
 ```cpp
 #include <bits/stdc++.h>
@@ -190,7 +189,8 @@ int main(){
 | $N<10^{14}$ |      $O(\sqrt{N})$      |      素数判定      |
 |  それ以上   |    $O(\log N)$     |      二分探索      |
 ||$O(1)$|定数時間|
-### 例題
+
+## 例題
 
 <https://atcoder.jp/contests/apg4b/tasks/APG4b_cb>
 
@@ -450,7 +450,9 @@ int main(){
   :::
 
 :::details 解答例
+
 ````cpp
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -493,9 +495,10 @@ int main()
     }
     cout << ans << endl;
 }
-````
-:::
 
+````
+
+:::
 
 ## bitset
 
@@ -535,4 +538,3 @@ bitset は bit 演算の演算子はすべて使える。
 |  .flip()  |  全ての bit を反転する  |
 | .flip(i)  | i 番目の bit を反転する  |
 | .to_string() | bitset を文字列に変換する |
-

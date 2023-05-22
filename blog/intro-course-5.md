@@ -486,7 +486,8 @@ int main()
                 }
             }
         }
-        if ((int)s.size() == n)
+        if ((int)s.size() == n)  // setは重複を許さない集合なので,setのsizeが
+                                 // nであるとき1からnまでの全ての数字が含まれている
         {
             ans++;
         }

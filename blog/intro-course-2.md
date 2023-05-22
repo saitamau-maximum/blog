@@ -53,6 +53,7 @@ int main()
 <https://atcoder.jp/contests/apg4b/tasks/APG4b_ci>
 
 ### 解答例
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -110,9 +111,10 @@ int main()
 
 このように、関数の引数に渡された値は、基本的にコピーされるため、関数内での処理は、関数外の変数に影響を与えないことに注意してください。これを解決するためには、参照渡しを使います。
 
-###  参照渡し
+### 参照渡し
 
 関数の引数に`&`をつけると、参照渡しになります。参照渡しを使うと、関数に渡された引数自体を変更することができます。
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -141,6 +143,7 @@ int main()
 関数を定義せずに、プログラムを書くこともできます。その場合は、main 関数の中に、関数の処理を書いてください。
 
 ### 解答例
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -213,7 +216,9 @@ int main(){
     for(int i=0; i<vec.size();i++) cout<<vec[i]<<endl;
 }
 ```
+
 このfor文を簡潔に書く方法がc++にはあり、それを範囲for文と言います。
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -223,6 +228,7 @@ int main(){
     for(int x:vec) cout<<x<<endl;
 }
 ```
+
 これは、vecの要素を順番にxに代入していくという意味になります。
 つまり、以下のように書いたのと同じことになります。
 
@@ -234,6 +240,7 @@ for(int i=0; i<vec.size();i++){
 ```
 
 この範囲for文は、string型の文字列にも使うことができます。
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -248,6 +255,7 @@ int main(){
 ```
 
 ### マクロ
+
 for文って結構書くのが面倒ですよね。そこで、マクロというものを使います。
 マクロとは、プログラムの中で定義した名前に対して、あらかじめ決められた処理を行うものです。
 マクロを使うと、for文を以下のように書くことができます。
@@ -265,10 +273,12 @@ int main(){
 ```
 
 ### 問題
+
 今回の問題はfor文になれる問題なので、範囲for文やマクロを実際に使ってみてください。
 <https://atcoder.jp/contests/apg4b/tasks/APG4b_cg>
 
 ### 解答例1
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -286,8 +296,8 @@ int main(){
 }
 ```
 
-
 ### 解答例2
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -307,6 +317,7 @@ int main(){
 ```
 
 ### 解答例3
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -325,6 +336,7 @@ int main(){
 ```
 
 ## 多重ループ
+
 for文の中にfor文をさらに書くと、多重ループとなります。
 
 ```cpp
@@ -339,8 +351,10 @@ int main(){
     }
 }
 ```
+
 実行結果
-```
+
+```plaintext
 i:0,j:0
 i:0,j:1
 i:0,j:2
@@ -352,13 +366,13 @@ i:2,j:1
 i:2,j:2
 ```
 
-
 ## 多重ループの時のbreakとcontinue
+
 多重ループの時も、breakとcontinueを使うことができます。多重ループでは、外側のループと内側のループがネスト(入れ子になっている)されています。
 
 ### braek文
-break文は現在のループを終了し、次のループ(外側のループ)に移行します。break文が内側のループにある場合は、内側のループのみを終了します。
 
+break文は現在のループを終了し、次のループ(外側のループ)に移行します。break文が内側のループにある場合は、内側のループのみを終了します。
 
 ```cpp
 #include <bits/stdc++.h>
@@ -375,8 +389,10 @@ int main(){
     }
 }
 ```
+
 実行結果
-```
+
+```plaintext
 i:0,j:0
 i:0,j:1
 i:1,j:0
@@ -385,9 +401,8 @@ i:2,j:0
 i:2,j:1
 ```
 
-
-
 ### continue文
+
 continue文は、現在のループの残りの処理をスキップし、次のループに移行します。continue文が内側のループにある場合は、内側のループのみをスキップします。
 
 ```cpp
@@ -407,7 +422,8 @@ int main(){
 ```
 
 実行結果
-```
+
+```plaintext
 i:0,j:0
 i:0,j:1
 i:0,j:3
@@ -419,14 +435,12 @@ i:2,j:1
 i:2,j:3
 ```
 
-
-
-
 ### 問題
 
 <https://atcoder.jp/contests/apg4b/tasks/APG4b_cf>
 
 ### 解答例
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -449,8 +463,8 @@ int main(){
 }
 ```
 
-
 ## 多次元配列
+
 多次元配列は、配列の中に配列を入れることで実現できます。初めは2次元配列までしか使わないので、2次元配列まで覚えれば大丈夫です。
 
 - 2次元配列は2次元配列を扱うのに便利です。
@@ -459,10 +473,11 @@ int main(){
 - 2次元配列の要素へのアクセスは、`vec.at(i).at(j)`,または`vec[i][j]`です。
 - 縦の大きさを`vec.size()`、横の大きさを`vec.at(0).size()`で取得できます。
 
-### 例題　
+### 例題
 
 入力
-```
+
+```plaintext
 1 3 2 4
 9 8 6 0
 1 4 2 5
@@ -492,6 +507,7 @@ int main(){
 <https://atcoder.jp/contests/apg4b/tasks/APG4b_ce>
 
 ### 解答例
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;

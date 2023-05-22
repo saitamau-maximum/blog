@@ -22,12 +22,20 @@ Headingは`#`を使って記述します。`#`の数が多いほど小さい見�
 ```
 
 :::details[結果]
+
+<!-- markdownlint-disable-next-line -->
 # Heading 1
+
 ## Heading 2
+
 ### Heading 3
+
 #### Heading 4
+
 ##### Heading 5
+
 ###### Heading 6
+
 :::
 
 ## Text
@@ -129,6 +137,7 @@ Listは`-`で記述できます。
 ```
 
 :::details[結果]
+
 - List1
 - List2
 - List3
@@ -167,21 +176,27 @@ Tableは`|`で記述できます。
 | Cell4   | Cell5   | Cell6   |
 :::
 
-
 ### Code(Block)
 
 Code(Block)は`` ``` ``で囲むことで記述できます。
+このリポジトリには表現統一のための[Markdownlint](https://github.com/DavidAnson/markdownlint)が導入されています。
+そのため、Code(Block)の言語指定なしだとエラーが出ます。
+txtを指定することでエラーを回避できます。
 
+<!-- markdownlint-disable-next-line -->
 ~~~txt
-```
+```txt
 Code
 ```
 ~~~
 
 :::details[結果]
-```
+
+<!-- markdownlint-disable-next-line -->
+```txt
 Code
 ```
+
 :::
 
 またこのブログは[Prism.js](https://prismjs.com/)が内部で使用されています。したがって
@@ -191,6 +206,7 @@ Codeブロックの拡張構文が使用できます。
 
 言語を指定することで、その言語に特化したシンタックスハイライトが適用されます。
 
+<!-- markdownlint-disable-next-line -->
 ~~~txt
 ```js
 const fib = (n) => {
@@ -203,6 +219,7 @@ console.log(fib(100)); // 354224848179262000000
 ~~~
 
 :::details[結果]
+
 ```js
 const fib = (n) => {
   if (n <= 1) return n;
@@ -211,12 +228,14 @@ const fib = (n) => {
 
 console.log(fib(100)); // 354224848179262000000
 ```
+
 :::
 
 #### Line Highlight
 
 行番号を指定することで、その行にハイライトが適用されます。
 
+<!-- markdownlint-disable-next-line -->
 ~~~txt
 ```js{2-3,6}
 const fib = (n) => {
@@ -229,6 +248,7 @@ console.log(fib(100)); // 354224848179262000000
 ~~~
 
 :::details[結果]
+
 ```js{2-3,6}
 const fib = (n) => {
   if (n <= 1) return n;
@@ -237,12 +257,14 @@ const fib = (n) => {
 
 console.log(fib(100)); // 354224848179262000000
 ```
+
 :::
 
 #### Line Numbers
 
 行番号を表示することができます。
 
+<!-- markdownlint-disable-next-line -->
 ~~~txt
 ```js showLineNumbers
 const fib = (n) => {
@@ -255,6 +277,7 @@ console.log(fib(100)); // 354224848179262000000
 ~~~
 
 :::details[結果]
+
 ```js showLineNumbers
 const fib = (n) => {
   if (n <= 1) return n;
@@ -263,12 +286,14 @@ const fib = (n) => {
 
 console.log(fib(100)); // 354224848179262000000
 ```
+
 :::
 
 #### Diff Highlight
 
 差分を表示することができます。
 
+<!-- markdownlint-disable-next-line -->
 ~~~txt
 ```diff
 - const fib = (n) => {
@@ -289,6 +314,7 @@ console.log(fib(100)); // 354224848179262000000
 ~~~
 
 :::details[結果]
+
 ```diff
 - const fib = (n) => {
 -   if (n <= 1) return n;
@@ -305,12 +331,14 @@ console.log(fib(100)); // 354224848179262000000
 
 console.log(fib(100)); // 354224848179262000000
 ```
+
 :::
 
 #### 拡張構文を組み合わせる
 
 `diff-<言語名>`を指定することで、差分表示とシンタックスハイライトを組み合わせることができます。
 
+<!-- markdownlint-disable-next-line -->
 ~~~txt
 ```diff-js{2-3,5,8,10} showLineNumbers
 - const fib = (n) => {
@@ -331,6 +359,7 @@ console.log(fib(100)); // 354224848179262000000
 ~~~
 
 :::details[結果]
+
 ```diff-js{2-3,5,8,10} showLineNumbers
 - const fib = (n) => {
 -  if (n <= 1) return n;
@@ -347,6 +376,7 @@ console.log(fib(100)); // 354224848179262000000
 
 console.log(fib(100)); // 354224848179262000000
 ```
+
 :::
 
 ### Math(Block)

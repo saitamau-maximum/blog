@@ -32,7 +32,6 @@ async function getBlogs() {
       const filePath = URL.BLOG_FILE_PATH(file);
       const content = await readFile(filePath, "utf-8");
       const res = parseStrToMarkdown(content, filePath);
-      if (!res) return null;
       return {
         ...res.frontmatter,
         slug: file.replace(/\.md$/, ""),

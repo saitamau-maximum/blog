@@ -171,37 +171,34 @@ type Frontmatter = z.infer<typeof frontmatterSchema>;
 export const parseStrToMarkdown = (
   str: string,
   filename: string
-): { frontmatter: Frontmatter; content: string } | null => {
+): { frontmatter: Frontmatter; content: string } => {
   if (filename === "tag.md") {
-    console.error(`[${filename}]`, ERROR.MARKDOWN_PARSER.TAG_MD_NOT_ALLOWED);
-    return null;
+    throw new Error(
+      `[${filename}] ${ERROR.MARKDOWN_PARSER.TAG_MD_NOT_ALLOWED}`
+    );
   }
 
   const frontmatter = frontmatterRegex.exec(str);
   if (!frontmatter) {
-    console.error(`[${filename}]`, ERROR.MARKDOWN_PARSER.FRONTMATTER_NOT_FOUND);
-    return null;
+    throw new Error(
+      `[${filename}] ${ERROR.MARKDOWN_PARSER.FRONTMATTER_NOT_FOUND}`
+    );
   }
   const jsonFrontmatter = parseFrontmatter(frontmatter[1]);
   if (!jsonFrontmatter) {
-    console.error(
-      `[${filename}]`,
-      ERROR.MARKDOWN_PARSER.FRONTMATTER_PARSE_ERROR,
-      ERROR.MARKDOWN_PARSER.FRONTMATTER_CORRECT_FORMAT
+    throw new Error(
+      `[${filename}] ${ERROR.MARKDOWN_PARSER.FRONTMATTER_PARSE_ERROR} ${ERROR.MARKDOWN_PARSER.FRONTMATTER_CORRECT_FORMAT}`
     );
-    return null;
   }
   const frontmatterData = frontmatterSchema.safeParse(jsonFrontmatter);
   if (!frontmatterData.success) {
-    console.error(
-      `[${filename}]`,
-      ERROR.MARKDOWN_PARSER.FRONTMATTER_SCHEMA_ERROR,
-      "\n" +
-        frontmatterData.error.issues
-          .map((issue) => `- ${issue.message}`)
-          .join("\n")
+    throw new Error(
+      `[${filename}] ${
+        ERROR.MARKDOWN_PARSER.FRONTMATTER_SCHEMA_ERROR
+      }\n${frontmatterData.error.issues
+        .map((issue) => `- ${issue.message}`)
+        .join("\n")}`
     );
-    return null;
   }
   const content = str.replace(frontmatterRegex, "");
   return {

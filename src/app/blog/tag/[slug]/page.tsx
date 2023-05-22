@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import styles from "./page.module.css";
 import { parseStrToMarkdown } from "@/lib/markdown";
 import { readdir, readFile } from "fs/promises";
-import path from "path";
 import { Hero } from "@/components/hero";
 import { BlogCardList } from "@/components/blog/card-list";
 import { URL } from "@/constants/url";
@@ -18,10 +17,7 @@ const TITLE = (tag: string) => `「${tag}」 のブログ一覧`;
 const DESCRIPTION = (tag: string) =>
   `${tag} のタグがついたブログ一覧です。\nサークルの公開している講習会資料や、技術のアウトプットなどを掲載しています。`;
 
-const BLOG_LIST_FILTER_BY_TAG_BREADCRUMBS = (
-  title: string,
-  tag: string
-) => [
+const BLOG_LIST_FILTER_BY_TAG_BREADCRUMBS = (title: string, tag: string) => [
   ...BLOG_LIST_BREADCRUMBS,
   {
     title,
@@ -70,7 +66,6 @@ async function getTags() {
 }
 
 async function getBlogsByTag(tag: string) {
-  console.log(tag);
   const files = await readdir(URL.BLOG_DIR_PATH);
   const blogs = await Promise.all(
     files.map(async (file) => {

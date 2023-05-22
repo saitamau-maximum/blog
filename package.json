@@ -7,11 +7,13 @@
     "build": "next build",
     "start": "next start",
     "pw-install": "playwright install chromium",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:md": "markdownlint '**/*.md' --ignore node_modules --ignore README.md",
+    "lint:fix:md": "markdownlint '**/*.md' --ignore node_modules --ignore README.md --fix",
+    "lint:frontmatter": "ts-node scripts/frontmatterlint.ts --ignore \"node_modules|README.md\""
   },
   "dependencies": {
     "@types/mdast": "^3.0.11",
-    "@types/node": "18.15.13",
     "@types/react": "18.0.38",
     "@types/react-dom": "18.0.11",
     "clsx": "^1.2.1",
@@ -39,9 +41,14 @@
     "remark-parse": "^10.0.1",
     "remark-rehype": "^10.1.0",
     "remark-slug": "^7.0.1",
-    "typescript": "5.0.4",
     "unified": "^10.1.2",
-    "unist-util-visit": "^4.1.2",
+    "unist-util-visit": "^4.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "18.15.13",
+    "markdownlint-cli": "^0.34.0",
+    "ts-node": "^10.9.1",
+    "typescript": "5.0.4",
     "zod": "^3.21.4"
   }
 }

@@ -393,7 +393,8 @@ NOTの複合代入演算子はありません。
 
 ### bit 演算の注意
 
-符号あり整数型の場合(int,long long)、最上位 bit は符号を表すので、bit 演算を行うときは、符号なし整数型(unsigned int,unsigned long long)を使うようにしましょう。
+符号あり整数型の場合(int,long long)、最上位 bit は符号を表すので、想定外の処理が起こることがあります。
+bit 演算を行うときは、気を付けて演算をするか、符号なし整数型(unsigned int,unsigned long long)を使うか後で説明するbitsetを使いましょう。
 
 # bit 全探索
 

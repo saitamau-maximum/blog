@@ -190,7 +190,7 @@ int main(){
 |  それ以上   |    $O(\log N)$     |      二分探索      |
 ||$O(1)$|定数時間|
 
-## 例題
+## 練習問題
 
 <https://atcoder.jp/contests/apg4b/tasks/APG4b_cb>
 
@@ -439,7 +439,7 @@ int main(){
 }
 ```
 
-### 例題
+### 練習問題
 
 <https://atcoder.jp/contests/abc289/tasks/abc289_c>
 

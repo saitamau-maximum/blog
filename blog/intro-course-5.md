@@ -505,7 +505,8 @@ int main()
 ### 宣言
 
 ```cpp
-bitset<長さ> 変数名;
+bitset<長さ> 変数名;  // 長さは定数である必要がある
+bitset<n> bs; // このような書き方はできません
 bitset<4> bs; // 4bitのbit列
 bitset<4> bs("1010"); // 4bitのbit列で初期化
 ````

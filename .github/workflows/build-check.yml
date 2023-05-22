@@ -1,4 +1,4 @@
-name: frontmatterlint
+name: build check
 
 on:
   push:
@@ -43,5 +43,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run frontmatterlint
-        run: pnpm run lint:frontmatter
+      - name: Run build
+        run: pnpm run build

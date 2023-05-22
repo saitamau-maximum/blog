@@ -189,7 +189,7 @@ AtCoder の問題では、`実行時間制限`、`メモリ制限`があるの�
 |  $N<=10^8$  |      $O(N)$      |      線形探索      |
 | $N<10^{14}$ |      $O(\sqrt{N})$      |      素数判定      |
 |  それ以上   |    $O(logN)$     |      二分探索      |
-
+||$O(1)$|定数時間|
 ## 例題
 
 <https://atcoder.jp/contests/apg4b/tasks/APG4b_cb>

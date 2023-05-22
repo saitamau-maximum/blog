@@ -43,5 +43,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Playwright setup
+        run: pnpm run pw-install
+
       - name: Run build
         run: pnpm run build

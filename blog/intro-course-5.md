@@ -167,6 +167,47 @@ int main(){
 
 このコードは、 $N$ 個の数列の順列を全て列挙しています。順列の数は $N!$ なので、 $O(N!)$ であらわされます。
 
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+  int n; cin >> n;
+  vector<int> a(n);
+  for (int i = 0; i < n; i++) cin >> a.at(i);
+  sort(a.begin(), a.end());
+  for (int i = 0; i < n; i++) cout << a.at(i) << " \n"[i == n - 1];
+  return 0;
+}
+```
+
+sortの計算量はいくらでしょう。下記のレファレンスを読んでみると...
+<https://cpprefjp.github.io/reference/algorithm/sort.html>
+
+$O(N\log N)$ と記載があります。
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int f(int x) {
+  int sum = 0;
+  for (int i = 0; i < x; i++) sum += i;
+  return sum;
+}
+
+int main() {
+  int n, m;
+  cin >> n >> m;
+  int sum = 0;
+  for (int i = 0; i < n; i++) sum += f(i);
+  cout << sum << endl;
+  return 0;
+}
+```
+
+このコードは、 $f(x)$ を $n$ 回呼び出しています。 $f(x)$ の計算量は $O(x)$ なので、 $O(N^2)$ であらわされます。
+
 ### 競プロでの計算量
 
 「実行時間制限」、「メモリ制限」があるので計算量をよく考えます。

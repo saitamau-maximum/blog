@@ -103,7 +103,11 @@ int main(){
 }
 ```
 
+:::details 答え
+
 さっき出てきたコードを同じです。これは for 文で処理を $N$ 回繰り返しているので、 $O(N)$ であらわされます。
+
+:::
 
 ```cpp
 #include <bits/stdc++.h>
@@ -122,7 +126,11 @@ int main(){
 }
 ```
 
+:::details 答え
+
 このコードは for 文が 2 重になっているので、 $O(N^2)$ であらわされます。
+
+:::
 
 ```cpp
 #include <bits/stdc++.h>
@@ -140,11 +148,15 @@ int main(){
 }
 ```
 
+:::details 答え
+
 このコードは $N$ を $2$ で割り続けているので、 $N$ を割る回数を $x$ とすると $N \Bigl( \dfrac{1}{2} \Bigr) ^x = 1$ で
 表せます。この式の両辺を $\log$ をとると、 $x=\log_2(N)$ となります。
 よって、 $O(\log N)$ であらわされます。
 計算量の $\log$ は底はなんでもいいです。底の変換公式より、 $\log_a(N)=\dfrac{\log_b(N)}{\log_b(a)}$ なので、定数とみなせます。
 今回は、 $\log_2(N)$ になります。
+
+:::
 
 ```cpp
 #include <bits/stdc++.h>
@@ -165,7 +177,11 @@ int main(){
 }
 ```
 
+:::details 答え
+
 このコードは、 $N$ 個の数列の順列を全て列挙しています。順列の数は $N!$ なので、 $O(N!)$ であらわされます。
+
+:::
 
 ```cpp
 #include <bits/stdc++.h>
@@ -184,7 +200,11 @@ int main() {
 sortの計算量はいくらでしょう。下記のレファレンスを読んでみると...
 <https://cpprefjp.github.io/reference/algorithm/sort.html>
 
-$O(N\log N)$ と記載があります。
+:::details 答え
+
+$O(N\log N)$ と記載があります。二つのfor文は $O(N)$ なので、全体の計算量は $O(N\log N)$ になります。
+
+:::
 
 ```cpp
 #include <bits/stdc++.h>
@@ -206,7 +226,11 @@ int main() {
 }
 ```
 
+:::details 答え
+
 このコードは、 $f(x)$ を $n$ 回呼び出しています。 $f(x)$ の計算量は $O(x)$ なので、 $O(N^2)$ であらわされます。
+
+:::
 
 ### 競プロでの計算量
 

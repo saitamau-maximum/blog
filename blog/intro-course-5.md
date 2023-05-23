@@ -75,7 +75,7 @@ $O(1) < O(\log N) < O(N) < O(N\log N) < O(N^2) < O(2^N) < O(N!)$
 6. $N \log N+N$
 7. $N^2+N^2\log N$
 
-:::details 答え
+:::details[答え]
 
 1. $O(N)$
 2. $O(N^2)$
@@ -103,7 +103,7 @@ int main(){
 }
 ```
 
-:::details 答え
+:::details[答え]
 さっき出てきたコードを同じです。これは for 文で処理を $N$ 回繰り返しているので、 $O(N)$ であらわされます。
 :::
 
@@ -124,7 +124,7 @@ int main(){
 }
 ```
 
-:::details 答え
+:::details[答え]
 このコードは for 文が 2 重になっているので、 $O(N^2)$ であらわされます。
 :::
 
@@ -144,7 +144,7 @@ int main(){
 }
 ```
 
-:::details 答え
+:::details[答え]
 このコードは $N$ を $2$ で割り続けているので、 $N$ を割る回数を $x$ とすると $N \Bigl( \dfrac{1}{2} \Bigr) ^x = 1$ で
 表せます。この式の両辺を $\log$ をとると、 $x=\log_2 N$ となります。
 よって、 $O(\log N)$ であらわされます。
@@ -171,7 +171,7 @@ int main(){
 }
 ```
 
-:::details 答え
+:::details[答え]
 このコードは、 $N$ 個の数列の順列を全て列挙しています。順列の数は $N!$ なので、 $O(N!)$ であらわされます。
 :::
 
@@ -192,7 +192,7 @@ int main() {
 sort の計算量はいくらでしょう。下記のレファレンスを読んでみると...
 <https://cpprefjp.github.io/reference/algorithm/sort.html>
 
-:::details 答え
+:::details[答え]
 $O(N\log N)$ と記載があります。二つの for 文は $O(N)$ なので、全体の計算量は $O(N\log N)$ になります。
 :::
 
@@ -216,7 +216,7 @@ int main() {
 }
 ```
 
-:::details 答え
+:::details[答え]
 このコードは、 $f(x)$ を $n$ 回呼び出しています。 $f(x)$ の計算量は $O(x)$ なので、 $O(N^2)$ であらわされます。
 :::
 
@@ -247,7 +247,7 @@ int main() {
 
 <https://atcoder.jp/contests/apg4b/tasks/APG4b_cb>
 
-:::details 解説
+:::details[解説]
 
 - f0
 
@@ -496,13 +496,13 @@ int main(){
 
 <https://atcoder.jp/contests/abc289/tasks/abc289_c>
 
-:::details ヒント
+:::details[ヒント]
 
 - 問題の言っていることは、選び出した集合の中に $1$ から $N$ までの数字が全て含まれていますかということ。
 - 集合は set で扱います。
 :::
 
-:::details 解答例
+:::details[解答例]
 
 ```cpp
 

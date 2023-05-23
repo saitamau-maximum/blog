@@ -76,6 +76,7 @@ $O(1) < O(\log N) < O(N) < O(N\log N) < O(N^2) < O(2^N) < O(N!)$
 7. $N^2+N^2\log N$
 
 :::details 答え
+
 1. $O(N)$
 2. $O(N^2)$
 3. $O(1)$
@@ -247,6 +248,7 @@ int main() {
 <https://atcoder.jp/contests/apg4b/tasks/APG4b_cb>
 
 :::details 解説
+
 - f0
 
 ```cpp
@@ -495,11 +497,13 @@ int main(){
 <https://atcoder.jp/contests/abc289/tasks/abc289_c>
 
 :::details ヒント
+
 - 問題の言っていることは、選び出した集合の中に $1$ から $N$ までの数字が全て含まれていますかということ。
 - 集合は set で扱います。
 :::
 
 :::details 解答例
+
 ```cpp
 
 #include <bits/stdc++.h>
@@ -546,6 +550,7 @@ int main()
 }
 
 ```
+
 :::
 
 ## bitset

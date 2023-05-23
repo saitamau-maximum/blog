@@ -86,7 +86,7 @@ $O(1) < O(\log N) < O(N) < O(N\log N) < O(N^2) < O(2^N) < O(N!)$
 7. $O(N^2\log (N))$
 :::
 
-### コードを見てみよう
+### コードを見て、計算量を考えよう
 
 ```cpp
 #include <bits/stdc++.h>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./navigation.module.css";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 interface NavData {
     title: string;
@@ -13,9 +14,26 @@ interface Props {
     next?: NavData;
 }
 
-const _Card = ({ title, slug, date, description }: NavData) => {
+interface CardProps extends NavData {
+    isPrev?: boolean;
+    isNext?: boolean;
+}
+
+const _Card = ({
+    title,
+    slug,
+    description,
+    date,
+    isPrev,
+    isNext,
+}: CardProps) => {
     return (
         <div className={styles.card}>
+            {isPrev && (
+                <div className={styles.cardIcon}>
+                    <IoIosArrowBack size={32} />
+                </div>
+            )}
             <Link href={`/blog/${slug}`} className={styles.cardLink}>
                 <div className={styles.cardHeader}>
                     <time className={styles.cardDate}>{date}</time>
@@ -23,6 +41,11 @@ const _Card = ({ title, slug, date, description }: NavData) => {
                 <h2 className={styles.cardTitle}>{title}</h2>
                 <p className={styles.cardDescription}>{description}</p>
             </Link>
+            {isNext && (
+                <div className={styles.cardIcon}>
+                    <IoIosArrowForward size={32} />
+                </div>
+            )}
         </div>
     );
 };
@@ -32,14 +55,12 @@ export const Navigation = ({ prev, next }: Props) => {
         <div className={styles.container}>
             {prev && (
                 <div className={styles.prev}>
-                    <h3 className={styles.prevTitle}>Previous</h3>
-                    <_Card {...prev} />
+                    <_Card {...prev} isPrev />
                 </div>
             )}
             {next && (
                 <div className={styles.next}>
-                    <h3 className={styles.nextTitle}>Next</h3>
-                    <_Card {...next} />
+                    <_Card {...next} isNext />
                 </div>
             )}
         </div>

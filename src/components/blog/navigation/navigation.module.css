@@ -1,107 +1,72 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem 0;
+}
 .card {
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  border-radius: 0.5rem;
-  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+    display: flex;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
 }
 
+
 @media (hover: hover) {
-  .card:hover {
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-    transform: translateY(-0.125rem);
-  }
+    .card:hover {
+        box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+        transform: translateY(-0.125rem);
+    }
 }
 
 :global(.light) .card {
-  background-color: var(--color-gray-50);
+    background-color: var(--color-gray-50);
 }
 
 :global(.dark) .card {
-  background-color: var(--color-gray-700);
+    background-color: var(--color-gray-700);
 }
 
 .cardLink {
-  display: block;
-  padding: 1rem;
-  text-decoration: none;
-  height: 100%;
-  box-sizing: border-box;
+    display: block;
+    padding: 1rem;
+    text-decoration: none;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .cardHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .cardTitle {
-  font-size: 1.5rem;
-  margin: 0;
-  font-weight: bold;
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: bold;
 }
 
 :global(.light) .cardTitle {
-  color: var(--color-gray-600);
+    color: var(--color-gray-600);
 }
 
 :global(.dark) .cardTitle {
-  color: var(--color-gray-100);
+    color: var(--color-gray-100);
 }
 
 .cardDate {
-  font-size: 0.75rem;
+    font-size: 0.75rem;
 }
 
 :global(.light) .cardDate {
-  color: var(--color-gray-500);
+    color: var(--color-gray-500);
 }
 
 :global(.dark) .cardDate {
-  color: var(--color-gray-300);
-}
-
-.cardAuthors {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.5rem;
-}
-
-.cardAuthorImage {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-}
-
-.cardFooter {
-  margin-top: 1rem;
-}
-
-.cardTags {
-  display: flex;
-  justify-content: left;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.cardTagItem {
-  font-size: 0.75rem;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  white-space: nowrap;
-}
-
-:global(.light) .cardTagItem {
-  background-color: var(--color-gray-200);
-  color: var(--color-gray-600);
-}
-
-:global(.dark) .cardTagItem {
-  background-color: var(--color-gray-600);
-  color: var(--color-gray-200);
+    color: var(--color-gray-300);
 }

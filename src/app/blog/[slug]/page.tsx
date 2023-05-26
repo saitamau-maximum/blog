@@ -14,7 +14,6 @@ import { BlogButtonList } from "@/components/blog/button-list";
 import { URL } from "@/constants/url";
 import { BLOG_LIST_BREADCRUMBS } from "../page";
 import { Navigation } from "@/components/blog/navigation";
-import { get } from "http";
 
 interface Props {
     params: {
@@ -63,6 +62,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         })),
     };
 }
+type ParsedMarkdown = ReturnType<typeof parseStrToMarkdown>;
+type ParsedHTML = Awaited<ReturnType<typeof parseMarkdownToHTML>>;
+type GetBlogResponseMeta = ParsedMarkdown["frontmatter"] & {
+    slug: string;
+};
+
+interface GetBlogResponse {
+    body: ParsedHTML;
+    meta: GetBlogResponseMeta;
+    nextMeta?: GetBlogResponseMeta;
+    prevMeta?: GetBlogResponseMeta;
+}
 
 async function getBlog(slug: string, readSide = true) {
     const filename = `${slug}.md`;
@@ -71,33 +82,24 @@ async function getBlog(slug: string, readSide = true) {
     const res = parseStrToMarkdown(str, filename);
     if (!res) notFound();
     const parsed = await parseMarkdownToHTML(res.content);
-    let nextMeta = {
-        meta: { title: "", slug: "", description: "", date: "" },
-    };
-    let prevMeta = {
-        meta: { title: "", slug: "", description: "", date: "" },
-    };
 
-    if (res.frontmatter.next && readSide) {
-        const next = (await getBlog(res.frontmatter.next, false)) as any;
-        nextMeta = next;
-    }
-    if (res.frontmatter.prev && readSide) {
-        const prev = (await getBlog(res.frontmatter.prev, false)) as any;
-        prevMeta = prev;
-    }
-
-    return {
-        body: {
-            ...parsed,
-        },
+    const blog: GetBlogResponse = {
+        body: parsed,
         meta: {
             ...res.frontmatter,
             slug,
         },
-        nextMeta,
-        prevMeta,
     };
+    if (res.frontmatter.next && readSide) {
+        const next = await getBlog(res.frontmatter.next, false);
+        blog.nextMeta = next.meta;
+    }
+    if (res.frontmatter.prev && readSide) {
+        const prev = await getBlog(res.frontmatter.prev, false);
+        blog.prevMeta = prev.meta;
+    }
+
+    return blog;
 }
 
 export default async function BlogDetail({ params }: Props) {
@@ -140,20 +142,7 @@ export default async function BlogDetail({ params }: Props) {
                 </aside>
             </div>
             <div className={styles.navigation}>
-                <Navigation
-                    next={{
-                        title: blog.nextMeta?.meta.title || "",
-                        slug: blog.nextMeta?.meta.slug || "",
-                        description: blog.nextMeta?.meta.description || "",
-                        date: blog.nextMeta?.meta.date || "",
-                    }}
-                    prev={{
-                        title: blog.prevMeta?.meta.title || "",
-                        slug: blog.prevMeta?.meta.slug || "",
-                        description: blog.prevMeta?.meta.description || "",
-                        date: blog.prevMeta?.meta.date || "",
-                    }}
-                />
+                <Navigation next={blog.nextMeta} prev={blog.prevMeta} />
             </div>
         </>
     );

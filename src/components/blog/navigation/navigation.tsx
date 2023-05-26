@@ -30,13 +30,13 @@ const _Card = ({ title, slug, date, description }: NavData) => {
 export const Navigation = ({ prev, next }: Props) => {
     return (
         <div className={styles.container}>
-            {prev && prev.slug !== "" && (
+            {prev && (
                 <div className={styles.prev}>
                     <h3 className={styles.prevTitle}>Previous</h3>
                     <_Card {...prev} />
                 </div>
             )}
-            {next && next.slug !== "" && (
+            {next && (
                 <div className={styles.next}>
                     <h3 className={styles.nextTitle}>Next</h3>
                     <_Card {...next} />

@@ -30,9 +30,11 @@ const _Card = ({
     return (
         <div className={styles.card}>
             {isPrev && (
+                <Link href={`/blog/${slug}`} >
                 <div className={styles.cardIcon}>
-                    <IoIosArrowBack size={32} />
+                    <IoIosArrowBack size={32}  color="#878787"/>
                 </div>
+                </Link>
             )}
             <Link href={`/blog/${slug}`} className={styles.cardLink}>
                 <div className={styles.cardHeader}>
@@ -42,9 +44,11 @@ const _Card = ({
                 <p className={styles.cardDescription}>{description}</p>
             </Link>
             {isNext && (
+                <Link href={`/blog/${slug}`} >
                 <div className={styles.cardIcon}>
-                    <IoIosArrowForward size={32} />
+                    <IoIosArrowForward size={32} color="#878787"/>
                 </div>
+                </Link>
             )}
         </div>
     );

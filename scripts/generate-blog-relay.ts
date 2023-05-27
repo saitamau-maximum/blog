@@ -2,6 +2,7 @@ import { bold, green, red, blue } from "kleur";
 import prompts, { PromptObject } from "prompts";
 import path from "path";
 import { writeFile } from "fs/promises";
+import { existsSync } from "fs";
 
 const RELAY_DIR = path.join(__dirname, "../relay");
 
@@ -18,6 +19,7 @@ type Relay = {
     author: string | null;
     /** string: ブログが書かれた場合、null: まだ書かれていない場合 */
     slug: string | null;
+    title: string | null;
   }[];
 };
 
@@ -97,13 +99,22 @@ const questions: PromptObject[] = [
       day: i + 1,
       author: null,
       slug: null,
+      title: null,
     })),
   };
 
-  const adventPath = path.join(
-    RELAY_DIR,
-    `${response.date}-${response.slug}.json`
-  );
+  const adventPath = path.join(RELAY_DIR, `${response.slug}.json`);
+  if (existsSync(adventPath)) {
+    console.log(
+      bold(
+        red(
+          "ブログリレーの設定ファイルが既に存在します、違うslugを入力してください"
+        )
+      )
+    );
+    console.log(blue(path.relative(process.cwd(), adventPath)));
+    return;
+  }
   await writeFile(adventPath, JSON.stringify(advent, null, 2));
 
   console.log(bold(green("ブログリレーの設定ファイルを生成しました")));

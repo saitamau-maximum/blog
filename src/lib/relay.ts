@@ -11,6 +11,7 @@ const relaySchema = z.object({
       day: z.number(),
       author: z.string().nullable(),
       slug: z.string().nullable(),
+      title: z.string().nullable(),
     })
   ),
 });

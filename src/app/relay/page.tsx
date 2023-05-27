@@ -6,6 +6,7 @@ import { URL } from "@/constants/url";
 import { HOME_BREADCRUMBS } from "../page";
 import { parseStrToRelay } from "@/lib/relay";
 import { RelayList } from "@/components/relay/list";
+import { existsSync } from "fs";
 
 const TITLE = "ブログリレー一覧";
 const DESCRIPTION =
@@ -25,6 +26,7 @@ export const RELAY_LIST_BREADCRUMBS = [
 ];
 
 async function getRelays() {
+  if (!existsSync(URL.RELAY_DIR_PATH)) return [];
   const files = await readdir(URL.RELAY_DIR_PATH);
   const relays = await Promise.all(
     files.map(async (file) => {

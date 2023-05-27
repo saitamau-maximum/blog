@@ -10,6 +10,7 @@ import Link from "next/link";
 import { MdArrowForward } from "react-icons/md";
 import { parseStrToRelay } from "@/lib/relay";
 import { RelayList } from "@/components/relay/list";
+import { existsSync } from "fs";
 
 const LATEST_BLOGS_COUNT = 6;
 const LATEST_RELAYS_COUNT = 3;
@@ -22,6 +23,7 @@ export const HOME_BREADCRUMBS = [
 ];
 
 async function getLatestBlogs() {
+  if (!existsSync(URL.BLOG_DIR_PATH)) return [];
   const files = await readdir(URL.BLOG_DIR_PATH);
   const blogs = await Promise.all(
     files.map(async (file) => {
@@ -46,6 +48,7 @@ async function getLatestBlogs() {
 }
 
 async function getLatestRelays() {
+  if (!existsSync(URL.RELAY_DIR_PATH)) return [];
   const files = await readdir(URL.RELAY_DIR_PATH);
   const relays = await Promise.all(
     files.map(async (file) => {

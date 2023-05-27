@@ -5,8 +5,6 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 interface NavData {
     title: string;
     slug: string;
-    description: string;
-    date: string;
 }
 
 interface Props {
@@ -19,38 +17,25 @@ interface CardProps extends NavData {
     isNext?: boolean;
 }
 
-const _Card = ({
-    title,
-    slug,
-    description,
-    date,
-    isPrev,
-    isNext,
-}: CardProps) => {
+const _Card = ({ title, slug, isPrev, isNext }: CardProps) => {
     return (
-        <div className={styles.card}>
+        <Link href={`/blog/${slug}`} className={styles.card}>
             {isPrev && (
-                <Link href={`/blog/${slug}`} >
-                <div className={styles.cardIcon}>
-                    <IoIosArrowBack size={32}  color="#878787"/>
-                </div>
-                </Link>
+                <span className={styles.prevIcon}>
+                    <IoIosArrowBack size={32} color="#878787" />
+                </span>
             )}
-            <Link href={`/blog/${slug}`} className={styles.cardLink}>
-                <div className={styles.cardHeader}>
-                    <time className={styles.cardDate}>{date}</time>
-                </div>
+
+            <span className={styles.cardContent}>
                 <h2 className={styles.cardTitle}>{title}</h2>
-                <p className={styles.cardDescription}>{description}</p>
-            </Link>
+            </span>
+
             {isNext && (
-                <Link href={`/blog/${slug}`} >
-                <div className={styles.cardIcon}>
-                    <IoIosArrowForward size={32} color="#878787"/>
-                </div>
-                </Link>
+                <span className={styles.nextIcon}>
+                    <IoIosArrowForward size={32} color="#878787" />
+                </span>
             )}
-        </div>
+        </Link>
     );
 };
 

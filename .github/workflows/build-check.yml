@@ -40,6 +40,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - name: Restore app cache
+        uses: actions/cache@v3
+        with:
+          path: .cache
+          key: ${{ runner.os }}-app-${{ hashFiles('.cache/**') }}
+          restore-keys: |
+            ${{ runner.os }}-app-
+
       - name: Install dependencies
         run: pnpm install
 

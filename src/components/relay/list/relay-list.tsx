@@ -17,14 +17,25 @@ interface Props {
   }[];
 }
 
-export const RelayList = ({ relays }: Props) => {
-  const isThisMonth = (date: string) => {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth() + 1;
-    return date.startsWith(`${year}-${month}`);
-  };
+const isThisMonth = (date: string) => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth() + 1;
+  return date.startsWith(`${year}-${month}`);
+};
 
+const isPastMonth = (date: string) => {
+  const now = new Date();
+  const currentYear = now.getFullYear();
+  const currentMonth = now.getMonth() + 1;
+  const [year, month] = date.split("-").map((str) => parseInt(str, 10));
+
+  if (currentYear > year) return true;
+  if (currentYear === year && currentMonth > month) return true;
+  return false;
+};
+
+export const RelayList = ({ relays }: Props) => {
   if (relays.length === 0) {
     return (
       <div className={styles.relayListEmpty}>
@@ -61,7 +72,15 @@ export const RelayList = ({ relays }: Props) => {
               className={styles.relayListItemCard}
               href={`/relay/${relay.slug}`}
             >
-              <h2 className={styles.relayListItemTitle}>{relay.title}</h2>
+              <h2 className={styles.relayListItemTitle}>
+                {relay.title}
+                {isThisMonth(relay.date) && (
+                  <span className={styles.relayListItemActive}>開催中</span>
+                )}
+                {isPastMonth(relay.date) && (
+                  <span className={styles.relayListItemArchived}>開催済み</span>
+                )}
+              </h2>
               <p className={styles.relayListItemDescription}>
                 {relay.description}
               </p>

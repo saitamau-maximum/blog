@@ -90,6 +90,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             url: URL.GITHUB_PROFILE_URL(author),
         })),
         openGraph: {
+            title: blog.meta.title,
+            description: blog.meta.description,
+            images: [
+                {
+                    url: ogpPath,
+                },
+            ],
+        },
+        twitter: {
+            card: "summary_large_image",
+            description: blog.meta.description,
             images: [
                 {
                     url: ogpPath,

@@ -17,11 +17,24 @@ export const metadata = {
   },
   description: TEXT.SITE_DESCRIPTION,
   openGraph: {
+    title: {
+      default: TEXT.SITE_TITLE,
+      template: `%s | ${TEXT.SITE_TITLE}`,
+    },
+    description: TEXT.SITE_DESCRIPTION,
     images: [
       {
         url: "images/ogp/default.png",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: {
+      default: TEXT.SITE_TITLE,
+      template: `%s | ${TEXT.SITE_TITLE}`,
+    },
+    description: TEXT.SITE_DESCRIPTION,
   },
 } satisfies Metadata;
 

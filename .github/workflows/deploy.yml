@@ -44,7 +44,9 @@ jobs:
       - name: Restore app cache
         uses: actions/cache@v3
         with:
-          path: .cache
+          path: |
+            .cache
+            public/images/ogp/generated
           key: ${{ runner.os }}-app-${{ hashFiles('.cache/**') }}
           restore-keys: |
             ${{ runner.os }}-app-

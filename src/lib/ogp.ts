@@ -10,8 +10,8 @@ const OGP_WIDTH = 1200;
 const OGP_HEIGHT = 630;
 const AUTHOR_LIST_MARGIN = 48;
 const MAX_TITLE_WIDTH = OGP_WIDTH - 160;
-const FONT_SIZE = 96;
-const OGP_BASE_IMAGE_PATH = "images/ogp/base.png";  
+const FONT_SIZE = 80;
+const OGP_BASE_IMAGE_PATH = "images/ogp/base.png";
 const OGP_GENERATED_IMAGE_PATH = "images/ogp/generated/";
 
 export const createOgp = async (
@@ -34,8 +34,6 @@ export const createOgp = async (
     ctx.shadowOffsetY = 4;
     ctx.shadowBlur = 4;
 
-  
-
     const titleWidth = ctx.measureText(title).width;
     if (titleWidth > MAX_TITLE_WIDTH) {
         const titleArray = title.split("");
@@ -55,7 +53,7 @@ export const createOgp = async (
             ctx.fillText(
                 line,
                 OGP_WIDTH / 2,
-                OGP_HEIGHT / 2 - TITLE_HEIGHT / 2 + FONT_SIZE * index
+                OGP_HEIGHT / 2 - TITLE_HEIGHT / 2 + FONT_SIZE * 1.5 * index
             );
         });
     } else {
@@ -105,6 +103,15 @@ export const createOgp = async (
     const imgPath = `${OGP_GENERATED_IMAGE_PATH}${slug}.png`;
     canvas.toBuffer((err, buf) => {
         if (err) throw err;
+        if (
+            !fs.existsSync(
+                path.join(URL.PUBLIC_DIR_PATH, OGP_GENERATED_IMAGE_PATH)
+            )
+        ) {
+            fs.mkdirSync(
+                path.join(URL.PUBLIC_DIR_PATH, OGP_GENERATED_IMAGE_PATH)
+            );
+        }
         fs.writeFile(path.join(URL.PUBLIC_DIR_PATH, imgPath), buf, () => {
             console.log(`${title}のOGP画像を生成しました`);
         });
@@ -120,6 +127,5 @@ const createAuthorImage = async (authors: string[]) => {
             imgs.push(img);
         })
     );
-    console.log(imgs);
     return imgs;
 };

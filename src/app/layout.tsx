@@ -16,6 +16,13 @@ export const metadata = {
     template: `%s | ${TEXT.SITE_TITLE}`,
   },
   description: TEXT.SITE_DESCRIPTION,
+  openGraph: {
+    images: [
+      {
+        url: "images/ogp/default.png",
+      },
+    ],
+  },
 } satisfies Metadata;
 
 export default function RootLayout({

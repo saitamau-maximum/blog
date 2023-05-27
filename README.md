@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Maximum Blog
 
-## Getting Started
+## 技術スタック
 
-First, run the development server:
+- Next.js (SSG)
+- Github Pages
+
+## 開発方法
+
+### 共通の準備
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+git clone https://github.com/saitamau-maximum/blog.git
+cd blog
+pnpm install
+# もしpnpmがない場合は`npm install -g pnpm`でインストールしてから`pnpm install`を実行してください。
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### ローカルでの開発
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm dev
+# `http://localhost:3000`にアクセスしてください。
+```
 
-[http://localhost:3000/api/hello](http://localhost:3000/api/hello) is an endpoint that uses [Route Handlers](https://beta.nextjs.org/docs/routing/route-handlers). This endpoint can be edited in `app/api/hello/route.ts`.
+開発するときは`main`ブランチからブランチを切ってください。
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+git checkout -b feat/your-feature-name
+```
 
-## Learn More
+ブランチは`feat/`から始めてください。
+例えばメンバー一覧ページを作る場合は`feat/members`というブランチ名になります。
 
-To learn more about Next.js, take a look at the following resources:
+作業が終わったら`main`に向けてプルリクエストを作成してください。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### ブログ執筆
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+ブログ執筆にはブランチを切ってください。
 
-## Deploy on Vercel
+```bash
+git checkout -b feat/your-blog-name
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+例えば入門講習会の第4回のブログを書く場合は`feat/intro-course-4`というブランチ名になります。
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+ブログを書き終わったら`main`に向けてプルリクエストを作成してください。
+
+`blog/`以下に`{slug}.md`というファイルを作成してください。`slug`はURLの一部になります。
+
+たとえば`blog/intro-course-4.md`というファイルを作成した場合、`http://localhost:3000/blog/intro-course-4`でアクセスできます。
+
+ファイルの中身は以下のようになっています。
+
+```md
+---
+title: "Maximumとは"
+description: "埼玉大学のプログラミングサークル「Maximum」を紹介します。"
+authors: ["taro", "jiro", "saburo"]
+tags: ["maximum", "埼玉大学", "プログラミングサークル"]
+prev: "previous-blog"
+next: "next-blog"
+---
+```
+
+| フィールド名 | 説明 | 必須か | 備考 |
+| --- | --- | --- | --- |
+| title | ブログのタイトル | ⭕️ | |
+| description | ブログの説明 | ⭕️ | |
+| authors | ブログの執筆者 | ⭕️ | 複数人設定できるので、共同執筆も可能です。githubのユーザー名で設定してください。 |
+| tags | ブログのタグ | ⭕️ | 複数設定できます。もしタグがない場合は`[]`としてください。 |
+| prev | 前のブログ(前章) | ❌ | 前のブログがない場合はそもそもこのフィールドを設定しないでください。 |
+| next | 次のブログ(次章) | ❌ | 次のブログがない場合はそもそもこのフィールドを設定しないでください。 |
+
+## バグや新規機能の提案
+
+バグの報告や新規機能の提案があれば気軽に**Issues**に投稿してください。
+
+## 開発への参加方法
+
+開発へ参加したい方は**Issues**から自分のやりたいことを探して、**Assignees**に自分を追加してください。
+すると「自分がこのIssueを担当している」ということになります。
+あとはいつものようにブランチを切って開発してください。

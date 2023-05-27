@@ -8,7 +8,16 @@
     width: calc(100% - var(--size-article-horizontal-padding) * 2);
     max-width: var(--size-content-max-width);
     gap: var(--size-aside-gap);
-}
+    @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        box-sizing: border-box;
+        padding: 1rem;
+        width: 100%;
+    }
+        
+    }
+
 .card {
     display: flex;
     box-sizing: border-box;
@@ -23,24 +32,23 @@
 .next {
     display: flex;
     grid-column: 2;
-    margin-left: 2rem; 
-    margin-right: 1rem;
+    @media screen and (max-width: 768px) {
+        grid-column: 1;
+    }
 }
 
 .prev {
     display: flex;
     grid-column: 1;
-    margin-right: 2rem;
-    margin-left: 1rem;
 }
 @media screen and (max-width: 768px) {
 
     .next {
         margin-left: 0;
-        margin-right: 0.5rem;
+        margin-right: 0;
     }
     .prev {
-        margin-left: 0.5rem;
+        margin-left: 0;
         margin-right: 0;
     }
 }

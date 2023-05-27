@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import styles from "./page.module.css";
 import { parseMarkdownToHTML, parseStrToMarkdown } from "@/lib/markdown";
-import { readdir, readFile } from "fs/promises";
+import { mkdir, readdir, readFile, writeFile } from "fs/promises";
 import path from "path";
 import { Hero } from "@/components/hero";
 import { AuthorList } from "@/components/blog/author-list";
@@ -14,6 +14,7 @@ import { BlogButtonList } from "@/components/blog/button-list";
 import { URL } from "@/constants/url";
 import { BLOG_LIST_BREADCRUMBS } from "../page";
 import { Navigation } from "@/components/blog/navigation";
+import { createOgp } from "@/lib/ogp";
 
 interface Props {
     params: {
@@ -52,6 +53,37 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const blog = await getBlog(params.slug);
+    const slug = params.slug.replace(/-/g, "/");
+    const title = blog.meta.title;
+    const jsonPath = path.join(URL.BLOG_CACHE_DIR_PATH, "blog.json");
+    const createJsonDir = async () => {
+        try {
+            await readdir(URL.BLOG_CACHE_DIR_PATH);
+        } catch (e) {
+            await mkdir(URL.BLOG_CACHE_DIR_PATH, { recursive: true });
+        }
+    };
+    await createJsonDir();
+    const jsonfile = await readdir(URL.BLOG_CACHE_DIR_PATH);
+    if (!jsonfile.includes("blog.json")) {
+        await writeFile(jsonPath, "{}");
+    }
+
+
+    let ogpPath = "images/ogp/generated/" + slug + ".png";
+    const json = await readFile(jsonPath, "utf-8");
+    const cache = JSON.parse(json);
+    if (cache[slug] !== title) {
+        ogpPath = await createOgp(
+            blog.meta.title,
+            blog.meta.authors,
+            blog.meta.slug
+        );
+        cache[slug] = title;
+        await writeFile(jsonPath, JSON.stringify(cache));
+    }else {
+        console.log("cache hit");
+    }
 
     return {
         title: blog.meta.title,
@@ -60,6 +92,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             name: author,
             url: URL.GITHUB_PROFILE_URL(author),
         })),
+        openGraph: {
+            images: [
+                {
+                    url: ogpPath,
+                },
+            ],
+        },
     };
 }
 type ParsedMarkdown = ReturnType<typeof parseStrToMarkdown>;

@@ -13,6 +13,7 @@ import { Article } from "@/components/blog/article";
 import { BlogButtonList } from "@/components/blog/button-list";
 import { URL } from "@/constants/url";
 import { BLOG_LIST_BREADCRUMBS } from "../page";
+import { existsSync } from "fs";
 
 interface Props {
   params: {
@@ -29,6 +30,7 @@ const BLOG_DETAIL_BREADCRUMBS = (title: string, href: string) => [
 ];
 
 export async function generateStaticParams() {
+  if (!existsSync(URL.BLOG_DIR_PATH)) return [];
   const files = await readdir(URL.BLOG_DIR_PATH);
   const slugs = await Promise.all(
     files.map(async (file) => {

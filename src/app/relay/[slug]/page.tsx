@@ -17,6 +17,7 @@ import {
 import { firstDayOfMonth, lastDayOfMonth } from "@/util/date";
 import { RelayCalender } from "@/components/relay/calendar/calendar";
 import { ProgressBar } from "@/components/relay/progress-bar/progress-bar";
+import { existsSync } from "fs";
 
 interface Props {
   params: {
@@ -33,15 +34,16 @@ const RELAY_DETAIL_BREADCRUMBS = (title: string, href: string) => [
 ];
 
 export async function generateStaticParams() {
-  const files = await readdir(URL.BLOG_DIR_PATH);
+  if (!existsSync(URL.RELAY_DIR_PATH)) return [];
+  const files = await readdir(URL.RELAY_DIR_PATH);
   const slugs = await Promise.all(
     files.map(async (file) => {
-      const filepath = URL.BLOG_FILE_PATH(file);
+      const filepath = URL.RELAY_FILE_PATH(file);
       const RELATIVE_PATH = path.relative(
-        URL.BLOG_DIR_PATH,
+        URL.RELAY_DIR_PATH,
         path.dirname(filepath)
       );
-      const slug = path.join(RELATIVE_PATH, path.basename(filepath, ".md"));
+      const slug = path.join(RELATIVE_PATH, path.basename(filepath, ".json"));
       const connectedSlug = slug.replace(path.sep, "-");
       return connectedSlug;
     })

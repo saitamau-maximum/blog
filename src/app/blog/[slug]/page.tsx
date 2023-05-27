@@ -81,10 +81,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         );
         cache[slug] = title;
         await writeFile(jsonPath, JSON.stringify(cache));
-    }else {
-        console.log("cache hit");
     }
-
     return {
         title: blog.meta.title,
         description: blog.meta.description,

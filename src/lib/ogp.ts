@@ -11,6 +11,8 @@ const OGP_HEIGHT = 630;
 const AUTHOR_LIST_MARGIN = 48;
 const MAX_TITLE_WIDTH = OGP_WIDTH - 160;
 const FONT_SIZE = 96;
+const OGP_BASE_IMAGE_PATH = "images/ogp/base.png";  
+const OGP_GENERATED_IMAGE_PATH = "images/ogp/generated/";
 
 export const createOgp = async (
     title: string,
@@ -21,7 +23,7 @@ export const createOgp = async (
     const canvas = createCanvas(OGP_WIDTH, OGP_HEIGHT);
     const ctx = canvas.getContext("2d");
     const baseImage = await loadImage(
-        path.join(URL.PUBLIC_DIR_PATH, "images/ogp/base/ogpbase.png")
+        path.join(URL.PUBLIC_DIR_PATH, OGP_BASE_IMAGE_PATH)
     );
     ctx.drawImage(baseImage, 0, 0, OGP_WIDTH, OGP_HEIGHT);
     ctx.font = `bold ${FONT_SIZE}px "Noto Sans JP"`;
@@ -32,7 +34,7 @@ export const createOgp = async (
     ctx.shadowOffsetY = 4;
     ctx.shadowBlur = 4;
 
-    // useMeasureText
+  
 
     const titleWidth = ctx.measureText(title).width;
     if (titleWidth > MAX_TITLE_WIDTH) {
@@ -100,7 +102,7 @@ export const createOgp = async (
         ctx.restore();
     });
 
-    const imgPath = "images/ogp/generated/" + slug + ".png";
+    const imgPath = `${OGP_GENERATED_IMAGE_PATH}${slug}.png`;
     canvas.toBuffer((err, buf) => {
         if (err) throw err;
         fs.writeFile(path.join(URL.PUBLIC_DIR_PATH, imgPath), buf, () => {

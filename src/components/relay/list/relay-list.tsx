@@ -38,15 +38,10 @@ const isPastMonth = (date: string) => {
 export const RelayList = ({ relays }: Props) => {
   if (relays.length === 0) {
     return (
-      <div className={styles.relayListEmpty}>
-        <p className={styles.relayListEmptyMessage}>
-          ブログリレーがありません。
-        </p>
-      </div>
+      <p className={styles.relayListEmptyMessage}>ブログリレーがありません。</p>
     );
   }
 
-  // like timeline UI
   return (
     <div className={styles.relayList}>
       {relays.map((relay, index) => (

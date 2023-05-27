@@ -4,6 +4,8 @@ description: "今回はJavascriptを使ってサイトに動きをつけます�
 date: "2023-05-01"
 authors: ["sor4chi"]
 tags: ["Web研究会", "javascript"]
+prev: "webken-1"
+next: "webken-3"
 ---
 ## JavaScriptとは
 

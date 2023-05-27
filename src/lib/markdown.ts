@@ -164,6 +164,8 @@ const frontmatterSchema = z.object({
     .min(1, {
       message: ERROR.MARKDOWN_PARSER.FRONTMATTER_TAGS_LEAST_ONE,
     }),
+  next: z.string().optional(),
+  prev: z.string().optional(),
 });
 
 type Frontmatter = z.infer<typeof frontmatterSchema>;

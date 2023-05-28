@@ -4,6 +4,8 @@ title: "【第4回】便利なデータ構造"
 description: "入門講習会第4回"
 authors: ["takashin9"]
 tags: ["algorithm", "atcoder", "競技プログラミング", "cpp"]
+prev: "intro-course-3"
+next: "intro-course-5"
 ---
 
 

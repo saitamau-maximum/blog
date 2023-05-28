@@ -4,6 +4,8 @@ description: "会社やサークルなどの組織の中で、複数人で同じ
 date: "2023-05-15"
 authors: ["sor4chi"]
 tags: ["Web研究会", "git", "github"]
+prev: "webken-3"
+next: "webken-5"
 ---
 
 ## おさらい

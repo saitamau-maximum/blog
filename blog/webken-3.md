@@ -4,6 +4,8 @@ description: "GitとGithubを使ってみましょう。自分が書いたコー
 date: "2023-05-08"
 authors: ["sor4chi"]
 tags: ["Web研究会", "git", "github"]
+prev: "webken-2"
+next: "webken-4"
 ---
 
 ## Gitとは

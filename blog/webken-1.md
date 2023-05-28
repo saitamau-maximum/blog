@@ -4,6 +4,7 @@ description: "Webの基礎を学び、HTMLとCSSを使ってWebページを作�
 date: "2023-04-24"
 authors: ["sor4chi"]
 tags: ["Web研究会", "html", "css"]
+next: "webken-2"
 ---
 ## はじめに
 

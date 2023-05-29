@@ -68,7 +68,9 @@ export const RelayList = ({ relays }: Props) => {
               href={`/relay/${relay.slug}`}
             >
               <h2 className={styles.relayListItemTitle}>
-                {relay.title}
+                <span className={styles.relayListItemTitleText}>
+                  {relay.title}
+                </span>
                 {isThisMonth(relay.date) && (
                   <span className={styles.relayListItemActive}>開催中</span>
                 )}

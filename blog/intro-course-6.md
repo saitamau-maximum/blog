@@ -133,3 +133,82 @@ cout << s[right] - s[left] << endl; // 22
 
 配列 $s$ の前処理に $O(N)$ かかりますが、部分和を $O(1)$ で計算出来ていることが分かると思います。
 
+## 練習してみよう
+### 問題1
+#### 問題文
+$n$ 個の整数からなる数列 $a_1,\ a_2,\ ...\ ,\ a_n$ が与えられる。
+
+
+### 問題2: [AOJ 0516 - 最大の和 (JOI 2006 本選 A)](https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0516)
+#### 問題文
+$n$ 個の整数からなる数列 $a_1,\ a_2,\ ...\ ,\ a_n$ と正整数 $k$ $(1 \leq k \leq n)$ が与えられる。このとき、連続して並ぶ $k$ 個の整数の和 $S_i = a_i + a_{i + 1} + ... + a_{i+ k-1}\ (1 \leq i \leq n - k + 1)$ の最大値を出力するプログラムを作りなさい。
+
+##### 入力
+入力は複数のデータセットからなる。各データセットは以下の形式で与えられる。入力は2つのゼロを含む行で終了する。
+
+1行目には正整数 $n\ (1 \leq n \leq 100000)$ と正整数 $k \ (1 \leq k \leq n)$ がこの順に空白で区切られて書かれている。2行目以降の第 $1 + i$ 行目 $(1 \leq i \leq n)$ には、数列の $i$ 番目の項 $a_i\ (-10000 \leq a_i \leq 10000)$ が書かれている。採点用データのうち、配点の 60% 分は $n \leq 5000,\ k \leq 1000$ を満たす。
+
+データセットの数は 5 を超えない。
+
+#### 出力
+データセットごとに $S_i$ の最大値を1行に出力する。
+#### 入出力例
+##### 入力例
+```txt
+5 3
+2
+5
+-4
+10
+3
+0 0
+```
+
+##### 出力例
+```txt
+11
+```
+
+:::details[ヒント]
+問題文を要約すると、
+
+> $N$ 個の整数 $a_0,\ a_1,\ ...\ ,\ a_{N-1}$ が与えられる。 $K$ 個の連続する整数の和の最大値を求めよ。
+
+となります。また、配列の最大値は`max`関数を用いて求められます。
+:::
+
+:::details[解答例]
+```cpp
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define rep2(i, s, n) for (int i = (int)s; i < (int)(n); i++)
+using namespace std;
+using ll = long long;
+
+int calcMaxOfPartialSums(int n, int k, vector<int> a) {
+    vector<int> s(n + 1, 0);
+
+    rep(i, n) s[i + 1] = s[i] + a[i];
+
+    int result = INT_MIN;
+    rep(i, n - k + 1) {
+        result = max(result, s[i + k] - s[i]);
+    }
+
+    return result;
+}
+
+int main() {
+    while (true) {
+        int n, k;
+        cin >> n >> k;
+        if (n == 0 && k == 0) break;
+
+        vector<int> a(n);
+        rep(i, n) cin >> a[i];
+
+        cout << calcMaxOfPartialSums(n, k, a) << endl;
+    }
+}
+```
+:::

@@ -390,6 +390,19 @@ Webアプリケーションを作ろう！と思ったら、まずは3層アー�
 
 **バックエンド**は、アプリケーション層とデータベース層を指すことが多いです。
 
+### Node.jsの用意
+
+**JavaScript**はブラウザで動かせる言語でしたが、**Node.js**を使うことで同様にサーバーでも動かすことができます。
+今回はNode.jsを使ってアプリケーションを作成していきます。
+
+Ubuntuの場合は、以下のコマンドを実行してNode.jsをインストールしてください。
+
+```bash
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - && sudo apt-get install -y nodejs
+```
+
+ほかの環境の場合は、[Node.jsの公式サイト](https://nodejs.org/ja/)を参考にしてください。
+
 ### データベースとの連携
 
 データベースとの連携は、アプリケーション層で行います。
@@ -402,6 +415,16 @@ Webアプリケーションを作ろう！と思ったら、まずは3層アー�
 ```bash
 git init
 ```
+
+`.git`というディレクトリが作成されていることが確認できればOKです。
+
+```bash
+npm init -y
+```
+
+として、`package.json`を作成します。
+これはNode.jsのプロジェクトの設定ファイルです。
+ライブラリのバージョン管理や、プロジェクトの設定ができます。
 
 次に、データベースを操作するためのライブラリをインストールします。
 
@@ -421,12 +444,26 @@ db.close();
 
 `db.close()`は、データベースとの接続を切断する関数です。これは、データベースとの接続を切断しないと、データベースファイルを削除したり、別のプログラムからデータベースにアクセスできなくなったりするので、必ずプログラムの最後に書いておきましょう。
 
+それでは、実行してみましょう。
+
+```bash
+node index.js
+```
+
+今回は、データベースに接続してすぐに切断しているので、何も表示されません。
+しかし、新しく`database.db`というファイルが作成されていることが確認できます。
+ちゃんとデータベースと接続できていることが確認できました。
+
 次に、`database.db`は頻繁にデータが書き変わるので、これを`git`で管理してしまうと毎回のコミットでデータベースの変更がコミットされてしまいます。
 そのため、`.gitignore`に`database.db`を追加しておきましょう。
 
-```bash
-# コマンド使ってますが、別に`.gitignore`って名前でファイルを作って`database.db`って書いてもOKです
-echo database.db >> .gitignore
+また、`node_modules`も頻繁に変更され、さらにファイル数が多いので、これも`.gitignore`に追加しておきましょう。
+
+`.gitignore`ファイルを作成して、以下のように書きます。
+
+```txt:.gitignore
+database.db
+node_modules
 ```
 
 こうすることで、`git`で管理されなくなります。
@@ -436,182 +473,4 @@ echo database.db >> .gitignore
 ```bash
 git add .
 git commit -m "データベースと接続する"
-```
-
-### ユーザーとツイートのテーブルを作成
-
-まず、`queries.js`を作成します。
-
-```js:queries.js
-const Tweets = {
-    createTable: `
-        CREATE TABLE tweets IF NOT EXISTS (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            content TEXT NOT NULL,
-            user_id INTEGER NOT NULL,
-            created_at DATETIME NOT NULL
-        );
-    `,
-};
-
-const Users = {
-    createTable: `
-        CREATE TABLE users IF NOT EXISTS (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            email TEXT NOT NULL,
-            created_at DATETIME NOT NULL
-        );
-    `,
-};
-
-module.exports = {
-    Tweets,
-    Users,
-};
-```
-
-次に、`index.js`を以下のように編集します。
-
-```js:index.js {6-9}
-const sqlite3 = require('sqlite3').verbose();
-const queries = require('./queries');
-
-const db = new sqlite3.Database('database.db');
-
-db.serialize(() => {
-    db.run(queries.Tweets.createTable);
-    db.run(queries.Users.createTable);
-});
-
-db.close();
-```
-
-`IF NOT EXISTS`というのは、テーブルが存在しない場合にのみテーブルを作成するという意味です。
-これをつけておくことで最初にこのファイルを実行したときにテーブルが作成され、2回目以降はテーブルが存在するのでテーブルが作成されないようにします。
-
-`db.serialize`の中に書いた処理は、順番に実行されます。
-`db.run`は、SQLを実行する関数です。
-
-では実行してみましょう。
-
-```bash
-node index.js
-```
-
-`database.db`が作成されていれば成功です。
-`database.db`を開いて、テーブルが作成されていることを確認してみましょう。
-
-```bash
-sqlite3 database.db
-```
-
-を実行して、sqliteのコンソールに入ります。
-
-```sql
-.tables
-```
-
-を実行すると、テーブルの一覧が表示されます。
-
-```txt
-tweets  users
-```
-
-と表示されれば成功です。
-
-それではテーブルを作成する機能ができたので、コミットしておきましょう。
-
-```bash
-git add .
-git commit -m "ユーザーとツイートのテーブルを作成"
-```
-
-### ユーザーを作成できるようにする
-
-次に、ユーザーを作成できるようにしてみましょう。
-`queries.js`を以下のように編集します。
-
-```js:queries.js {10}
-const Users = {
-    createTable: `
-        CREATE TABLE users IF NOT EXISTS (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            email TEXT NOT NULL,
-            created_at DATETIME NOT NULL
-        );
-    `,
-    create: `INSERT INTO users (name, email, created_at) VALUES (?, ?, ?);`,
-};
-```
-
-そして、`index.js`を以下のように編集します。
-
-```js:index.js {10}
-const sqlite3 = require('sqlite3').verbose();
-const queries = require('./queries');
-
-const db = new sqlite3.Database('database.db');
-
-db.serialize(() => {
-    db.run(queries.Tweets.createTable);
-    db.run(queries.Users.createTable);
-
-    db.run(queries.Users.create, 'りんご太郎', 'apple@example.com', '2022-08-15 00:00:00');
-});
-
-db.close();
-```
-
-`?`は、後から値を埋め込むための**プレースホルダ**と呼ばれるものです。
-
-:::details[?を含むクエリに関する補足]
-`User.create`のクエリを
-
-```js
-create(name, email, created_at): `INSERT INTO users (name, email, created_at) VALUES ('${name}', '${email}', '${created_at}');`,
-```
-
-にしないの？と思うかもしれません。
-
-しかし、このようにすると、SQLインジェクションというセキュリティ上の問題が発生します。
-たとえば、`name`に`'); DROP TABLE users; --`という文字列を入れると、出力されるクエリは以下のようになります。
-
-```sql
-INSERT INTO users (name, email, created_at) VALUES (''); DROP TABLE users; --', 'hacker@example.com', '2023-05-21 00:00:00');
-```
-
-これにより、本来意図していないテーブルの削除が行われてしまいます。
-そのため、`?`を使って、SQLインジェクションを防ぐようにしましょう。
-これを使えば攻撃性のある命令に使われる特殊文字`'; --`などを命令ではなくそのまま文字列として埋め込むことができます。
-:::
-
-では実行してみましょう。
-
-```bash
-node index.js
-```
-
-`database.db`を開いて、ユーザーが作成されていることを確認してみましょう。
-
-```bash
-sqlite3 database.db
-```
-
-```sql
-SELECT * FROM users;
-```
-
-```txt
-1|りんご太郎|apple@example.com|2022-08-15 00:00:00
-```
-
-と表示されれば成功です。
-
-それではユーザーを作成できるようにする機能ができたので、コミットしておきましょう。
-
-```bash
-git add .
-git commit -m "ユーザーを作成できるようにする"
 ```

@@ -25,4 +25,9 @@ tags: ["tag1", "tag2"]
     TAG_MD_NOT_ALLOWED:
       "File名がURLになる仕様上、`/blog/tag`と重複する`tag.md`の作成は許可されていません。",
   },
+  /** Blog Relay Parser Error */
+  BLOG_RELAY_PARSER: {
+    RELAY_SCHEMA_ERROR:
+      "Relayが不正な形式です。`pnpm gen:blog-relay`から設定ファイルを生成することをおすすめします。",
+  },
 };

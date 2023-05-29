@@ -7,6 +7,7 @@ import { Hero } from "@/components/hero";
 import { BlogCardList } from "@/components/blog/card-list";
 import { URL } from "@/constants/url";
 import { HOME_BREADCRUMBS } from "../page";
+import { existsSync } from "fs";
 
 const TITLE = "ブログ一覧";
 const DESCRIPTION =
@@ -26,6 +27,7 @@ export const BLOG_LIST_BREADCRUMBS = [
 ];
 
 async function getBlogs() {
+  if (!existsSync(URL.BLOG_DIR_PATH)) return [];
   const files = await readdir(URL.BLOG_DIR_PATH);
   const blogs = await Promise.all(
     files.map(async (file) => {

@@ -1,0 +1,243 @@
+.relayList {
+  display: flex;
+  flex-direction: column;
+  --relayListGap: 2rem;
+  gap: var(--relayListGap);
+}
+
+.relayListItem {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  border-radius: 0.5rem;
+  position: relative;
+  --relayListItemLeftWidth: 5rem;
+  --relayListItemPointSize: 1.25rem;
+}
+
+.relayListItemLine {
+  content: "";
+  position: absolute;
+  top: var(--relayListItemPointSize);
+  left: calc(var(--relayListItemLeftWidth) - var(--relayListItemPointSize) / 2);
+  transform: translateX(-50%);
+  width: 0.125rem;
+  height: calc(100% + var(--relayListGap));
+  z-index: -1;
+}
+
+:global(.light) .relayListItemLine {
+  background-color: var(--color-gray-300);
+}
+
+:global(.dark) .relayListItemLine {
+  background-color: var(--color-gray-600);
+}
+
+.relayListItemRight {
+  width: 100%;
+  min-width: 0;
+}
+
+.relayListItemCard {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  display: block;
+  text-decoration: none;
+}
+
+:global(.light) .relayListItemCard {
+  color: var(--color-gray-600);
+  background-color: var(--color-gray-50);
+}
+
+:global(.dark) .relayListItemCard {
+  color: var(--color-gray-100);
+  background-color: var(--color-gray-700);
+}
+
+@media (hover: hover) {
+  .relayListItemCard:hover {
+    transform: translateY(-0.25rem);
+  }
+}
+
+.relayListItemLeft {
+  width: var(--relayListItemLeftWidth);
+  height: fit-content;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.count {
+  display: flex;
+  justify-content: space-between;
+}
+
+.relayListItemPoint {
+  width: var(--relayListItemPointSize);
+  height: var(--relayListItemPointSize);
+  border-radius: 50%;
+  background-color: var(--color-gray-500);
+  box-sizing: border-box;
+  border-style: solid;
+  border-width: 0.25rem;
+  position: relative;
+}
+
+:global(.light) .relayListItemPoint {
+  border-color: var(--color-gray-100);
+}
+
+:global(.dark) .relayListItemPoint {
+  border-color: var(--color-gray-800);
+}
+
+.relayListItemPointActive {
+  background-color: var(--color-accent-primary);
+}
+
+.relayListItemTitle {
+  font-size: 1.5rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.relayListItemActive {
+  font-size: 1rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  color: var(--color-gray-50);
+  background: var(--color-accent-gradient);
+}
+
+.relayListItemArchived {
+  font-size: 1rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  color: var(--color-gray-50);
+}
+
+:global(.light) .relayListItemArchived {
+  background: var(--color-gray-400);
+}
+
+:global(.dark) .relayListItemArchived {
+  background: var(--color-gray-500);
+}
+
+:global(.light) .relayListItemDescription {
+  color: var(--color-gray-500);
+}
+
+:global(.dark) .relayListItemDescription {
+  color: var(--color-gray-200);
+}
+
+.relayListItemDate {
+  width: calc(var(--relayListItemLeftWidth) - var(--relayListItemPointSize));
+}
+
+:global(.light) .relayListItemDate {
+  color: var(--color-gray-500);
+}
+
+:global(.dark) .relayListItemDate {
+  color: var(--color-gray-400);
+}
+
+:global(.light) .relayListItemDateActive {
+  color: var(--color-gray-900) !important;
+  font-weight: 700;
+}
+
+:global(.dark) .relayListItemDateActive {
+  color: var(--color-gray-50) !important;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .relayListItem {
+    flex-direction: column;
+  }
+}
+
+.relayListEmptyMessage {
+  text-align: center;
+}
+
+.memberList {
+  margin: 0;
+  margin-top: 1rem;
+  padding: 0 1rem;
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.memberList:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5rem;
+  height: 100%;
+}
+
+:global(.light) .memberList:after {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    var(--color-gray-50) 100%
+  );
+}
+
+:global(.dark) .memberList:after {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    var(--color-gray-700) 100%
+  );
+}
+
+.memberListItem {
+  border-radius: 50%;
+}
+
+.relayListItemStatus {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  margin-top: 1rem;
+}
+
+.relayListItemStatusIcon {
+  margin: 0 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.relayListItemStatusText {
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.relayListItemStatusTextCount {
+  margin: 0 0.25rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--color-accent-primary);
+}

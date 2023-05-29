@@ -6,6 +6,7 @@ import { Hero } from "@/components/hero";
 import { BlogCardList } from "@/components/blog/card-list";
 import { URL } from "@/constants/url";
 import { BLOG_LIST_BREADCRUMBS } from "../../page";
+import { existsSync } from "fs";
 
 interface Props {
   params: {
@@ -41,6 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 async function getTags() {
+  if (!existsSync(URL.BLOG_DIR_PATH)) return [];
   const files = await readdir(URL.BLOG_DIR_PATH);
   const blogs = await Promise.all(
     files.map(async (file) => {

@@ -8,6 +8,7 @@ import { BlogCardList } from "@/components/blog/card-list";
 import { URL } from "@/constants/url";
 import { HOME_BREADCRUMBS } from "../page";
 import { findFilesInDeep } from "@/util/file";
+import { ROUTE } from "@/constants/route";
 
 const TITLE = "ブログ一覧";
 const DESCRIPTION =
@@ -22,7 +23,7 @@ export const BLOG_LIST_BREADCRUMBS = [
   ...HOME_BREADCRUMBS,
   {
     title: TITLE,
-    href: "/blog",
+    href: ROUTE.BLOG_LIST,
   },
 ];
 

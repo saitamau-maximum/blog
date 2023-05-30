@@ -4,6 +4,7 @@ import Image from "next/image";
 import { URL } from "@/constants/url";
 import { MdEditCalendar, MdEventAvailable } from "react-icons/md";
 import Link from "next/link";
+import { ROUTE } from "@/constants/route";
 
 interface Props {
   relays: {
@@ -65,7 +66,7 @@ export const RelayList = ({ relays }: Props) => {
           <div className={styles.relayListItemRight}>
             <Link
               className={styles.relayListItemCard}
-              href={`/relay/${relay.slug}`}
+              href={ROUTE.RELAY_DETAIL(relay.slug)}
             >
               <h2 className={styles.relayListItemTitle}>
                 <span className={styles.relayListItemTitleText}>

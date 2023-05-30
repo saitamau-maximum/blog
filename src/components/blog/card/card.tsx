@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./card.module.css";
 import Link from "next/link";
 import { URL } from "@/constants/url";
+import { ROUTE } from "@/constants/route";
 
 interface Props {
   title: string;
@@ -14,7 +15,7 @@ interface Props {
 export const BlogCard = ({ title, slug, date, authors, tags }: Props) => {
   return (
     <div className={styles.card}>
-      <Link href={`/blog/${slug.join("/")}`} className={styles.cardLink}>
+      <Link href={ROUTE.BLOG_DETAIL(slug)} className={styles.cardLink}>
         <div className={styles.cardHeader}>
           <time className={styles.cardDate}>{date}</time>
           <div className={styles.cardAuthors}>

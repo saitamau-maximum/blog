@@ -5,6 +5,7 @@ import { Logo } from "./logo";
 import { useHeader } from "@/hooks";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ROUTE } from "@/constants/route";
 
 const SLIDEIN_KF = [
   { transform: "translateY(-30%)", opacity: 0 },
@@ -52,13 +53,13 @@ export const Header = () => {
   return (
     <>
       <header className={styles.header}>
-        <Link href="/">
+        <Link href={ROUTE.TOP}>
           <Logo />
         </Link>
       </header>
       <header className={styles.stickyHeader} ref={stickyHeaderRef}>
         <div className={styles.stickyHeaderBg} />
-        <Link href="/">
+        <Link href={ROUTE.TOP}>
           <Logo />
         </Link>
         <span className={styles.title}>{title}</span>

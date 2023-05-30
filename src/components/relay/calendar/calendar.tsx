@@ -4,6 +4,7 @@ import { clsx } from "clsx";
 import { useMemo } from "react";
 import Image from "next/image";
 import { URL } from "@/constants/url";
+import { ROUTE } from "@/constants/route";
 
 type RelayItem = {
   slug: string | null;
@@ -127,7 +128,7 @@ const _CalenderCell = ({ relay }: { relay: RelayItem | null }) => {
   return (
     <Link
       className={clsx(styles.dayCell, styles.dayCellLink)}
-      href={`/blog/${relay.slug}`}
+      href={ROUTE.BLOG_DETAIL(relay.slug.split("/"))}
     >
       <div className={styles.dayCard}>
         <div className={styles.dayCardAuthor}>

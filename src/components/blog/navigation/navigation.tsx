@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from "./navigation.module.css";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { ROUTE } from "@/constants/route";
 
 interface NavData {
   title: string;
@@ -19,7 +20,7 @@ interface CardProps extends NavData {
 
 const _Card = ({ title, slug, isPrev, isNext }: CardProps) => {
   return (
-    <Link href={`/blog/${slug.join("/")}`} className={styles.card}>
+    <Link href={ROUTE.BLOG_DETAIL(slug)} className={styles.card}>
       {isPrev && (
         <span className={styles.prevIcon}>
           <IoIosArrowBack size={32} color="#878787" />

@@ -9,6 +9,7 @@ import { BLOG_LIST_BREADCRUMBS } from "../../page";
 import { existsSync } from "fs";
 import { findFilesInDeep } from "@/util/file";
 import path from "path";
+import { ROUTE } from "@/constants/route";
 
 interface Props {
   params: {
@@ -24,7 +25,7 @@ const BLOG_LIST_FILTER_BY_TAG_BREADCRUMBS = (title: string, tag: string) => [
   ...BLOG_LIST_BREADCRUMBS,
   {
     title,
-    href: `/blog/tag/${tag}`,
+    href: ROUTE.TAGGED_BLOG_LIST(tag),
   },
 ];
 

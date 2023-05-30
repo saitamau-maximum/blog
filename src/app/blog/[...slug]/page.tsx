@@ -15,6 +15,7 @@ import { URL } from "@/constants/url";
 import { BLOG_LIST_BREADCRUMBS } from "../page";
 import { Navigation } from "@/components/blog/navigation";
 import { findFilesInDeep } from "@/util/file";
+import { ROUTE } from "@/constants/route";
 
 interface Props {
   params: {
@@ -142,7 +143,7 @@ export default async function BlogDetail({ params }: Props) {
         title={blog.meta.title}
         breadcrumbs={BLOG_DETAIL_BREADCRUMBS(
           blog.meta.title,
-          `/blog/${blog.meta.slug}`
+          ROUTE.BLOG_DETAIL(blog.meta.slug)
         )}
       >
         <div className={styles.heroContainer}>

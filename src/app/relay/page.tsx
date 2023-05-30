@@ -7,6 +7,7 @@ import { HOME_BREADCRUMBS } from "../page";
 import { parseStrToRelay } from "@/lib/relay";
 import { RelayList } from "@/components/relay/list";
 import { existsSync } from "fs";
+import { ROUTE } from "@/constants/route";
 
 const TITLE = "ブログリレー一覧";
 const DESCRIPTION =
@@ -21,7 +22,7 @@ export const RELAY_LIST_BREADCRUMBS = [
   ...HOME_BREADCRUMBS,
   {
     title: TITLE,
-    href: "/relay",
+    href: ROUTE.RELAY_LIST,
   },
 ];
 

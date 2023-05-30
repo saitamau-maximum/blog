@@ -13,6 +13,7 @@ import { RelayList } from "@/components/relay/list";
 import { existsSync } from "fs";
 import { findFilesInDeep } from "@/util/file";
 import path from "path";
+import { ROUTE } from "@/constants/route";
 
 const LATEST_BLOGS_COUNT = 6;
 const LATEST_RELAYS_COUNT = 3;
@@ -20,7 +21,7 @@ const LATEST_RELAYS_COUNT = 3;
 export const HOME_BREADCRUMBS = [
   {
     title: "Home",
-    href: "/",
+    href: ROUTE.TOP,
   },
 ];
 
@@ -114,7 +115,7 @@ export default async function Home() {
           サークルで講義に使った資料や、メンバーが得た知見をアウトプットしています。
         </p>
         <BlogCardList blogs={latestBlogs} />
-        <Link href="/blog" className={styles.moreLink}>
+        <Link href={ROUTE.BLOG_LIST} className={styles.moreLink}>
           More
           <MdArrowForward />
         </Link>
@@ -123,7 +124,7 @@ export default async function Home() {
           1ヶ月で1つのテーマについて、複数のメンバーが記事を書く企画「ブログリレー」を不定期に開催しています。
         </p>
         <RelayList relays={latestRelays} />
-        <Link href="/relay" className={styles.moreLink}>
+        <Link href={ROUTE.RELAY_LIST} className={styles.moreLink}>
           More
           <MdArrowForward />
         </Link>

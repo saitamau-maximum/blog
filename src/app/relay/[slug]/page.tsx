@@ -18,6 +18,7 @@ import { firstDayOfMonth, lastDayOfMonth } from "@/util/date";
 import { RelayCalender } from "@/components/relay/calendar/calendar";
 import { ProgressBar } from "@/components/relay/progress-bar/progress-bar";
 import { existsSync } from "fs";
+import { ROUTE } from "@/constants/route";
 
 interface Props {
   params: {
@@ -97,7 +98,7 @@ export default async function RelayDetail({ params }: Props) {
         title={relay.title}
         breadcrumbs={RELAY_DETAIL_BREADCRUMBS(
           relay.title,
-          `/relay/${relay.slug}`
+          ROUTE.RELAY_DETAIL(relay.slug)
         )}
       >
         <div className={styles.heroContent}>

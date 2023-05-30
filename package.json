@@ -10,6 +10,9 @@
     "lint": "next lint",
     "lint:md": "markdownlint '**/*.md' --ignore node_modules --ignore README.md",
     "lint:fix:md": "markdownlint '**/*.md' --ignore node_modules --ignore README.md --fix",
+    "lint:js": "eslint --ext .js,.jsx,.ts,.tsx .",
+    "lint:fix:js": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
+    "format": "prettier --write '**/*.{js,jsx,ts,tsx,json}'",
     "gen:blog-relay": "ts-node scripts/generate-blog-relay.ts"
   },
   "dependencies": {

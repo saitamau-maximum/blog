@@ -1,11 +1,11 @@
-import { existsSync } from "fs";
-import { writeFile } from "fs/promises";
-import path from "path";
+import { existsSync } from 'fs';
+import { writeFile } from 'fs/promises';
+import path from 'path';
 
-import { bold, green, red, blue } from "kleur";
-import prompts, { PromptObject } from "prompts";
+import { bold, green, red, blue } from 'kleur';
+import prompts, { PromptObject } from 'prompts';
 
-const RELAY_DIR = path.join(__dirname, "../relay");
+const RELAY_DIR = path.join(__dirname, '../relay');
 
 const today = new Date();
 
@@ -26,46 +26,46 @@ type Relay = {
 
 const questions: PromptObject[] = [
   {
-    type: "text",
-    name: "title",
-    message: "ブログリレーのタイトルを入力してください",
+    type: 'text',
+    name: 'title',
+    message: 'ブログリレーのタイトルを入力してください',
     validate: (value) => {
       if (value.length < 1) {
-        return "タイトルは必須です";
+        return 'タイトルは必須です';
       }
       return true;
     },
   },
   {
-    type: "text",
-    name: "slug",
-    message: "ブログリレーのスラッグを入力してください",
+    type: 'text',
+    name: 'slug',
+    message: 'ブログリレーのスラッグを入力してください',
     validate: (value) => {
       const regex = /^[a-z0-9-]+$/;
       if (value.length < 1) {
-        return "スラッグは必須です";
+        return 'スラッグは必須です';
       }
       if (!regex.test(value)) {
-        return "スラッグは半角英数字とハイフンのみで入力してください";
+        return 'スラッグは半角英数字とハイフンのみで入力してください';
       }
       return true;
     },
   },
   {
-    type: "text",
-    name: "description",
-    message: "ブログリレーの説明を入力してください",
+    type: 'text',
+    name: 'description',
+    message: 'ブログリレーの説明を入力してください',
     validate: (value) => {
       if (value.length < 1) {
-        return "説明は必須です";
+        return '説明は必須です';
       }
       return true;
     },
   },
   {
-    type: "select",
-    name: "date",
-    message: "ブログリレーの開催月を選択してください",
+    type: 'select',
+    name: 'date',
+    message: 'ブログリレーの開催月を選択してください',
     choices: Array.from({ length: 12 }, (_, i) => {
       let year = today.getFullYear();
       let month = today.getMonth() + i + 1;
@@ -86,9 +86,9 @@ const questions: PromptObject[] = [
   const response = await prompts(questions);
 
   const maxDayCount = new Date(
-    parseInt(response.date.split("-")[0], 10),
-    parseInt(response.date.split("-")[1], 10),
-    0
+    parseInt(response.date.split('-')[0], 10),
+    parseInt(response.date.split('-')[1], 10),
+    0,
   );
 
   const advent: Relay = {
@@ -109,15 +109,15 @@ const questions: PromptObject[] = [
     console.log(
       bold(
         red(
-          "ブログリレーの設定ファイルが既に存在します、違うslugを入力してください"
-        )
-      )
+          'ブログリレーの設定ファイルが既に存在します、違うslugを入力してください',
+        ),
+      ),
     );
     console.log(blue(path.relative(process.cwd(), adventPath)));
     return;
   }
   await writeFile(adventPath, JSON.stringify(advent, null, 2));
 
-  console.log(bold(green("ブログリレーの設定ファイルを生成しました")));
+  console.log(bold(green('ブログリレーの設定ファイルを生成しました')));
   console.log(blue(path.relative(process.cwd(), adventPath)));
 })();

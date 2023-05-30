@@ -1,12 +1,12 @@
-"use client";
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
-import { MdExpandMore } from "react-icons/md";
+'use client';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
+import { MdExpandMore } from 'react-icons/md';
 
-import { URL } from "@/constants/url";
+import { URL } from '@/constants/url';
 
-import styles from "./author-list.module.css";
+import styles from './author-list.module.css';
 
 interface Props {
   authors: string[];

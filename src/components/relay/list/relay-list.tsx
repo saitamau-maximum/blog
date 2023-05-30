@@ -1,12 +1,11 @@
-import { clsx } from "clsx";
-import Image from "next/image";
-import Link from "next/link";
-import { MdEditCalendar, MdEventAvailable } from "react-icons/md";
+import { clsx } from 'clsx';
+import Image from 'next/image';
+import Link from 'next/link';
+import { MdEditCalendar, MdEventAvailable } from 'react-icons/md';
 
-import { URL } from "@/constants/url";
+import { URL } from '@/constants/url';
 
-
-import styles from "./relay-list.module.css";
+import styles from './relay-list.module.css';
 
 interface Props {
   relays: {
@@ -31,7 +30,7 @@ const isPastMonth = (date: string) => {
   const now = new Date();
   const currentYear = now.getFullYear();
   const currentMonth = now.getMonth() + 1;
-  const [year, month] = date.split("-").map((str) => parseInt(str, 10));
+  const [year, month] = date.split('-').map((str) => parseInt(str, 10));
 
   if (currentYear > year) return true;
   if (currentYear === year && currentMonth > month) return true;
@@ -53,7 +52,7 @@ export const RelayList = ({ relays }: Props) => {
             <time
               className={clsx(
                 styles.relayListItemDate,
-                isThisMonth(relay.date) && styles.relayListItemDateActive
+                isThisMonth(relay.date) && styles.relayListItemDateActive,
               )}
             >
               {relay.date}
@@ -61,7 +60,7 @@ export const RelayList = ({ relays }: Props) => {
             <div
               className={clsx(
                 styles.relayListItemPoint,
-                isThisMonth(relay.date) && styles.relayListItemPointActive
+                isThisMonth(relay.date) && styles.relayListItemPointActive,
               )}
             />
           </div>

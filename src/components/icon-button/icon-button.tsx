@@ -1,12 +1,12 @@
-import { ComponentProps, ReactNode } from "react";
+import { ComponentProps, ReactNode } from 'react';
 
-import styles from "./icon-button.module.css";
+import styles from './icon-button.module.css';
 
 type Props = {
   children: ReactNode;
   onClick: () => void;
   ariaLabel: string;
-} & ComponentProps<"button">;
+} & ComponentProps<'button'>;
 
 export const IconButton = ({ children, onClick, ariaLabel }: Props) => {
   return (

@@ -1,15 +1,15 @@
-import { Metadata } from "next";
-import "./globals.css";
-import { Noto_Sans_JP } from "next/font/google";
+import { Metadata } from 'next';
+import './globals.css';
+import { Noto_Sans_JP } from 'next/font/google';
 
-import { TEXT } from "@/constants/text";
-import { HeaderProvider } from "@/hooks";
+import { TEXT } from '@/constants/text';
+import { HeaderProvider } from '@/hooks';
 
-import { Header } from "../components/header";
+import { Header } from '../components/header';
 
 const notoSansJP = Noto_Sans_JP({
-  subsets: ["latin"],
-  weight: ["400", "700"],
+  subsets: ['latin'],
+  weight: ['400', '700'],
 });
 
 export const metadata = {

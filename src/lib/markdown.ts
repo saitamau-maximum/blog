@@ -1,44 +1,41 @@
-import { createElement, Fragment } from "react";
-import refactorBash from "refractor/lang/bash";
-import refractorC from "refractor/lang/c";
-import refractorCpp from "refractor/lang/cpp";
-import refractorCSS from "refractor/lang/css";
-import refractorDiff from "refractor/lang/diff";
-import refractorGo from "refractor/lang/go";
-import refractorJava from "refractor/lang/java";
-import refractorJavascript from "refractor/lang/javascript";
-import refractorJson from "refractor/lang/json";
-import refractorPython from "refractor/lang/python";
-import refractorRust from "refractor/lang/rust";
-import refactorSql from "refractor/lang/sql";
-import refractorTypescript from "refractor/lang/typescript";
-import refactorHtml from "refractor/lang/xml-doc";
-import { refractor } from "refractor/lib/core.js";
-import rehypeKatex from "rehype-katex";
-import rehypeMermaid from "rehype-mermaidjs";
-import rehypeParse from "rehype-parse";
-import rehypePrismGenerator from "rehype-prism-plus/generator";
-import rehypeReact from "rehype-react";
-import rehypeStringify from "rehype-stringify";
-import remarkDirective from "remark-directive";
-import remarkExtractToc from "remark-extract-toc";
-import remarkCodeTitle from "remark-flexible-code-titles";
-import remarkGfm from "remark-gfm";
-import remarkMath from "remark-math";
-import remarkParse from "remark-parse";
-import remarkRehype from "remark-rehype";
-import remarkSlug from "remark-slug";
-import { unified } from "unified";
-import { z } from "zod";
+import { createElement, Fragment } from 'react';
+import refactorBash from 'refractor/lang/bash';
+import refractorC from 'refractor/lang/c';
+import refractorCpp from 'refractor/lang/cpp';
+import refractorCSS from 'refractor/lang/css';
+import refractorDiff from 'refractor/lang/diff';
+import refractorGo from 'refractor/lang/go';
+import refractorJava from 'refractor/lang/java';
+import refractorJavascript from 'refractor/lang/javascript';
+import refractorJson from 'refractor/lang/json';
+import refractorPython from 'refractor/lang/python';
+import refractorRust from 'refractor/lang/rust';
+import refactorSql from 'refractor/lang/sql';
+import refractorTypescript from 'refractor/lang/typescript';
+import refactorHtml from 'refractor/lang/xml-doc';
+import { refractor } from 'refractor/lib/core.js';
+import rehypeKatex from 'rehype-katex';
+import rehypeMermaid from 'rehype-mermaidjs';
+import rehypeParse from 'rehype-parse';
+import rehypePrismGenerator from 'rehype-prism-plus/generator';
+import rehypeReact from 'rehype-react';
+import rehypeStringify from 'rehype-stringify';
+import remarkDirective from 'remark-directive';
+import remarkExtractToc from 'remark-extract-toc';
+import remarkCodeTitle from 'remark-flexible-code-titles';
+import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import remarkParse from 'remark-parse';
+import remarkRehype from 'remark-rehype';
+import remarkSlug from 'remark-slug';
+import { unified } from 'unified';
+import { z } from 'zod';
 
-import { ERROR } from "@/constants/error";
+import { ERROR } from '@/constants/error';
 
-import { Anchor } from "./rehype/anchor";
-import { Image } from "./rehype/image";
-import remarkCustomDirectives from "./remark/directive";
-
-
-
+import { Anchor } from './rehype/anchor';
+import { Image } from './rehype/image';
+import remarkCustomDirectives from './remark/directive';
 
 refractor.register(refractorRust);
 refractor.register(refractorTypescript);
@@ -80,9 +77,9 @@ const mdHtmlProcessor = unified()
   .use(remarkCodeTitle) //        [mdast -> mdast] codeブロックへタイトル等の構文拡張
   .use(remarkRehype) //           [mdast -> hast ] mdast(Markdown抽象構文木)をhast(HTML抽象構文木)に変換
   .use(rehypeMermaid, {
-    strategy: "inline-svg",
+    strategy: 'inline-svg',
     mermaidConfig: {
-      fontFamily: "sans-serif, monospace",
+      fontFamily: 'sans-serif, monospace',
     },
   }) //          [hast  -> hast ] mermaidブロックをmermaid.jsに対応
   .use(rehypeKatex) //            [mdast -> hast ] mathブロックをkatex.jsに対応
@@ -95,7 +92,7 @@ const tocProcessor = unified()
   .use(remarkParse) //      [md    -> mdast] Markdownをmdast(Markdown抽象構文木)に変換
   .use(remarkSlug) //       [mdast -> mdast] Headingにid付与（Toc Anchor用）
   .use(remarkExtractToc, {
-    keys: ["data"],
+    keys: ['data'],
   });
 
 export const parseMarkdownToHTML = async (mdContent: string) => {
@@ -129,7 +126,7 @@ export const parseHTMLToReactJSX = (htmlContent: string) => {
 const parseFrontmatter = (frontmatter: string) => {
   const wrappedFrontmatter = frontmatter
     .replace(/(\w+):/g, '"$1":')
-    .replace(/\n/g, ",\n");
+    .replace(/\n/g, ',\n');
   try {
     const jsonFrontmatter = JSON.parse(`{${wrappedFrontmatter}}`);
     return jsonFrontmatter;
@@ -176,24 +173,24 @@ type Frontmatter = z.infer<typeof frontmatterSchema>;
 
 export const parseStrToMarkdown = (
   str: string,
-  filename: string
+  filename: string,
 ): { frontmatter: Frontmatter; content: string } => {
-  if (filename === "tag.md") {
+  if (filename === 'tag.md') {
     throw new Error(
-      `[${filename}] ${ERROR.MARKDOWN_PARSER.TAG_MD_NOT_ALLOWED}`
+      `[${filename}] ${ERROR.MARKDOWN_PARSER.TAG_MD_NOT_ALLOWED}`,
     );
   }
 
   const frontmatter = frontmatterRegex.exec(str);
   if (!frontmatter) {
     throw new Error(
-      `[${filename}] ${ERROR.MARKDOWN_PARSER.FRONTMATTER_NOT_FOUND}`
+      `[${filename}] ${ERROR.MARKDOWN_PARSER.FRONTMATTER_NOT_FOUND}`,
     );
   }
   const jsonFrontmatter = parseFrontmatter(frontmatter[1]);
   if (!jsonFrontmatter) {
     throw new Error(
-      `[${filename}] ${ERROR.MARKDOWN_PARSER.FRONTMATTER_PARSE_ERROR} ${ERROR.MARKDOWN_PARSER.FRONTMATTER_CORRECT_FORMAT}`
+      `[${filename}] ${ERROR.MARKDOWN_PARSER.FRONTMATTER_PARSE_ERROR} ${ERROR.MARKDOWN_PARSER.FRONTMATTER_CORRECT_FORMAT}`,
     );
   }
   const frontmatterData = frontmatterSchema.safeParse(jsonFrontmatter);
@@ -203,10 +200,10 @@ export const parseStrToMarkdown = (
         ERROR.MARKDOWN_PARSER.FRONTMATTER_SCHEMA_ERROR
       }\n${frontmatterData.error.issues
         .map((issue) => `- ${issue.message}`)
-        .join("\n")}`
+        .join('\n')}`,
     );
   }
-  const content = str.replace(frontmatterRegex, "");
+  const content = str.replace(frontmatterRegex, '');
   return {
     frontmatter: frontmatterData.data,
     content,

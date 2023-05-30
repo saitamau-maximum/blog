@@ -1,21 +1,21 @@
-"use client";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useRef } from "react";
+'use client';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useEffect, useRef } from 'react';
 
-import { useHeader } from "@/hooks";
+import { useHeader } from '@/hooks';
 
-import styles from "./header.module.css";
-import { Logo } from "./logo";
+import styles from './header.module.css';
+import { Logo } from './logo';
 
 const SLIDEIN_KF = [
-  { transform: "translateY(-30%)", opacity: 0 },
-  { transform: "translateY(0)", opacity: 1 },
+  { transform: 'translateY(-30%)', opacity: 0 },
+  { transform: 'translateY(0)', opacity: 1 },
 ];
 
 const SLIDEOUT_KF = [
-  { transform: "translateY(0)", opacity: 1 },
-  { transform: "translateY(-30%)", opacity: 0 },
+  { transform: 'translateY(0)', opacity: 1 },
+  { transform: 'translateY(-30%)', opacity: 0 },
 ];
 
 const ANIMATION_DURATION = 100;
@@ -45,7 +45,7 @@ export const Header = () => {
           stickyHeader.animate(SLIDEIN_KF, { duration: ANIMATION_DURATION });
         }
       },
-      { threshold: [0, 0.25, 0.5, 0.75, 1] }
+      { threshold: [0, 0.25, 0.5, 0.75, 1] },
     );
     observer.observe(hero);
     return () => observer.unobserve(hero);

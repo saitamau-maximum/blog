@@ -1,1 +1,1 @@
-export * from "./relay-list";
+export * from './relay-list';

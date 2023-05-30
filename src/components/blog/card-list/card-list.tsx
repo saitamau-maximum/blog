@@ -1,6 +1,6 @@
-import { BlogCard } from "../card";
+import { BlogCard } from '../card';
 
-import styles from "./card-list.module.css";
+import styles from './card-list.module.css';
 
 interface Props {
   blogs: {

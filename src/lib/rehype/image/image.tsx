@@ -1,14 +1,14 @@
-"use client";
-import NextImage from "next/image";
-import { useEffect, useState } from "react";
+'use client';
+import NextImage from 'next/image';
+import { useEffect, useState } from 'react';
 
-import { useClickOutside } from "@/hooks";
+import { useClickOutside } from '@/hooks';
 
-import styles from "./image.module.css";
+import styles from './image.module.css';
 
-import type { ComponentProps } from "react";
+import type { ComponentProps } from 'react';
 
-type Props = ComponentProps<"img">;
+type Props = ComponentProps<'img'>;
 
 export const Image = (props: Props) => {
   const { alt, src } = props;
@@ -20,17 +20,17 @@ export const Image = (props: Props) => {
 
   useEffect(() => {
     if (isExpanded) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = 'auto';
     }
   }, [isExpanded]);
 
   const img = (
     <span className={styles.imageContainer}>
       <NextImage
-        alt={alt || ""}
-        src={src || ""}
+        alt={alt || ''}
+        src={src || ''}
         fill
         className={styles.image}
         onClick={() => setIsExpanded(true)}

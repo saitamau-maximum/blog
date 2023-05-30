@@ -1,20 +1,16 @@
-import { existsSync } from "fs";
-import { readdir, readFile } from "fs/promises";
+import { existsSync } from 'fs';
+import { readdir, readFile } from 'fs/promises';
 
-import { BlogCardList } from "@/components/blog/card-list";
-import { Hero } from "@/components/hero";
-import { URL } from "@/constants/url";
-import { parseStrToMarkdown } from "@/lib/markdown";
+import { BlogCardList } from '@/components/blog/card-list';
+import { Hero } from '@/components/hero';
+import { URL } from '@/constants/url';
+import { parseStrToMarkdown } from '@/lib/markdown';
 
-import { BLOG_LIST_BREADCRUMBS } from "../../page";
+import { BLOG_LIST_BREADCRUMBS } from '../../page';
 
-import styles from "./page.module.css";
+import styles from './page.module.css';
 
-import type { Metadata } from "next";
-
-
-
-
+import type { Metadata } from 'next';
 
 interface Props {
   params: {
@@ -55,17 +51,17 @@ async function getTags() {
   const blogs = await Promise.all(
     files.map(async (file) => {
       const filePath = URL.BLOG_FILE_PATH(file);
-      const content = await readFile(filePath, "utf-8");
+      const content = await readFile(filePath, 'utf-8');
       const res = parseStrToMarkdown(content, filePath);
       if (!res) return null;
       return {
         ...res.frontmatter,
-        slug: file.replace(/\.md$/, ""),
+        slug: file.replace(/\.md$/, ''),
       };
-    })
+    }),
   );
   const filteredBlogs = blogs.filter(
-    (blog): blog is NonNullable<typeof blog> => blog !== null
+    (blog): blog is NonNullable<typeof blog> => blog !== null,
   );
   const tags = filteredBlogs
     .map((blog) => blog.tags)
@@ -80,21 +76,21 @@ async function getBlogsByTag(tag: string) {
   const blogs = await Promise.all(
     files.map(async (file) => {
       const filePath = URL.BLOG_FILE_PATH(file);
-      const content = await readFile(filePath, "utf-8");
+      const content = await readFile(filePath, 'utf-8');
       const res = parseStrToMarkdown(content, filePath);
       if (!res) return null;
       return {
         ...res.frontmatter,
-        slug: file.replace(/\.md$/, ""),
+        slug: file.replace(/\.md$/, ''),
       };
-    })
+    }),
   );
 
   const filteredBlogs = blogs.filter(
-    (blog): blog is NonNullable<typeof blog> => blog !== null
+    (blog): blog is NonNullable<typeof blog> => blog !== null,
   );
   const sortedBlogs = filteredBlogs.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
   const blogsByTag = sortedBlogs.filter((blog) => blog.tags.includes(tag));
 
@@ -110,7 +106,7 @@ export default async function BlogListByTag({ params }: Props) {
       <Hero
         breadcrumbs={BLOG_LIST_FILTER_BY_TAG_BREADCRUMBS(
           TITLE(tagSlug),
-          params.slug
+          params.slug,
         )}
         information={`${blogs.length} posts`}
       >

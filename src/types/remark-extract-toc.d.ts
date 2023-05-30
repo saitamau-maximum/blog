@@ -1,4 +1,4 @@
-declare module "remark-extract-toc" {
+declare module 'remark-extract-toc' {
   /**
    * Type definition for the `extractToc` function.
    * @param {Object} opt - Options object.

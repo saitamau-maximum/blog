@@ -1,37 +1,37 @@
 // @ts-nocheck
-import { Plugin } from "unified";
-import { visit } from "unist-util-visit";
+import { Plugin } from 'unified';
+import { visit } from 'unist-util-visit';
 
-import type { Root } from "mdast";
+import type { Root } from 'mdast';
 
 const remarkCustomDirectives: Plugin<[], Root> = () => {
   return (tree) => {
     visit(tree, (node) => {
-      if (node.type === "containerDirective" && node.name === "details") {
+      if (node.type === 'containerDirective' && node.name === 'details') {
         const [summary, ...children] = node.children;
-        node.type = "details";
+        node.type = 'details';
         node.data = {
-          hName: "details",
+          hName: 'details',
         };
         node.children = [
           {
-            type: "summary",
+            type: 'summary',
             data: {
-              hName: "summary",
+              hName: 'summary',
             },
             children: [
               {
-                type: "text",
+                type: 'text',
                 value: summary.children[0].value,
               },
             ],
           },
           {
-            type: "div",
+            type: 'div',
             data: {
-              hName: "div",
+              hName: 'div',
               hProperties: {
-                className: "body",
+                className: 'body',
               },
             },
             children,

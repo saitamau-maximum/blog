@@ -1,24 +1,20 @@
-import { existsSync } from "fs";
-import { readdir, readFile } from "fs/promises";
+import { existsSync } from 'fs';
+import { readdir, readFile } from 'fs/promises';
 
-import { Hero } from "@/components/hero";
-import { RelayList } from "@/components/relay/list";
-import { URL } from "@/constants/url";
-import { parseStrToRelay } from "@/lib/relay";
+import { Hero } from '@/components/hero';
+import { RelayList } from '@/components/relay/list';
+import { URL } from '@/constants/url';
+import { parseStrToRelay } from '@/lib/relay';
 
-import { HOME_BREADCRUMBS } from "../page";
+import { HOME_BREADCRUMBS } from '../page';
 
-import styles from "./page.module.css";
+import styles from './page.module.css';
 
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 
-
-
-
-
-const TITLE = "ブログリレー一覧";
+const TITLE = 'ブログリレー一覧';
 const DESCRIPTION =
-  "定期的に開催しているブログリレーを掲載しています。1ヶ月で1つのテーマについて、複数のメンバーが記事を書きます。";
+  '定期的に開催しているブログリレーを掲載しています。1ヶ月で1つのテーマについて、複数のメンバーが記事を書きます。';
 
 export const metadata = {
   title: TITLE,
@@ -29,7 +25,7 @@ export const RELAY_LIST_BREADCRUMBS = [
   ...HOME_BREADCRUMBS,
   {
     title: TITLE,
-    href: "/relay",
+    href: '/relay',
   },
 ];
 
@@ -39,9 +35,9 @@ async function getRelays() {
   const relays = await Promise.all(
     files.map(async (file) => {
       const filePath = URL.RELAY_FILE_PATH(file);
-      const content = await readFile(filePath, "utf-8");
+      const content = await readFile(filePath, 'utf-8');
       return parseStrToRelay(content, filePath);
-    })
+    }),
   );
 
   return relays
@@ -55,7 +51,7 @@ async function getRelays() {
         .map((blog) => blog.author)
         .filter(
           (author, i, self): author is NonNullable<typeof author> =>
-            author !== null && self.indexOf(author) === i
+            author !== null && self.indexOf(author) === i,
         ),
       reservedBlogCount: relay.blogs.filter((blog) => blog.author).length,
       postedBlogCount: relay.blogs.filter((blog) => blog.slug).length,

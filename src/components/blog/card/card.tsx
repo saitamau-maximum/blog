@@ -5,7 +5,7 @@ import { URL } from "@/constants/url";
 
 interface Props {
   title: string;
-  slug: string;
+  slug: string[];
   date: string;
   authors: string[];
   tags: string[];
@@ -14,7 +14,7 @@ interface Props {
 export const BlogCard = ({ title, slug, date, authors, tags }: Props) => {
   return (
     <div className={styles.card}>
-      <Link href={`/blog/${slug}`} className={styles.cardLink}>
+      <Link href={`/blog/${slug.join("/")}`} className={styles.cardLink}>
         <div className={styles.cardHeader}>
           <time className={styles.cardDate}>{date}</time>
           <div className={styles.cardAuthors}>

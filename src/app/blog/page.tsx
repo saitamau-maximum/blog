@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import styles from "./page.module.css";
 import { parseStrToMarkdown } from "@/lib/markdown";
-import { readdir, readFile } from "fs/promises";
+import { readdir, readFile, access, stat } from "fs/promises";
 import path from "path";
 import { Hero } from "@/components/hero";
 import { BlogCardList } from "@/components/blog/card-list";
 import { URL } from "@/constants/url";
 import { HOME_BREADCRUMBS } from "../page";
-import { existsSync } from "fs";
+import { findFilesInDeep } from "@/util/file";
 
 const TITLE = "ブログ一覧";
 const DESCRIPTION =
@@ -27,16 +27,28 @@ export const BLOG_LIST_BREADCRUMBS = [
 ];
 
 async function getBlogs() {
-  if (!existsSync(URL.BLOG_DIR_PATH)) return [];
-  const files = await readdir(URL.BLOG_DIR_PATH);
+  // もしblogディレクトリが存在しなければ空配列を返す
+  try {
+    await access(URL.BLOG_DIR_PATH);
+  } catch (e) {
+    return [];
+  }
+
+  // blogディレクトリ内のすべてのファイルを再帰的に探す
+  const files = await findFilesInDeep(URL.BLOG_DIR_PATH, ".md");
+
+  // ファイルの内容を取得
   const blogs = await Promise.all(
     files.map(async (file) => {
-      const filePath = URL.BLOG_FILE_PATH(file);
-      const content = await readFile(filePath, "utf-8");
-      const res = parseStrToMarkdown(content, filePath);
+      const content = await readFile(file, "utf-8");
+      const res = parseStrToMarkdown(content, file);
+      const relativePath = path.relative(URL.BLOG_DIR_PATH, file);
+      const slugs = relativePath
+        .split(path.sep)
+        .map((slug) => slug.replace(/\.md$/, ""));
       return {
         ...res.frontmatter,
-        slug: file.replace(/\.md$/, ""),
+        slug: slugs,
       };
     })
   );

@@ -134,12 +134,75 @@ cout << s[right] - s[left] << endl; // 22
 配列 $s$ の前処理に $O(N)$ かかりますが、部分和を $O(1)$ で計算出来ていることが分かると思います。
 
 ## 練習してみよう
-### 問題1
+### 問題1: [ABC037: C - 総和](https://atcoder.jp/contests/abc037/tasks/abc037_c)
 #### 問題文
-$n$ 個の整数からなる数列 $a_1,\ a_2,\ ...\ ,\ a_n$ が与えられる。
+長さ $N$ の数列 $\{a_i\}$ と $1$ 以上 $N$ 以下の整数 $K$ が与えられます。この数列には長さ $K$ の連続する部分列が $N − K + 1$ 個あります。これらのそれぞれ部分列に含まれる値の合計の総和を求めてください。
 
+#### 制約
+- $1 \leq K \leq N \leq 10^5$
+- $0 \leq a_i \leq 10^8$
+- $a_i$ は整数である。
 
-### 問題2: [AOJ 0516 - 最大の和 (JOI 2006 本選 A)](https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0516)
+#### 部分点
+$50$ 点分のテストケースでは、 $N \leq 10^3$ である。
+
+:::details[ヒント]
+まずは部分点を取れるようにプログラムを組んでみましょう。for文を用いて問題文の通りに実装すれば解けるはずです。その後、計算量を見積もってみましょう。
+:::
+
+:::details[部分点が得られる解答例]
+```cpp
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define rep2(i, s, n) for (int i = (int)s; i < (int)(n); i++)
+using namespace std;
+using ll = long long;
+
+int main() {
+    int N, K;
+    cin >> N >> K;
+    vector<int> a(N);
+    rep(i, N) cin >> a[i];
+
+    ll sum = 0;
+    rep(i, N - K + 1) {
+        rep(j, K) {
+            sum += a[i + j];
+        }
+    }
+
+    cout << sum << endl;
+}
+```
+:::
+
+:::details[解答例]
+```cpp
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (int)n; i++)
+#define rep2(i, s, n) for (int i = (int)s; i < (int)n; i++)
+using namespace std;
+using ll = long long;
+
+int main() {
+    int N, K; cin >> N >> K;
+    vector<ll> a(N); rep(i, N) cin >> a[i];
+
+    vector<ll> s(N + 1, 0);
+    rep(i, N) s[i + 1] = s[i] + a[i];
+    
+    ll result = 0;
+    rep(i, N - K + 1)
+        result += s[i + K] - s[i];
+    
+    cout << result << endl;
+}
+```
+:::
+
+上2つの解答の実行時間には、**25倍**の差があります！
+
+### 問題3: [AOJ 0516 - 最大の和 (JOI 2006 本選 A)](https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0516)
 #### 問題文
 $n$ 個の整数からなる数列 $a_1,\ a_2,\ ...\ ,\ a_n$ と正整数 $k$ $(1 \leq k \leq n)$ が与えられる。このとき、連続して並ぶ $k$ 個の整数の和 $S_i = a_i + a_{i + 1} + ... + a_{i+ k-1}\ (1 \leq i \leq n - k + 1)$ の最大値を出力するプログラムを作りなさい。
 

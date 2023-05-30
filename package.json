@@ -13,6 +13,7 @@
     "lint:js": "eslint --ext .js,.jsx,.ts,.tsx .",
     "lint:fix:js": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
     "format": "prettier --write '**/*.{json,js,jsx,ts,tsx,html,css}'",
+    "fix": "npm run lint:fix:md && npm run lint:fix:js && npm run format",
     "gen:blog-relay": "ts-node scripts/generate-blog-relay.ts",
     "prepare": "husky install"
   },

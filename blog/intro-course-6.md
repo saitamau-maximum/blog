@@ -133,6 +133,34 @@ cout << s[right] - s[left] << endl; // 22
 
 配列 $s$ の前処理に $O(N)$ かかりますが、部分和を $O(1)$ で計算出来ていることが分かると思います。
 
+## 全処理に累積の考え方を使うケース
+累積和の他にも、累積の考え方は
+
+- 累積積
+- 累積Max/Min
+- 累積GCD
+- 累積XOR
+
+などに応用することができる。
+
+### 累積Max/Min
+要素数 $N$ の配列 $\{A_i\} \subset \mathbb{N}$ (0-indexed) に対して、
+
+$$
+\begin{equation}
+s_i = \begin{cases}
+   -1 & (i = 0) \\
+   \displaystyle \max_{0 \leq j \leq i - 1} A_j & (i = 1,\  2,\  ...\ ,\  N)
+\end{cases}
+
+\notag
+\end{equation}
+$$
+
+と配列 $s$ (0-indexed) を定めれば、区間 [0, i) における配列 $A$ の最大値が `s[i]` と求まる。
+
+最小値についても同様に計算できる。
+
 ## 練習してみよう
 ### 問題1: [ABC037: C - 総和](https://atcoder.jp/contests/abc037/tasks/abc037_c)
 #### 問題文
@@ -151,7 +179,7 @@ $50$ 点分のテストケースでは、 $N \leq 10^3$ である。
 :::
 
 :::details[部分点が得られる解答例]
-```cpp
+```cpp showLineNumbers
 #include <bits/stdc++.h>
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define rep2(i, s, n) for (int i = (int)s; i < (int)(n); i++)
@@ -177,7 +205,7 @@ int main() {
 :::
 
 :::details[解答例]
-```cpp
+```cpp showLineNumbers
 #include <bits/stdc++.h>
 #define rep(i, n) for (int i = 0; i < (int)n; i++)
 #define rep2(i, s, n) for (int i = (int)s; i < (int)n; i++)
@@ -201,6 +229,52 @@ int main() {
 :::
 
 上2つの解答の実行時間には、**25倍**の差があります！
+
+### 問題2: [ABC134: C - Exception Handling](https://atcoder.jp/contests/abc134/tasks/abc134_c)
+
+#### 問題文
+長さ $N$ の数列 $A_1,\ A_2,\ ...\ ,\ A_N$ が与えられます。 $1$ 以上 $N$ 以下の各整数 $i$ に対し、次の問いに答えてください。
+
+- 数列中の $A_i$ を除く $N - 1$ 個の要素のうちの最大の値を求めよ。
+
+#### 制約
+- $2 \leq N \leq 200000$
+- $1 \leq A_i \leq 200000$
+- 入力中のすべての値は整数である。
+
+:::[ヒント]
+配列の先頭と末尾からの2つの累積maxを保持すると、上手く実装できます。
+:::
+
+:::[解答例]
+- `s[i] := A[0] ~ A[i - 1]の最大値`
+- `e[i] := A[N - i] ~ A[N - 1]の最大値`
+
+と累積Maxを定めることによって、
+$i$ 番目以外の最大値は `max(s[i], e[N - i - 1])` となる。
+
+```cpp showLineNumbers
+#include <bits/stdc++.h>
+#define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define rep2(i, s, n) for (int i = (int)s; i < (int)(n); i++)
+using namespace std;
+using ll = long long;
+
+int main() {
+    int N;
+    cin >> N;
+    vector<int> A(N);
+    rep(i, N) cin >> A[i];
+
+    vector<int> s(N + 1, -1), e(N + 1, -1);
+    rep(i, N) s[i + 1] = max(s[i], A[i]);
+    rep(i, N) e[i + 1] = max(e[i], A[N - i - 1]);
+
+    rep(i, N)
+        cout << max(s[i], e[N - i - 1]) << endl;
+}
+```
+:::
 
 ### 問題3: [AOJ 0516 - 最大の和 (JOI 2006 本選 A)](https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0516)
 #### 問題文
@@ -241,7 +315,7 @@ $n$ 個の整数からなる数列 $a_1,\ a_2,\ ...\ ,\ a_n$ と正整数 $k$ $(
 :::
 
 :::details[解答例]
-```cpp
+```cpp showLineNumbers
 #include <bits/stdc++.h>
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 #define rep2(i, s, n) for (int i = (int)s; i < (int)(n); i++)

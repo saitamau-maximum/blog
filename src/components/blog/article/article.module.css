@@ -51,7 +51,7 @@
   font-size: 14px;
   color: hsl(220, 14%, 71%);
   text-shadow: 0 1px rgba(0, 0, 0, 0.3);
-  font-family: "Fira Code", "Fira Mono", Menlo, Consolas, "DejaVu Sans Mono",
+  font-family: 'Fira Code', 'Fira Mono', Menlo, Consolas, 'DejaVu Sans Mono',
     monospace;
   background: none;
   direction: ltr;
@@ -123,7 +123,7 @@
 }
 
 :global(.dark) .content blockquote {
-  background-color: var(--color-gray-600)
+  background-color: var(--color-gray-600);
 }
 
 .content blockquote > :global(*:first-child) {
@@ -191,7 +191,7 @@
   align-items: center;
 }
 
-.content svg[id^="mermaid-"] {
+.content svg[id^='mermaid-'] {
   background-color: var(--color-gray-100);
   border: 1px solid var(--color-gray-300);
   border-radius: 0.5rem;

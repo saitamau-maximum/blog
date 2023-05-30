@@ -16,7 +16,7 @@
 }
 
 .relayListItemLine {
-  content: "";
+  content: '';
   position: absolute;
   top: var(--relayListItemPointSize);
   left: calc(var(--relayListItemLeftWidth) - var(--relayListItemPointSize) / 2);
@@ -190,7 +190,7 @@
 }
 
 .memberList:after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   right: 0;

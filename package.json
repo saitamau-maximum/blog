@@ -12,8 +12,20 @@
     "lint:fix:md": "markdownlint '**/*.md' --ignore node_modules --ignore README.md --fix",
     "lint:js": "eslint --ext .js,.jsx,.ts,.tsx .",
     "lint:fix:js": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
-    "format": "prettier --write '**/*.{js,jsx,ts,tsx,json}'",
-    "gen:blog-relay": "ts-node scripts/generate-blog-relay.ts"
+    "format": "prettier --write '**/*.{json,js,jsx,ts,tsx,html,css}'",
+    "gen:blog-relay": "ts-node scripts/generate-blog-relay.ts",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{md}": [
+      "markdownlint --fix"
+    ],
+    "*.{json,js,jsx,ts,tsx,html,css}": [
+      "prettier --write"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ]
   },
   "dependencies": {
     "@types/mdast": "^3.0.11",

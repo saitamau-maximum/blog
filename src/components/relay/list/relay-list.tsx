@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { MdEditCalendar, MdEventAvailable } from 'react-icons/md';
 
+import { ROUTE } from '@/constants/route';
 import { URL } from '@/constants/url';
 
 import styles from './relay-list.module.css';
@@ -67,7 +68,7 @@ export const RelayList = ({ relays }: Props) => {
           <div className={styles.relayListItemRight}>
             <Link
               className={styles.relayListItemCard}
-              href={`/relay/${relay.slug}`}
+              href={ROUTE.RELAY_DETAIL(relay.slug)}
             >
               <h2 className={styles.relayListItemTitle}>
                 <span className={styles.relayListItemTitleText}>

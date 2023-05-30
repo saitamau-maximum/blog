@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 
+import { ROUTE } from '@/constants/route';
 import { useHeader } from '@/hooks';
 
 import styles from './header.module.css';
@@ -54,13 +55,13 @@ export const Header = () => {
   return (
     <>
       <header className={styles.header}>
-        <Link href="/">
+        <Link href={ROUTE.TOP}>
           <Logo />
         </Link>
       </header>
       <header className={styles.stickyHeader} ref={stickyHeaderRef}>
         <div className={styles.stickyHeaderBg} />
-        <Link href="/">
+        <Link href={ROUTE.TOP}>
           <Logo />
         </Link>
         <span className={styles.title}>{title}</span>

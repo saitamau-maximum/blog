@@ -5,7 +5,7 @@ import styles from './card-list.module.css';
 interface Props {
   blogs: {
     title: string;
-    slug: string;
+    slug: string[];
     date: string;
     authors: string[];
     tags: string[];
@@ -25,7 +25,7 @@ export const BlogCardList = ({ blogs }: Props) => {
     <div className={styles.cardList}>
       {blogs.map((blog) => (
         <BlogCard
-          key={blog.slug}
+          key={blog.slug.join('/')}
           title={blog.title}
           slug={blog.slug}
           date={blog.date}

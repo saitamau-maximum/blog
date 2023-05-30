@@ -12,6 +12,7 @@ import {
 import { Hero } from '@/components/hero';
 import { RelayCalender } from '@/components/relay/calendar/calendar';
 import { ProgressBar } from '@/components/relay/progress-bar/progress-bar';
+import { ROUTE } from '@/constants/route';
 import { URL } from '@/constants/url';
 import { parseStrToRelay } from '@/lib/relay';
 import { firstDayOfMonth, lastDayOfMonth } from '@/util/date';
@@ -46,9 +47,7 @@ export async function generateStaticParams() {
         URL.RELAY_DIR_PATH,
         path.dirname(filepath),
       );
-      const slug = path.join(RELATIVE_PATH, path.basename(filepath, '.json'));
-      const connectedSlug = slug.replace(path.sep, '-');
-      return connectedSlug;
+      return path.join(RELATIVE_PATH, path.basename(filepath, '.json'));
     }),
   );
 
@@ -100,7 +99,7 @@ export default async function RelayDetail({ params }: Props) {
         title={relay.title}
         breadcrumbs={RELAY_DETAIL_BREADCRUMBS(
           relay.title,
-          `/relay/${relay.slug}`,
+          ROUTE.RELAY_DETAIL(relay.slug),
         )}
       >
         <div className={styles.heroContent}>

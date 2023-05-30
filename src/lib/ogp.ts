@@ -1,5 +1,4 @@
-import { Image, createCanvas } from "canvas";
-import { loadImage } from "canvas";
+import { Image, createCanvas, loadImage } from "canvas";
 import { URL } from "@/constants/url";
 import fs from "fs";
 import path from "path";
@@ -23,7 +22,7 @@ export const createOgp = async (
     const canvas = createCanvas(OGP_WIDTH, OGP_HEIGHT);
     const ctx = canvas.getContext("2d");
     const baseImage = await loadImage(
-        path.join(URL.PUBLIC_DIR_PATH, OGP_BASE_IMAGE_PATH)
+        path.join(URL.BLOG_DIR_PATH, OGP_BASE_IMAGE_PATH)
     );
     ctx.drawImage(baseImage, 0, 0, OGP_WIDTH, OGP_HEIGHT);
     ctx.font = `bold ${FONT_SIZE}px "Noto Sans JP"`;
@@ -105,14 +104,14 @@ export const createOgp = async (
         if (err) throw err;
         if (
             !fs.existsSync(
-                path.join(URL.PUBLIC_DIR_PATH, OGP_GENERATED_IMAGE_PATH)
+                path.join(URL.BLOG_DIR_PATH, OGP_GENERATED_IMAGE_PATH)
             )
         ) {
             fs.mkdirSync(
-                path.join(URL.PUBLIC_DIR_PATH, OGP_GENERATED_IMAGE_PATH)
+                path.join(URL.BLOG_DIR_PATH, OGP_GENERATED_IMAGE_PATH)
             );
         }
-        fs.writeFile(path.join(URL.PUBLIC_DIR_PATH, imgPath), buf, () => {
+        fs.writeFile(path.join(URL.BLOG_DIR_PATH, imgPath), buf, () => {
             console.log(`${title}のOGP画像を生成しました`);
         });
     });

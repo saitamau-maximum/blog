@@ -44,9 +44,7 @@ export async function generateStaticParams() {
         URL.RELAY_DIR_PATH,
         path.dirname(filepath)
       );
-      const slug = path.join(RELATIVE_PATH, path.basename(filepath, ".json"));
-      const connectedSlug = slug.replace(path.sep, "-");
-      return connectedSlug;
+      return path.join(RELATIVE_PATH, path.basename(filepath, ".json"));
     })
   );
 

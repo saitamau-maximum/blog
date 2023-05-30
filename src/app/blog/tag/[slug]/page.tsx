@@ -53,7 +53,7 @@ async function getTags() {
       const res = parseStrToMarkdown(content, file);
       const relativePath = path.relative(URL.BLOG_DIR_PATH, file);
       const slugs = relativePath
-        .split(path.sep)
+        .split("/")
         .map((slug) => slug.replace(/\.md$/, ""));
       return {
         ...res.frontmatter,
@@ -90,7 +90,7 @@ async function getBlogsByTag(tag: string) {
       const res = parseStrToMarkdown(content, file);
       const relativePath = path.relative(URL.BLOG_DIR_PATH, file);
       const slugs = relativePath
-        .split(path.sep)
+        .split("/")
         .map((slug) => slug.replace(/\.md$/, ""));
       return {
         ...res.frontmatter,

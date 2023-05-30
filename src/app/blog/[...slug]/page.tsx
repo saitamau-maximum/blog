@@ -1,21 +1,25 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { access, readFile } from 'fs/promises';
+import path from 'path';
 
-import styles from "./page.module.css";
-import { parseMarkdownToHTML, parseStrToMarkdown } from "@/lib/markdown";
-import { access, readFile } from "fs/promises";
-import path from "path";
-import { Hero } from "@/components/hero";
-import { AuthorList } from "@/components/blog/author-list";
-import { TagList } from "@/components/blog/tag-list";
-import { Toc } from "@/components/blog/toc";
-import { Article } from "@/components/blog/article";
-import { BlogButtonList } from "@/components/blog/button-list";
-import { URL } from "@/constants/url";
-import { BLOG_LIST_BREADCRUMBS } from "../page";
-import { Navigation } from "@/components/blog/navigation";
-import { findFilesInDeep } from "@/util/file";
-import { ROUTE } from "@/constants/route";
+import { notFound } from 'next/navigation';
+
+import { Article } from '@/components/blog/article';
+import { AuthorList } from '@/components/blog/author-list';
+import { BlogButtonList } from '@/components/blog/button-list';
+import { Navigation } from '@/components/blog/navigation';
+import { TagList } from '@/components/blog/tag-list';
+import { Toc } from '@/components/blog/toc';
+import { Hero } from '@/components/hero';
+import { ROUTE } from '@/constants/route';
+import { URL } from '@/constants/url';
+import { parseMarkdownToHTML, parseStrToMarkdown } from '@/lib/markdown';
+import { findFilesInDeep } from '@/util/file';
+
+import { BLOG_LIST_BREADCRUMBS } from '../page';
+
+import styles from './page.module.css';
+
+import type { Metadata } from 'next';
 
 interface Props {
   params: {
@@ -40,19 +44,19 @@ export async function generateStaticParams() {
   }
 
   // blogディレクトリ内のすべてのファイルを再帰的に探す
-  const files = await findFilesInDeep(URL.BLOG_DIR_PATH, ".md");
+  const files = await findFilesInDeep(URL.BLOG_DIR_PATH, '.md');
 
   // ファイルの内容を取得
   const slugs = await Promise.all(
     files.map(async (file) => {
-      const content = await readFile(file, "utf-8");
+      const content = await readFile(file, 'utf-8');
       const res = parseStrToMarkdown(content, file);
       const relativePath = path.relative(URL.BLOG_DIR_PATH, file);
       const slugs = relativePath
-        .split("/")
-        .map((slug) => slug.replace(/\.md$/, ""));
+        .split('/')
+        .map((slug) => slug.replace(/\.md$/, ''));
       return slugs;
-    })
+    }),
   );
 
   return slugs.map((slug) => ({ slug }));
@@ -72,7 +76,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 type ParsedMarkdown = ReturnType<typeof parseStrToMarkdown>;
 type ParsedHTML = Awaited<ReturnType<typeof parseMarkdownToHTML>>;
-type GetBlogResponseMeta = ParsedMarkdown["frontmatter"] & {
+type GetBlogResponseMeta = ParsedMarkdown['frontmatter'] & {
   slug: string[];
 };
 
@@ -89,10 +93,10 @@ const resolveNavigationPath = (baseFilePath: string, navPath: string) => {
   // ["blog", "2021", "08", "01", "next-blog"] という配列に変換する
   // next = "../../next-blog" の場合
   // ["blog", "2021", "next-blog"] という配列に変換する
-  if (navPath.startsWith(".")) {
+  if (navPath.startsWith('.')) {
     const absolutePath = path.join(path.dirname(baseFilePath), navPath);
     const relativePath = path.relative(URL.BLOG_DIR_PATH, absolutePath);
-    return relativePath.split("/");
+    return relativePath.split('/');
   }
 
   // 絶対パスの場合の処理を書く
@@ -100,16 +104,16 @@ const resolveNavigationPath = (baseFilePath: string, navPath: string) => {
   // ["blog", "2021", "08", "01", "next-blog"] という配列に変換する
   // next = "blog/2021/08/01/next-blog" の場合
   // ["blog", "2021", "08", "01", "next-blog"] という配列に変換する
-  if (navPath.startsWith("/")) {
-    return navPath.split("/").slice(1);
+  if (navPath.startsWith('/')) {
+    return navPath.split('/').slice(1);
   } else {
-    return navPath.split("/");
+    return navPath.split('/');
   }
 };
 
 async function getBlog(slug: string[], readSide = true) {
   const filepath = URL.BLOG_FILE_PATH(slug);
-  const str = await readFile(filepath, "utf-8");
+  const str = await readFile(filepath, 'utf-8');
   const res = parseStrToMarkdown(str, filepath);
   if (!res) notFound();
   const parsed = await parseMarkdownToHTML(res.content);
@@ -143,7 +147,7 @@ export default async function BlogDetail({ params }: Props) {
         title={blog.meta.title}
         breadcrumbs={BLOG_DETAIL_BREADCRUMBS(
           blog.meta.title,
-          ROUTE.BLOG_DETAIL(blog.meta.slug)
+          ROUTE.BLOG_DETAIL(blog.meta.slug),
         )}
       >
         <div className={styles.heroContainer}>

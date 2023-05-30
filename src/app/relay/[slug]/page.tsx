@@ -1,24 +1,27 @@
-import type { Metadata } from "next";
+import { existsSync } from 'fs';
+import { readdir, readFile } from 'fs/promises';
+import path from 'path';
 
-import styles from "./page.module.css";
-import { readdir, readFile } from "fs/promises";
-import path from "path";
-import { Hero } from "@/components/hero";
-import { URL } from "@/constants/url";
-import { parseStrToRelay } from "@/lib/relay";
-import { RELAY_LIST_BREADCRUMBS } from "../page";
 import {
   MdCalendarMonth,
   MdEditCalendar,
   MdEventAvailable,
   MdGroup,
-  MdPerson,
-} from "react-icons/md";
-import { firstDayOfMonth, lastDayOfMonth } from "@/util/date";
-import { RelayCalender } from "@/components/relay/calendar/calendar";
-import { ProgressBar } from "@/components/relay/progress-bar/progress-bar";
-import { existsSync } from "fs";
-import { ROUTE } from "@/constants/route";
+} from 'react-icons/md';
+
+import { Hero } from '@/components/hero';
+import { RelayCalender } from '@/components/relay/calendar/calendar';
+import { ProgressBar } from '@/components/relay/progress-bar/progress-bar';
+import { ROUTE } from '@/constants/route';
+import { URL } from '@/constants/url';
+import { parseStrToRelay } from '@/lib/relay';
+import { firstDayOfMonth, lastDayOfMonth } from '@/util/date';
+
+import { RELAY_LIST_BREADCRUMBS } from '../page';
+
+import styles from './page.module.css';
+
+import type { Metadata } from 'next';
 
 interface Props {
   params: {
@@ -42,10 +45,10 @@ export async function generateStaticParams() {
       const filepath = URL.RELAY_FILE_PATH(file);
       const RELATIVE_PATH = path.relative(
         URL.RELAY_DIR_PATH,
-        path.dirname(filepath)
+        path.dirname(filepath),
       );
-      return path.join(RELATIVE_PATH, path.basename(filepath, ".json"));
-    })
+      return path.join(RELATIVE_PATH, path.basename(filepath, '.json'));
+    }),
   );
 
   return slugs.map((slug) => ({ slug }));
@@ -67,7 +70,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 async function getRelay(slug: string) {
   const filename = `${slug}.json`;
   const filepath = URL.RELAY_FILE_PATH(filename);
-  const str = await readFile(filepath, "utf-8");
+  const str = await readFile(filepath, 'utf-8');
   const relay = parseStrToRelay(str, filename);
 
   return {
@@ -80,7 +83,7 @@ async function getRelay(slug: string) {
       .map((blog) => blog.author)
       .filter(
         (author, i, self): author is NonNullable<typeof author> =>
-          author !== null && self.indexOf(author) === i
+          author !== null && self.indexOf(author) === i,
       ),
     reservedBlogCount: relay.blogs.filter((blog) => blog.author).length,
     postedBlogCount: relay.blogs.filter((blog) => blog.slug).length,
@@ -96,7 +99,7 @@ export default async function RelayDetail({ params }: Props) {
         title={relay.title}
         breadcrumbs={RELAY_DETAIL_BREADCRUMBS(
           relay.title,
-          ROUTE.RELAY_DETAIL(relay.slug)
+          ROUTE.RELAY_DETAIL(relay.slug),
         )}
       >
         <div className={styles.heroContent}>

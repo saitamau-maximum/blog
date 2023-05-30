@@ -1,6 +1,6 @@
-import styles from "./card-list.module.css";
-import Link from "next/link";
-import { BlogCard } from "../card";
+import { BlogCard } from '../card';
+
+import styles from './card-list.module.css';
 
 interface Props {
   blogs: {
@@ -25,7 +25,7 @@ export const BlogCardList = ({ blogs }: Props) => {
     <div className={styles.cardList}>
       {blogs.map((blog) => (
         <BlogCard
-          key={blog.slug.join("/")}
+          key={blog.slug.join('/')}
           title={blog.title}
           slug={blog.slug}
           date={blog.date}

@@ -1,7 +1,9 @@
-import Link from "next/link";
-import styles from "./navigation.module.css";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { ROUTE } from "@/constants/route";
+import Link from 'next/link';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+
+import { ROUTE } from '@/constants/route';
+
+import styles from './navigation.module.css';
 
 interface NavData {
   title: string;

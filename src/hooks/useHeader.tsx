@@ -1,8 +1,7 @@
-"use client";
-import { ReactNode, useRef } from "react";
-import { useState } from "react";
+'use client';
+import { ReactNode, useRef, useState } from 'react';
 
-import { createCtx } from "@/util/context";
+import { createCtx } from '@/util/context';
 
 type IHeaderContext = {
   title?: string;

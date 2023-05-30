@@ -1,18 +1,22 @@
-import type { Metadata } from "next";
-import styles from "./page.module.css";
-import { parseStrToMarkdown } from "@/lib/markdown";
-import { readdir, readFile, access, stat } from "fs/promises";
-import path from "path";
-import { Hero } from "@/components/hero";
-import { BlogCardList } from "@/components/blog/card-list";
-import { URL } from "@/constants/url";
-import { HOME_BREADCRUMBS } from "../page";
-import { findFilesInDeep } from "@/util/file";
-import { ROUTE } from "@/constants/route";
+import { readFile, access } from 'fs/promises';
+import path from 'path';
 
-const TITLE = "ブログ一覧";
+import { BlogCardList } from '@/components/blog/card-list';
+import { Hero } from '@/components/hero';
+import { ROUTE } from '@/constants/route';
+import { URL } from '@/constants/url';
+import { parseStrToMarkdown } from '@/lib/markdown';
+import { findFilesInDeep } from '@/util/file';
+
+import { HOME_BREADCRUMBS } from '../page';
+
+import styles from './page.module.css';
+
+import type { Metadata } from 'next';
+
+const TITLE = 'ブログ一覧';
 const DESCRIPTION =
-  "サークルの公開している講習会資料や、技術のアウトプットなどを掲載しています。";
+  'サークルの公開している講習会資料や、技術のアウトプットなどを掲載しています。';
 
 export const metadata = {
   title: TITLE,
@@ -36,28 +40,28 @@ async function getBlogs() {
   }
 
   // blogディレクトリ内のすべてのファイルを再帰的に探す
-  const files = await findFilesInDeep(URL.BLOG_DIR_PATH, ".md");
+  const files = await findFilesInDeep(URL.BLOG_DIR_PATH, '.md');
 
   // ファイルの内容を取得
   const blogs = await Promise.all(
     files.map(async (file) => {
-      const content = await readFile(file, "utf-8");
+      const content = await readFile(file, 'utf-8');
       const res = parseStrToMarkdown(content, file);
       const relativePath = path.relative(URL.BLOG_DIR_PATH, file);
       const slugs = relativePath
-        .split("/")
-        .map((slug) => slug.replace(/\.md$/, ""));
+        .split('/')
+        .map((slug) => slug.replace(/\.md$/, ''));
       return {
         ...res.frontmatter,
         slug: slugs,
       };
-    })
+    }),
   );
   const filteredBlogs = blogs.filter(
-    (blog): blog is NonNullable<typeof blog> => blog !== null
+    (blog): blog is NonNullable<typeof blog> => blog !== null,
   );
   const sortedBlogs = filteredBlogs.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
 
   return sortedBlogs;

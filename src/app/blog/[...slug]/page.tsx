@@ -1,5 +1,4 @@
-import { existsSync } from 'fs';
-import { readdir, readFile } from 'fs/promises';
+import { access, readFile } from 'fs/promises';
 import path from 'path';
 
 import { notFound } from 'next/navigation';
@@ -11,8 +10,10 @@ import { Navigation } from '@/components/blog/navigation';
 import { TagList } from '@/components/blog/tag-list';
 import { Toc } from '@/components/blog/toc';
 import { Hero } from '@/components/hero';
+import { ROUTE } from '@/constants/route';
 import { URL } from '@/constants/url';
 import { parseMarkdownToHTML, parseStrToMarkdown } from '@/lib/markdown';
+import { findFilesInDeep } from '@/util/file';
 
 import { BLOG_LIST_BREADCRUMBS } from '../page';
 
@@ -22,7 +23,7 @@ import type { Metadata } from 'next';
 
 interface Props {
   params: {
-    slug: string;
+    slug: string[];
   };
 }
 
@@ -35,18 +36,26 @@ const BLOG_DETAIL_BREADCRUMBS = (title: string, href: string) => [
 ];
 
 export async function generateStaticParams() {
-  if (!existsSync(URL.BLOG_DIR_PATH)) return [];
-  const files = await readdir(URL.BLOG_DIR_PATH);
+  // もしblogディレクトリが存在しなければ空配列を返す
+  try {
+    await access(URL.BLOG_DIR_PATH);
+  } catch (e) {
+    return [];
+  }
+
+  // blogディレクトリ内のすべてのファイルを再帰的に探す
+  const files = await findFilesInDeep(URL.BLOG_DIR_PATH, '.md');
+
+  // ファイルの内容を取得
   const slugs = await Promise.all(
     files.map(async (file) => {
-      const filepath = URL.BLOG_FILE_PATH(file);
-      const RELATIVE_PATH = path.relative(
-        URL.BLOG_DIR_PATH,
-        path.dirname(filepath),
-      );
-      const slug = path.join(RELATIVE_PATH, path.basename(filepath, '.md'));
-      const connectedSlug = slug.replace(path.sep, '-');
-      return connectedSlug;
+      const content = await readFile(file, 'utf-8');
+      const res = parseStrToMarkdown(content, file);
+      const relativePath = path.relative(URL.BLOG_DIR_PATH, file);
+      const slugs = relativePath
+        .split('/')
+        .map((slug) => slug.replace(/\.md$/, ''));
+      return slugs;
     }),
   );
 
@@ -68,7 +77,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 type ParsedMarkdown = ReturnType<typeof parseStrToMarkdown>;
 type ParsedHTML = Awaited<ReturnType<typeof parseMarkdownToHTML>>;
 type GetBlogResponseMeta = ParsedMarkdown['frontmatter'] & {
-  slug: string;
+  slug: string[];
 };
 
 interface GetBlogResponse {
@@ -78,11 +87,34 @@ interface GetBlogResponse {
   prevMeta?: GetBlogResponseMeta;
 }
 
-async function getBlog(slug: string, readSide = true) {
-  const filename = `${slug}.md`;
-  const filepath = URL.BLOG_FILE_PATH(filename);
+const resolveNavigationPath = (baseFilePath: string, navPath: string) => {
+  // 相対パスの場合の処理を書く
+  // next = "./next-blog" の場合
+  // ["blog", "2021", "08", "01", "next-blog"] という配列に変換する
+  // next = "../../next-blog" の場合
+  // ["blog", "2021", "next-blog"] という配列に変換する
+  if (navPath.startsWith('.')) {
+    const absolutePath = path.join(path.dirname(baseFilePath), navPath);
+    const relativePath = path.relative(URL.BLOG_DIR_PATH, absolutePath);
+    return relativePath.split('/');
+  }
+
+  // 絶対パスの場合の処理を書く
+  // next = "/blog/2021/08/01/next-blog" の場合
+  // ["blog", "2021", "08", "01", "next-blog"] という配列に変換する
+  // next = "blog/2021/08/01/next-blog" の場合
+  // ["blog", "2021", "08", "01", "next-blog"] という配列に変換する
+  if (navPath.startsWith('/')) {
+    return navPath.split('/').slice(1);
+  } else {
+    return navPath.split('/');
+  }
+};
+
+async function getBlog(slug: string[], readSide = true) {
+  const filepath = URL.BLOG_FILE_PATH(slug);
   const str = await readFile(filepath, 'utf-8');
-  const res = parseStrToMarkdown(str, filename);
+  const res = parseStrToMarkdown(str, filepath);
   if (!res) notFound();
   const parsed = await parseMarkdownToHTML(res.content);
 
@@ -94,11 +126,13 @@ async function getBlog(slug: string, readSide = true) {
     },
   };
   if (res.frontmatter.next && readSide) {
-    const next = await getBlog(res.frontmatter.next, false);
+    const nextSlug = resolveNavigationPath(filepath, res.frontmatter.next);
+    const next = await getBlog(nextSlug, false);
     blog.nextMeta = next.meta;
   }
   if (res.frontmatter.prev && readSide) {
-    const prev = await getBlog(res.frontmatter.prev, false);
+    const prevSlug = resolveNavigationPath(filepath, res.frontmatter.prev);
+    const prev = await getBlog(prevSlug, false);
     blog.prevMeta = prev.meta;
   }
 
@@ -113,7 +147,7 @@ export default async function BlogDetail({ params }: Props) {
         title={blog.meta.title}
         breadcrumbs={BLOG_DETAIL_BREADCRUMBS(
           blog.meta.title,
-          `/blog/${blog.meta.slug}`,
+          ROUTE.BLOG_DETAIL(blog.meta.slug),
         )}
       >
         <div className={styles.heroContainer}>

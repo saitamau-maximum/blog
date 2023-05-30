@@ -1,19 +1,19 @@
 import Link from 'next/link';
 
+import { ROUTE } from '@/constants/route';
+
 import styles from './tag-list.module.css';
 
 interface Props {
   tags: string[];
 }
 
-const BLOG_LIST_BY_TAG_URL = (tag: string) => `/blog/tag/${tag}`;
-
 export const TagList = ({ tags }: Props) => {
   return (
     <ul className={styles.tagList}>
       {tags.map((tag) => (
         <li key={tag} className={styles.tagItem}>
-          <Link className={styles.tag} href={BLOG_LIST_BY_TAG_URL(tag)}>
+          <Link className={styles.tag} href={ROUTE.TAGGED_BLOG_LIST(tag)}>
             {tag}
           </Link>
         </li>

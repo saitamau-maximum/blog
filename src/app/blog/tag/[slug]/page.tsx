@@ -1,10 +1,13 @@
 import { existsSync } from 'fs';
-import { readdir, readFile } from 'fs/promises';
+import { access, readFile } from 'fs/promises';
+import path from 'path';
 
 import { BlogCardList } from '@/components/blog/card-list';
 import { Hero } from '@/components/hero';
+import { ROUTE } from '@/constants/route';
 import { URL } from '@/constants/url';
 import { parseStrToMarkdown } from '@/lib/markdown';
+import { findFilesInDeep } from '@/util/file';
 
 import { BLOG_LIST_BREADCRUMBS } from '../../page';
 
@@ -26,7 +29,7 @@ const BLOG_LIST_FILTER_BY_TAG_BREADCRUMBS = (title: string, tag: string) => [
   ...BLOG_LIST_BREADCRUMBS,
   {
     title,
-    href: `/blog/tag/${tag}`,
+    href: ROUTE.TAGGED_BLOG_LIST(tag),
   },
 ];
 
@@ -47,16 +50,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 async function getTags() {
   if (!existsSync(URL.BLOG_DIR_PATH)) return [];
-  const files = await readdir(URL.BLOG_DIR_PATH);
+  const files = await findFilesInDeep(URL.BLOG_DIR_PATH, '.md');
   const blogs = await Promise.all(
     files.map(async (file) => {
-      const filePath = URL.BLOG_FILE_PATH(file);
-      const content = await readFile(filePath, 'utf-8');
-      const res = parseStrToMarkdown(content, filePath);
-      if (!res) return null;
+      const content = await readFile(file, 'utf-8');
+      const res = parseStrToMarkdown(content, file);
+      const relativePath = path.relative(URL.BLOG_DIR_PATH, file);
+      const slugs = relativePath
+        .split('/')
+        .map((slug) => slug.replace(/\.md$/, ''));
       return {
         ...res.frontmatter,
-        slug: file.replace(/\.md$/, ''),
+        slug: slugs,
       };
     }),
   );
@@ -72,16 +77,28 @@ async function getTags() {
 }
 
 async function getBlogsByTag(tag: string) {
-  const files = await readdir(URL.BLOG_DIR_PATH);
+  // もしblogディレクトリが存在しなければ空配列を返す
+  try {
+    await access(URL.BLOG_DIR_PATH);
+  } catch (e) {
+    return [];
+  }
+
+  // blogディレクトリ内のすべてのファイルを再帰的に探す
+  const files = await findFilesInDeep(URL.BLOG_DIR_PATH, '.md');
+
+  // ファイルの内容を取得
   const blogs = await Promise.all(
     files.map(async (file) => {
-      const filePath = URL.BLOG_FILE_PATH(file);
-      const content = await readFile(filePath, 'utf-8');
-      const res = parseStrToMarkdown(content, filePath);
-      if (!res) return null;
+      const content = await readFile(file, 'utf-8');
+      const res = parseStrToMarkdown(content, file);
+      const relativePath = path.relative(URL.BLOG_DIR_PATH, file);
+      const slugs = relativePath
+        .split('/')
+        .map((slug) => slug.replace(/\.md$/, ''));
       return {
         ...res.frontmatter,
-        slug: file.replace(/\.md$/, ''),
+        slug: slugs,
       };
     }),
   );

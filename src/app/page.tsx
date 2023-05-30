@@ -1,5 +1,6 @@
 import { existsSync } from 'fs';
-import { readFile, readdir } from 'fs/promises';
+import { access, readFile, readdir } from 'fs/promises';
+import path from 'path';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,10 +8,12 @@ import { MdArrowForward } from 'react-icons/md';
 
 import { BlogCardList } from '@/components/blog/card-list';
 import { RelayList } from '@/components/relay/list';
+import { ROUTE } from '@/constants/route';
 import { TEXT } from '@/constants/text';
 import { URL } from '@/constants/url';
 import { parseStrToMarkdown } from '@/lib/markdown';
 import { parseStrToRelay } from '@/lib/relay';
+import { findFilesInDeep } from '@/util/file';
 
 import { Hero } from '../components/hero';
 
@@ -22,22 +25,33 @@ const LATEST_RELAYS_COUNT = 3;
 export const HOME_BREADCRUMBS = [
   {
     title: 'Home',
-    href: '/',
+    href: ROUTE.TOP,
   },
 ];
 
 async function getLatestBlogs() {
-  if (!existsSync(URL.BLOG_DIR_PATH)) return [];
-  const files = await readdir(URL.BLOG_DIR_PATH);
+  // もしblogディレクトリが存在しなければ空配列を返す
+  try {
+    await access(URL.BLOG_DIR_PATH);
+  } catch (e) {
+    return [];
+  }
+
+  // blogディレクトリ内のすべてのファイルを再帰的に探す
+  const files = await findFilesInDeep(URL.BLOG_DIR_PATH, '.md');
+
+  // ファイルの内容を取得
   const blogs = await Promise.all(
     files.map(async (file) => {
-      const filePath = URL.BLOG_FILE_PATH(file);
-      const content = await readFile(filePath, 'utf-8');
-      const res = parseStrToMarkdown(content, filePath);
-      if (!res) return null;
+      const content = await readFile(file, 'utf-8');
+      const res = parseStrToMarkdown(content, file);
+      const relativePath = path.relative(URL.BLOG_DIR_PATH, file);
+      const slugs = relativePath
+        .split('/')
+        .map((slug) => slug.replace(/\.md$/, ''));
       return {
         ...res.frontmatter,
-        slug: file.replace(/\.md$/, ''),
+        slug: slugs,
       };
     }),
   );
@@ -105,7 +119,7 @@ export default async function Home() {
           サークルで講義に使った資料や、メンバーが得た知見をアウトプットしています。
         </p>
         <BlogCardList blogs={latestBlogs} />
-        <Link href="/blog" className={styles.moreLink}>
+        <Link href={ROUTE.BLOG_LIST} className={styles.moreLink}>
           More
           <MdArrowForward />
         </Link>
@@ -114,7 +128,7 @@ export default async function Home() {
           1ヶ月で1つのテーマについて、複数のメンバーが記事を書く企画「ブログリレー」を不定期に開催しています。
         </p>
         <RelayList relays={latestRelays} />
-        <Link href="/relay" className={styles.moreLink}>
+        <Link href={ROUTE.RELAY_LIST} className={styles.moreLink}>
           More
           <MdArrowForward />
         </Link>

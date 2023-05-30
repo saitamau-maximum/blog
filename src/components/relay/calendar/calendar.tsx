@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useMemo } from 'react';
 
+import { ROUTE } from '@/constants/route';
 import { URL } from '@/constants/url';
 
 import styles from './calendar.module.css';
@@ -129,7 +130,7 @@ const _CalenderCell = ({ relay }: { relay: RelayItem | null }) => {
   return (
     <Link
       className={clsx(styles.dayCell, styles.dayCellLink)}
-      href={`/blog/${relay.slug}`}
+      href={ROUTE.BLOG_DETAIL(relay.slug.split('/'))}
     >
       <div className={styles.dayCard}>
         <div className={styles.dayCardAuthor}>

@@ -3,6 +3,7 @@ import { readdir, readFile } from 'fs/promises';
 
 import { Hero } from '@/components/hero';
 import { RelayList } from '@/components/relay/list';
+import { ROUTE } from '@/constants/route';
 import { URL } from '@/constants/url';
 import { parseStrToRelay } from '@/lib/relay';
 
@@ -25,7 +26,7 @@ export const RELAY_LIST_BREADCRUMBS = [
   ...HOME_BREADCRUMBS,
   {
     title: TITLE,
-    href: '/relay',
+    href: ROUTE.RELAY_LIST,
   },
 ];
 

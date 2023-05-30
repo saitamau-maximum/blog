@@ -32,6 +32,7 @@ import { unified } from 'unified';
 import { z } from 'zod';
 
 import { ERROR } from '@/constants/error';
+import { URL } from '@/constants/url';
 
 import { Anchor } from './rehype/anchor';
 import { Image } from './rehype/image';
@@ -173,30 +174,31 @@ type Frontmatter = z.infer<typeof frontmatterSchema>;
 
 export const parseStrToMarkdown = (
   str: string,
-  filename: string,
+  filepath: string,
 ): { frontmatter: Frontmatter; content: string } => {
-  if (filename === 'tag.md') {
+  const re = new RegExp(`^${URL.BLOG_DIR_PATH}/tag*`);
+  if (re.test(filepath)) {
     throw new Error(
-      `[${filename}] ${ERROR.MARKDOWN_PARSER.TAG_MD_NOT_ALLOWED}`,
+      `[${filepath}] ${ERROR.MARKDOWN_PARSER.TAG_MD_NOT_ALLOWED}`,
     );
   }
 
   const frontmatter = frontmatterRegex.exec(str);
   if (!frontmatter) {
     throw new Error(
-      `[${filename}] ${ERROR.MARKDOWN_PARSER.FRONTMATTER_NOT_FOUND}`,
+      `[${filepath}] ${ERROR.MARKDOWN_PARSER.FRONTMATTER_NOT_FOUND}`,
     );
   }
   const jsonFrontmatter = parseFrontmatter(frontmatter[1]);
   if (!jsonFrontmatter) {
     throw new Error(
-      `[${filename}] ${ERROR.MARKDOWN_PARSER.FRONTMATTER_PARSE_ERROR} ${ERROR.MARKDOWN_PARSER.FRONTMATTER_CORRECT_FORMAT}`,
+      `[${filepath}] ${ERROR.MARKDOWN_PARSER.FRONTMATTER_PARSE_ERROR} ${ERROR.MARKDOWN_PARSER.FRONTMATTER_CORRECT_FORMAT}`,
     );
   }
   const frontmatterData = frontmatterSchema.safeParse(jsonFrontmatter);
   if (!frontmatterData.success) {
     throw new Error(
-      `[${filename}] ${
+      `[${filepath}] ${
         ERROR.MARKDOWN_PARSER.FRONTMATTER_SCHEMA_ERROR
       }\n${frontmatterData.error.issues
         .map((issue) => `- ${issue.message}`)

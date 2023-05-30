@@ -1,5 +1,6 @@
-import { ERROR } from "@/constants/error";
 import { z } from "zod";
+
+import { ERROR } from "@/constants/error";
 
 const relaySchema = z.object({
   title: z.string(),

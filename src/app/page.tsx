@@ -1,16 +1,21 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-import { TEXT } from "@/constants/text";
-import { Hero } from "../components/hero";
+import { existsSync } from "fs";
 import { readFile, readdir } from "fs/promises";
-import { URL } from "@/constants/url";
-import { parseStrToMarkdown } from "@/lib/markdown";
-import { BlogCardList } from "@/components/blog/card-list";
+
+import Image from "next/image";
 import Link from "next/link";
 import { MdArrowForward } from "react-icons/md";
-import { parseStrToRelay } from "@/lib/relay";
+
+import { BlogCardList } from "@/components/blog/card-list";
 import { RelayList } from "@/components/relay/list";
-import { existsSync } from "fs";
+import { TEXT } from "@/constants/text";
+import { URL } from "@/constants/url";
+import { parseStrToMarkdown } from "@/lib/markdown";
+import { parseStrToRelay } from "@/lib/relay";
+
+import { Hero } from "../components/hero";
+
+import styles from "./page.module.css";
+
 
 const LATEST_BLOGS_COUNT = 6;
 const LATEST_RELAYS_COUNT = 3;

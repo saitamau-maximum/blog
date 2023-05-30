@@ -1,23 +1,29 @@
-import type { Metadata } from "next";
-
-import styles from "./page.module.css";
+import { existsSync } from "fs";
 import { readdir, readFile } from "fs/promises";
 import path from "path";
-import { Hero } from "@/components/hero";
-import { URL } from "@/constants/url";
-import { parseStrToRelay } from "@/lib/relay";
-import { RELAY_LIST_BREADCRUMBS } from "../page";
+
 import {
   MdCalendarMonth,
   MdEditCalendar,
   MdEventAvailable,
   MdGroup,
-  MdPerson,
 } from "react-icons/md";
-import { firstDayOfMonth, lastDayOfMonth } from "@/util/date";
+
+import { Hero } from "@/components/hero";
 import { RelayCalender } from "@/components/relay/calendar/calendar";
 import { ProgressBar } from "@/components/relay/progress-bar/progress-bar";
-import { existsSync } from "fs";
+import { URL } from "@/constants/url";
+import { parseStrToRelay } from "@/lib/relay";
+import { firstDayOfMonth, lastDayOfMonth } from "@/util/date";
+
+import { RELAY_LIST_BREADCRUMBS } from "../page";
+
+
+
+import styles from "./page.module.css";
+
+import type { Metadata } from "next";
+
 
 interface Props {
   params: {

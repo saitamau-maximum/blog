@@ -1,7 +1,9 @@
 "use client";
+import { FaGithub } from "react-icons/fa";
+
 import { IconButton } from "@/components/icon-button";
 import { ThemeSwitch } from "@/components/theme-switch";
-import { FaGithub } from "react-icons/fa";
+
 import styles from "./button-list.module.css";
 
 interface Props {

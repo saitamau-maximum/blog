@@ -1,9 +1,11 @@
-import Link from "next/link";
-import styles from "./calendar.module.css";
 import { clsx } from "clsx";
-import { useMemo } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { useMemo } from "react";
+
 import { URL } from "@/constants/url";
+
+import styles from "./calendar.module.css";
 
 type RelayItem = {
   slug: string | null;

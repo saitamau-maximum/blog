@@ -1,6 +1,7 @@
 import Link from "next/link";
-import styles from "./navigation.module.css";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+
+import styles from "./navigation.module.css";
 
 interface NavData {
     title: string;

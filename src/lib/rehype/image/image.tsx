@@ -1,11 +1,12 @@
 "use client";
 import NextImage from "next/image";
-import type { ComponentProps } from "react";
 import { useEffect, useState } from "react";
+
+import { useClickOutside } from "@/hooks";
 
 import styles from "./image.module.css";
 
-import { useClickOutside } from "@/hooks";
+import type { ComponentProps } from "react";
 
 type Props = ComponentProps<"img">;
 

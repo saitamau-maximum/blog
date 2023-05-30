@@ -1,7 +1,9 @@
-import Link from "next/link";
-import type { ComponentProps } from "react";
-import styles from "./anchor.module.css";
 import { clsx } from "clsx";
+import Link from "next/link";
+
+import styles from "./anchor.module.css";
+
+import type { ComponentProps } from "react";
 
 type Props = ComponentProps<typeof Link> & {
   href: string;

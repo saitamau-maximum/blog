@@ -1,7 +1,8 @@
 import { FaMoon, FaSun } from "react-icons/fa";
 
-import styles from "./theme-switch.module.css";
 import { IconButton } from "../icon-button";
+
+import styles from "./theme-switch.module.css";
 
 type Theme = "light" | "dark";
 

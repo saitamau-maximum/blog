@@ -1,10 +1,12 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import styles from "./header.module.css";
-import { Logo } from "./logo";
-import { useHeader } from "@/hooks";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
+
+import { useHeader } from "@/hooks";
+
+import styles from "./header.module.css";
+import { Logo } from "./logo";
 
 const SLIDEIN_KF = [
   { transform: "translateY(-30%)", opacity: 0 },

@@ -1,12 +1,20 @@
-import type { Metadata } from "next";
-import styles from "./page.module.css";
-import { readdir, readFile } from "fs/promises";
-import { Hero } from "@/components/hero";
-import { URL } from "@/constants/url";
-import { HOME_BREADCRUMBS } from "../page";
-import { parseStrToRelay } from "@/lib/relay";
-import { RelayList } from "@/components/relay/list";
 import { existsSync } from "fs";
+import { readdir, readFile } from "fs/promises";
+
+import { Hero } from "@/components/hero";
+import { RelayList } from "@/components/relay/list";
+import { URL } from "@/constants/url";
+import { parseStrToRelay } from "@/lib/relay";
+
+import { HOME_BREADCRUMBS } from "../page";
+
+import styles from "./page.module.css";
+
+import type { Metadata } from "next";
+
+
+
+
 
 const TITLE = "ブログリレー一覧";
 const DESCRIPTION =

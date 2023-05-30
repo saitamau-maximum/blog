@@ -1,9 +1,9 @@
 export const ERROR = {
   /** Markdown Parser Error */
   MARKDOWN_PARSER: {
-    FRONTMATTER_NOT_FOUND: "Frontmatterが見つかりませんでした。",
-    FRONTMATTER_SCHEMA_ERROR: "Frontmatterが不正な形式です。",
-    FRONTMATTER_PARSE_ERROR: "Frontmatterのパースに失敗しました。",
+    FRONTMATTER_NOT_FOUND: 'Frontmatterが見つかりませんでした。',
+    FRONTMATTER_SCHEMA_ERROR: 'Frontmatterが不正な形式です。',
+    FRONTMATTER_PARSE_ERROR: 'Frontmatterのパースに失敗しました。',
     FRONTMATTER_CORRECT_FORMAT: `次のような形式になっている必要があります。
 ---
 title: "タイトル"
@@ -13,16 +13,21 @@ authors: ["author1", "author2"]
 tags: ["tag1", "tag2"]
 ---
 `.trim(),
-    FRONTMATTER_TITLE_REQUIRED: "titleが必要です。",
-    FRONTMATTER_DESCRIPTION_REQUIRED: "descriptionが必要です。",
-    FRONTMATTER_DATE_REQUIRED: "dateが必要です。",
+    FRONTMATTER_TITLE_REQUIRED: 'titleが必要です。',
+    FRONTMATTER_DESCRIPTION_REQUIRED: 'descriptionが必要です。',
+    FRONTMATTER_DATE_REQUIRED: 'dateが必要です。',
     FRONTMATTER_DATE_FORMAT:
       'dateはYYYY-MM-DD形式である必要があります。例) date: "2021-01-01"',
-    FRONTMATTER_AUTHORS_REQUIRED: "authorsが必要です。",
-    FRONTMATTER_AUTHORS_LEAST_ONE: "authorsは1人以上必要です。",
-    FRONTMATTER_TAGS_REQUIRED: "tagsが必要です。",
-    FRONTMATTER_TAGS_LEAST_ONE: "tagsは1つ以上必要です。",
+    FRONTMATTER_AUTHORS_REQUIRED: 'authorsが必要です。',
+    FRONTMATTER_AUTHORS_LEAST_ONE: 'authorsは1人以上必要です。',
+    FRONTMATTER_TAGS_REQUIRED: 'tagsが必要です。',
+    FRONTMATTER_TAGS_LEAST_ONE: 'tagsは1つ以上必要です。',
     TAG_MD_NOT_ALLOWED:
-      "File名がURLになる仕様上、`/blog/tag`と重複する`tag.md`の作成は許可されていません。",
+      'File名がURLになる仕様上、`/blog/tag`と重複する`tag.md`の作成は許可されていません。',
+  },
+  /** Blog Relay Parser Error */
+  BLOG_RELAY_PARSER: {
+    RELAY_SCHEMA_ERROR:
+      'Relayが不正な形式です。`pnpm gen:blog-relay`から設定ファイルを生成することをおすすめします。',
   },
 };

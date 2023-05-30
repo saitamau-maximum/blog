@@ -9,7 +9,7 @@
 }
 
 .heroBg {
-  background-image: url("/images/noize.webp");
+  background-image: url('/images/noize.webp');
   background-repeat: repeat;
   opacity: 0.1;
 

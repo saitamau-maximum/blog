@@ -1,8 +1,8 @@
-"use client";
-import { clsx } from "clsx";
-import { useEffect, useRef } from "react";
+'use client';
+import { clsx } from 'clsx';
+import { useEffect, useRef } from 'react';
 
-import styles from "./toc.module.css";
+import styles from './toc.module.css';
 
 export interface TocItemProps {
   depth: number;

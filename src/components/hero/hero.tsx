@@ -1,12 +1,13 @@
-"use client";
-import { ReactNode, useEffect } from "react";
-import styles from "./hero.module.css";
-import { useHeader } from "@/hooks";
-import Link from "next/link";
-import { IoIosArrowForward } from "react-icons/io";
-import { clsx } from "clsx";
-import { FaSlash, FaSquareRootAlt } from "react-icons/fa";
-import { MdHome } from "react-icons/md";
+'use client';
+import { clsx } from 'clsx';
+import Link from 'next/link';
+import { ReactNode, useEffect } from 'react';
+import { IoIosArrowForward } from 'react-icons/io';
+import { MdHome } from 'react-icons/md';
+
+import { useHeader } from '@/hooks';
+
+import styles from './hero.module.css';
 
 type BreadcrumbItem = {
   title: string;
@@ -26,7 +27,7 @@ export const Hero = ({ children, information, title, breadcrumbs }: Props) => {
 
   useEffect(() => {
     return () => {
-      setTitle("");
+      setTitle('');
     };
   }, [setTitle]);
 

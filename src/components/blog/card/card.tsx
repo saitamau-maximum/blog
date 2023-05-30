@@ -1,7 +1,9 @@
-import Image from "next/image";
-import styles from "./card.module.css";
-import Link from "next/link";
-import { URL } from "@/constants/url";
+import Image from 'next/image';
+import Link from 'next/link';
+
+import { URL } from '@/constants/url';
+
+import styles from './card.module.css';
 
 interface Props {
   title: string;

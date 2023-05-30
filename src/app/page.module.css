@@ -36,10 +36,6 @@
   box-sizing: border-box;
 }
 
-.sectionTitle {
-  text-align: center;
-}
-
 .moreLink {
   display: flex;
   justify-content: center;

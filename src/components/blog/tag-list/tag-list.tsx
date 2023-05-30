@@ -1,6 +1,6 @@
-import Image from "next/image";
-import Link from "next/link";
-import styles from "./tag-list.module.css";
+import Link from 'next/link';
+
+import styles from './tag-list.module.css';
 
 interface Props {
   tags: string[];

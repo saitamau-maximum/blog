@@ -1,14 +1,16 @@
-import Link from "next/link";
-import type { ComponentProps } from "react";
-import styles from "./anchor.module.css";
-import { clsx } from "clsx";
+import { clsx } from 'clsx';
+import Link from 'next/link';
+
+import styles from './anchor.module.css';
+
+import type { ComponentProps } from 'react';
 
 type Props = ComponentProps<typeof Link> & {
   href: string;
 };
 
 export const Anchor = ({ children, href, ...rest }: Props) => {
-  if (href.startsWith("/")) {
+  if (href.startsWith('/')) {
     return (
       <Link
         href={href}
@@ -21,7 +23,7 @@ export const Anchor = ({ children, href, ...rest }: Props) => {
     );
   }
 
-  if (href.startsWith("#")) {
+  if (href.startsWith('#')) {
     return (
       <a href={href} className={clsx(styles.anchor, rest.className)} {...rest}>
         {children}

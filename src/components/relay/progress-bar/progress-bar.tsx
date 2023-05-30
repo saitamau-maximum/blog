@@ -1,4 +1,4 @@
-import style from "./progress-bar.module.css";
+import style from './progress-bar.module.css';
 
 interface Props {
   progress: number; // 0 ~ 1
@@ -9,9 +9,9 @@ export const ProgressBar = ({ progress }: Props) => {
 
   const statusDisplay = () => {
     if (progress === 1) {
-      return "Completed";
+      return 'Completed';
     } else if (progress === 0) {
-      return "";
+      return '';
     } else {
       return `${Math.floor(percent)}%`;
     }

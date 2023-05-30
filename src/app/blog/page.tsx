@@ -1,17 +1,20 @@
-import type { Metadata } from "next";
-import styles from "./page.module.css";
-import { parseStrToMarkdown } from "@/lib/markdown";
-import { readdir, readFile } from "fs/promises";
-import path from "path";
-import { Hero } from "@/components/hero";
-import { BlogCardList } from "@/components/blog/card-list";
-import { URL } from "@/constants/url";
-import { HOME_BREADCRUMBS } from "../page";
-import { existsSync } from "fs";
+import { existsSync } from 'fs';
+import { readdir, readFile } from 'fs/promises';
 
-const TITLE = "ブログ一覧";
+import { BlogCardList } from '@/components/blog/card-list';
+import { Hero } from '@/components/hero';
+import { URL } from '@/constants/url';
+import { parseStrToMarkdown } from '@/lib/markdown';
+
+import { HOME_BREADCRUMBS } from '../page';
+
+import styles from './page.module.css';
+
+import type { Metadata } from 'next';
+
+const TITLE = 'ブログ一覧';
 const DESCRIPTION =
-  "サークルの公開している講習会資料や、技術のアウトプットなどを掲載しています。";
+  'サークルの公開している講習会資料や、技術のアウトプットなどを掲載しています。';
 
 export const metadata = {
   title: TITLE,
@@ -22,7 +25,7 @@ export const BLOG_LIST_BREADCRUMBS = [
   ...HOME_BREADCRUMBS,
   {
     title: TITLE,
-    href: "/blog",
+    href: '/blog',
   },
 ];
 
@@ -32,19 +35,19 @@ async function getBlogs() {
   const blogs = await Promise.all(
     files.map(async (file) => {
       const filePath = URL.BLOG_FILE_PATH(file);
-      const content = await readFile(filePath, "utf-8");
+      const content = await readFile(filePath, 'utf-8');
       const res = parseStrToMarkdown(content, filePath);
       return {
         ...res.frontmatter,
-        slug: file.replace(/\.md$/, ""),
+        slug: file.replace(/\.md$/, ''),
       };
-    })
+    }),
   );
   const filteredBlogs = blogs.filter(
-    (blog): blog is NonNullable<typeof blog> => blog !== null
+    (blog): blog is NonNullable<typeof blog> => blog !== null,
   );
   const sortedBlogs = filteredBlogs.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
 
   return sortedBlogs;

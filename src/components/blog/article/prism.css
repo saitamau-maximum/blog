@@ -1,4 +1,4 @@
-svg[id^="mermaid-"] g foreignObject {
+svg[id^='mermaid-'] g foreignObject {
   /* mermaidjsのバージョンが古いので、foreignObjectのスタイルを上書き */
   overflow: visible;
   font-size: 15px;
@@ -34,24 +34,24 @@ svg[id^="mermaid-"] g foreignObject {
  */
 
 /* Selection */
-code[class*="language-"]::-moz-selection,
-code[class*="language-"] *::-moz-selection,
-pre[class*="language-"] *::-moz-selection {
+code[class*='language-']::-moz-selection,
+code[class*='language-'] *::-moz-selection,
+pre[class*='language-'] *::-moz-selection {
   background: hsl(220, 13%, 28%);
   color: inherit;
   text-shadow: none;
 }
 
-code[class*="language-"]::selection,
-code[class*="language-"] *::selection,
-pre[class*="language-"] *::selection {
+code[class*='language-']::selection,
+code[class*='language-'] *::selection,
+pre[class*='language-'] *::selection {
   background: hsl(220, 13%, 28%);
   color: inherit;
   text-shadow: none;
 }
 
 /* Code blocks */
-pre[class*="language-"] {
+pre[class*='language-'] {
   padding: 1em;
   margin: 0.5em 0;
   overflow: auto;
@@ -59,7 +59,7 @@ pre[class*="language-"] {
 }
 
 /* Inline code */
-:not(pre) > code[class*="language-"] {
+:not(pre) > code[class*='language-'] {
   padding: 0.2em 0.3em;
   border-radius: 0.3em;
   white-space: normal;
@@ -67,8 +67,8 @@ pre[class*="language-"] {
 
 /* Print */
 @media print {
-  code[class*="language-"],
-  pre[class*="language-"] {
+  code[class*='language-'],
+  pre[class*='language-'] {
     text-shadow: none;
   }
 }

@@ -1,4 +1,4 @@
-import styles from "./logo.module.css";
+import styles from './logo.module.css';
 
 export const Logo = () => (
   <svg

@@ -1,9 +1,11 @@
-import Link from "next/link";
-import styles from "./calendar.module.css";
-import { clsx } from "clsx";
-import { useMemo } from "react";
-import Image from "next/image";
-import { URL } from "@/constants/url";
+import { clsx } from 'clsx';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useMemo } from 'react';
+
+import { URL } from '@/constants/url';
+
+import styles from './calendar.module.css';
 
 type RelayItem = {
   slug: string | null;
@@ -17,7 +19,7 @@ interface Props {
   relay: RelayItem[];
 }
 
-const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const WEEK_LENGTH = WEEKDAYS.length;
 
 export const RelayCalender = ({ calenderDate, relay }: Props) => {
@@ -35,7 +37,7 @@ export const RelayCalender = ({ calenderDate, relay }: Props) => {
     const lastDay = new Date(
       thisMonth.getFullYear(),
       thisMonth.getMonth() + 1,
-      0
+      0,
     );
     const lastDate = lastDay.getDate();
 
@@ -77,7 +79,7 @@ export const RelayCalender = ({ calenderDate, relay }: Props) => {
               className={clsx(
                 styles.weekday,
                 weekday === WEEKDAYS[0] && styles.sunday,
-                weekday === WEEKDAYS[6] && styles.saturday
+                weekday === WEEKDAYS[6] && styles.saturday,
               )}
             >
               {weekday}
@@ -118,7 +120,7 @@ const _CalenderCell = ({ relay }: { relay: RelayItem | null }) => {
             {relay.author}
           </div>
           <div className={styles.dayCardTitle}>
-            {relay.title || "タイトル未定"}
+            {relay.title || 'タイトル未定'}
           </div>
         </div>
       </div>

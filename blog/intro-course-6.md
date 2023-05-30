@@ -104,7 +104,7 @@ $s_7 - s_3\ (= A_3 + A_4 + A_5 + A_6)$ を計算するだけで簡単に求め�
 
 そして、この計算量は $O(1)$ です。
 
-まとめると、配列 $A$ の区間 (left, right] の総和は
+まとめると、配列 $A$ の区間 [left, right) の総和は
 $s_\mathrm{right} - s_\mathrm{left}$ で求まります。
 また、 $s_0 = 0$ と定めたことで、 $\mathrm{left} = 0$ としても値が計算できるようになっています。
 
@@ -249,8 +249,6 @@ int main() {
 ```
 
 :::
-
-上2つの解答の実行時間には、**25倍**の差があります！
 
 ### 問題2: [ABC134: C - Exception Handling](https://atcoder.jp/contests/abc134/tasks/abc134_c)
 

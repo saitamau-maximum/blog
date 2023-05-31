@@ -1,0 +1,55 @@
+.remarkCodeTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+
+:global(.light) .remarkCodeTitle {
+  background-color: var(--color-gray-200);
+  color: var(--color-gray-600);
+}
+
+:global(.dark) .remarkCodeTitle {
+  background-color: var(--color-gray-900);
+  color: var(--color-gray-400);
+}
+
+.remarkCodeTitle + pre {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  margin-top: 0 !important;
+}
+
+.copy {
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  box-sizing: border-box;
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: inherit;
+}
+
+:global(.light) .copy:hover {
+  background-color: var(--color-gray-300);
+}
+
+:global(.dark) .copy:hover {
+  background-color: var(--color-gray-800);
+}
+
+.copyIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+}

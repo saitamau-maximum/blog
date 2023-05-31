@@ -35,6 +35,7 @@ import { ERROR } from '@/constants/error';
 import { URL } from '@/constants/url';
 
 import { Anchor } from './rehype/anchor';
+import { Div } from './rehype/div';
 import { Image } from './rehype/image';
 import remarkCustomDirectives from './remark/directive';
 
@@ -117,6 +118,7 @@ export const parseHTMLToReactJSX = (htmlContent: string) => {
       components: {
         a: Anchor,
         img: Image,
+        div: Div,
       },
       createElement,
       Fragment,

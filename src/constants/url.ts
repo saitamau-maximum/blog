@@ -19,9 +19,9 @@ export const URL = {
 export const OGP = {
   PUBLIC_DIR_PATH: path.join(process.cwd(), 'public'),
   BLOG_CACHE_DIR_PATH: path.join(process.cwd(), '.cache/blog'),
-  OGP_BASE_IMAGE_PATH: 'images/ogp/base.png',
-  OGP_DEFAULT_IMAGE_PATH: 'images/ogp/default.png',
-  OGP_GENERATED_IMAGE_PATH: 'images/ogp/generated',
+  OGP_BASE_IMAGE_PATH: '/images/ogp/base.png',
+  OGP_DEFAULT_IMAGE_PATH: '/images/ogp/default.png',
+  OGP_GENERATED_IMAGE_PATH: '/images/ogp/generated',
   OGP_DYNAMIC_IMAGE: (slug: string[]) =>
     `${OGP.OGP_GENERATED_IMAGE_PATH}/${slug.join('-')}.png`,
 };

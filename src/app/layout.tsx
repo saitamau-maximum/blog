@@ -14,6 +14,7 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata = {
+  metadataBase: new URL(process.env.URL ?? 'http://localhost:3000'),
   title: {
     default: TEXT.SITE_TITLE,
     template: `%s | ${TEXT.SITE_TITLE}`,

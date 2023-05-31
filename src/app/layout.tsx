@@ -3,6 +3,7 @@ import './globals.css';
 import { Noto_Sans_JP } from 'next/font/google';
 
 import { TEXT } from '@/constants/text';
+import { OGP } from '@/constants/url';
 import { HeaderProvider } from '@/hooks';
 
 import { Header } from '../components/header';
@@ -26,12 +27,12 @@ export const metadata = {
     description: TEXT.SITE_DESCRIPTION,
     images: [
       {
-        url: "images/ogp/default.png",
+        url: OGP.OGP_DEFAULT_IMAGE_PATH,
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: 'summary_large_image',
     title: {
       default: TEXT.SITE_TITLE,
       template: `%s | ${TEXT.SITE_TITLE}`,

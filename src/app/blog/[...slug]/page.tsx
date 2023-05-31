@@ -1,4 +1,4 @@
-import { access, readFile } from 'fs/promises';
+import { access, mkdir, readFile, readdir, writeFile } from 'fs/promises';
 import path from 'path';
 
 import { notFound } from 'next/navigation';
@@ -11,8 +11,9 @@ import { TagList } from '@/components/blog/tag-list';
 import { Toc } from '@/components/blog/toc';
 import { Hero } from '@/components/hero';
 import { ROUTE } from '@/constants/route';
-import { URL } from '@/constants/url';
+import { OGP, URL } from '@/constants/url';
 import { parseMarkdownToHTML, parseStrToMarkdown } from '@/lib/markdown';
+import { createOgp } from '@/lib/ogp';
 import { findFilesInDeep } from '@/util/file';
 
 import { BLOG_LIST_BREADCRUMBS } from '../page';
@@ -64,6 +65,34 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const blog = await getBlog(params.slug);
+  const slug = params.slug.join('-');
+  const title = blog.meta.title;
+  const jsonPath = path.join(OGP.BLOG_CACHE_DIR_PATH, 'blog.json');
+  const createJsonDir = async () => {
+    try {
+      await readdir(OGP.BLOG_CACHE_DIR_PATH);
+    } catch (e) {
+      await mkdir(OGP.BLOG_CACHE_DIR_PATH, { recursive: true });
+    }
+  };
+  await createJsonDir();
+  const jsonfile = await readdir(OGP.BLOG_CACHE_DIR_PATH);
+  if (!jsonfile.includes('blog.json')) {
+    await writeFile(jsonPath, '{}');
+  }
+
+  let ogpPath = OGP.OGP_DYNAMIC_IMAGE(params.slug);
+  const json = await readFile(jsonPath, 'utf-8');
+  const cache = JSON.parse(json);
+  if (cache[slug] !== title) {
+    ogpPath = await createOgp(
+      blog.meta.title,
+      blog.meta.authors,
+      blog.meta.slug,
+    );
+    cache[slug] = title;
+    await writeFile(jsonPath, JSON.stringify(cache));
+  }
 
   return {
     title: blog.meta.title,
@@ -72,6 +101,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       name: author,
       url: URL.GITHUB_PROFILE_URL(author),
     })),
+    openGraph: {
+      title: blog.meta.title,
+      description: blog.meta.description,
+      images: [
+        {
+          url: ogpPath,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      description: blog.meta.description,
+      images: [
+        {
+          url: ogpPath,
+        },
+      ],
+    },
   };
 }
 type ParsedMarkdown = ReturnType<typeof parseStrToMarkdown>;

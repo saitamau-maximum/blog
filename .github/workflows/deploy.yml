@@ -52,8 +52,15 @@ jobs:
             ${{ runner.os }}-app-
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
+      - name: Cache fonts (sans-serif, japanese)
+        id: cache-fonts
+        uses: actions/cache@v2
+        with:
+          path: ~/.local/share/fonts/NotoCJK
+          key: fonts-noto-cjk-${{ runner.os }}
       - name: Install fonts (sans-serif, japanese)
-        run: sudo apt-get install -y fonts-noto-cjk
+        if: steps.cache-fonts.outputs.cache-hit != 'true'
+        run: sudo apt-get update && sudo apt-get install -y fonts-noto-cjk
       - name: Playwright setup
         run: pnpm run pw-install
       - name: Build with Next.js

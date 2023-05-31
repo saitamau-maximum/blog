@@ -3,6 +3,7 @@ import './globals.css';
 import { Noto_Sans_JP } from 'next/font/google';
 
 import { TEXT } from '@/constants/text';
+import { OGP } from '@/constants/url';
 import { HeaderProvider } from '@/hooks';
 
 import { Header } from '../components/header';
@@ -18,6 +19,26 @@ export const metadata = {
     template: `%s | ${TEXT.SITE_TITLE}`,
   },
   description: TEXT.SITE_DESCRIPTION,
+  openGraph: {
+    title: {
+      default: TEXT.SITE_TITLE,
+      template: `%s | ${TEXT.SITE_TITLE}`,
+    },
+    description: TEXT.SITE_DESCRIPTION,
+    images: [
+      {
+        url: OGP.OGP_DEFAULT_IMAGE_PATH,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: {
+      default: TEXT.SITE_TITLE,
+      template: `%s | ${TEXT.SITE_TITLE}`,
+    },
+    description: TEXT.SITE_DESCRIPTION,
+  },
 } satisfies Metadata;
 
 export default function RootLayout({

@@ -81,3 +81,14 @@ next: "next-blog"
 開発へ参加したい方は**Issues**から自分のやりたいことを探して、**Assignees**に自分を追加してください。
 すると「自分がこのIssueを担当している」ということになります。
 あとはいつものようにブランチを切って開発してください。
+
+## Support
+
+### Mac環境で`pnpm i`したときに`node-pre-gyp`のエラーが出る場合
+
+```bash
+brew install pkg-config cairo pango libpng jpeg giflib librsvg pixman
+```
+
+を打ってから`pnpm i`を実行してください。
+<https://github.com/Automattic/node-canvas/issues/913>

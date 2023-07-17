@@ -55,6 +55,7 @@
     "remark-extract-toc": "^1.1.0",
     "remark-flexible-code-titles": "^1.1.2",
     "remark-gfm": "^3.0.1",
+    "remark-link-meta": "^0.0.8",
     "remark-math": "^5.1.1",
     "remark-parse": "^10.0.1",
     "remark-rehype": "^10.1.0",

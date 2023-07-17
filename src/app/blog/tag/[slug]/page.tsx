@@ -6,7 +6,7 @@ import { BlogCardList } from '@/components/blog/card-list';
 import { Hero } from '@/components/hero';
 import { ROUTE } from '@/constants/route';
 import { URL } from '@/constants/url';
-import { parseStrToMarkdown } from '@/lib/markdown';
+import { parseStrToMarkdown } from '@/lib/markdown-server';
 import { findFilesInDeep } from '@/util/file';
 
 import { BLOG_LIST_BREADCRUMBS } from '../../page';

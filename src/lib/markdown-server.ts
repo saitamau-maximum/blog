@@ -1,4 +1,3 @@
-import { createElement, Fragment } from 'react';
 import refactorBash from 'refractor/lang/bash';
 import refractorC from 'refractor/lang/c';
 import refractorCpp from 'refractor/lang/cpp';
@@ -17,9 +16,7 @@ import refactorHtml from 'refractor/lang/xml-doc';
 import { refractor } from 'refractor/lib/core.js';
 import rehypeKatex from 'rehype-katex';
 import rehypeMermaid from 'rehype-mermaidjs';
-import rehypeParse from 'rehype-parse';
 import rehypePrismGenerator from 'rehype-prism-plus/generator';
-import rehypeReact from 'rehype-react';
 import rehypeStringify from 'rehype-stringify';
 import remarkDirective from 'remark-directive';
 import remarkExtractToc from 'remark-extract-toc';
@@ -35,9 +32,6 @@ import { z } from 'zod';
 import { ERROR } from '@/constants/error';
 import { URL } from '@/constants/url';
 
-import { Anchor } from './rehype/anchor';
-import { Div } from './rehype/div';
-import { Image } from './rehype/image';
 import remarkCustomDirectives from './remark/directive';
 
 refractor.register(refractorRust);
@@ -108,24 +102,6 @@ export const parseMarkdownToHTML = async (mdContent: string) => {
     content: content.toString(),
     toc: toc as TocItem[],
   };
-};
-
-export const parseHTMLToReactJSX = (htmlContent: string) => {
-  const processor = unified()
-    .use(rehypeParse, {
-      fragment: true,
-    }) //                    [html -> hast] HTMLをhast(HTML抽象構文木)に変換
-    // @ts-ignore
-    .use(rehypeReact, {
-      components: {
-        a: Anchor,
-        img: Image,
-        div: Div,
-      },
-      createElement,
-      Fragment,
-    }); //                   [hast -> jsx] hast(HTML抽象構文木)を一部ReactJSXに変換
-  return processor.processSync(htmlContent).result;
 };
 
 const parseFrontmatter = (frontmatter: string) => {

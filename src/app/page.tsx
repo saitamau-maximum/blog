@@ -11,7 +11,7 @@ import { RelayList } from '@/components/relay/list';
 import { ROUTE } from '@/constants/route';
 import { TEXT } from '@/constants/text';
 import { URL } from '@/constants/url';
-import { parseStrToMarkdown } from '@/lib/markdown';
+import { parseStrToMarkdown } from '@/lib/markdown-server';
 import { parseStrToRelay } from '@/lib/relay';
 import { findFilesInDeep } from '@/util/file';
 

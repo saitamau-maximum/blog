@@ -1,4 +1,3 @@
-import { createElement, Fragment } from 'react';
 import refactorBash from 'refractor/lang/bash';
 import refractorC from 'refractor/lang/c';
 import refractorCpp from 'refractor/lang/cpp';
@@ -17,14 +16,13 @@ import refactorHtml from 'refractor/lang/xml-doc';
 import { refractor } from 'refractor/lib/core.js';
 import rehypeKatex from 'rehype-katex';
 import rehypeMermaid from 'rehype-mermaidjs';
-import rehypeParse from 'rehype-parse';
 import rehypePrismGenerator from 'rehype-prism-plus/generator';
-import rehypeReact from 'rehype-react';
 import rehypeStringify from 'rehype-stringify';
 import remarkDirective from 'remark-directive';
 import remarkExtractToc from 'remark-extract-toc';
 import remarkCodeTitle from 'remark-flexible-code-titles';
 import remarkGfm from 'remark-gfm';
+import { remarkLinkMeta } from 'remark-link-meta/dist/remark-link-meta';
 import remarkMath from 'remark-math';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
@@ -35,9 +33,6 @@ import { z } from 'zod';
 import { ERROR } from '@/constants/error';
 import { URL } from '@/constants/url';
 
-import { Anchor } from './rehype/anchor';
-import { Div } from './rehype/div';
-import { Image } from './rehype/image';
 import remarkCustomDirectives from './remark/directive';
 
 refractor.register(refractorRust);
@@ -79,6 +74,7 @@ const mdHtmlProcessor = unified()
   .use(remarkDirective) //        [mdast -> mdast] directiveブロックを変換
   .use(remarkCustomDirectives) // [mdast -> mdast] directiveブロックを拡張
   .use(remarkCodeTitle) //        [mdast -> mdast] codeブロックへタイトル等の構文拡張
+  .use(remarkLinkMeta) //         [mdast -> mdast] リンクのメタデータを取得
   .use(remarkRehype) //           [mdast -> hast ] mdast(Markdown抽象構文木)をhast(HTML抽象構文木)に変換
   .use(rehypeMermaid, {
     strategy: 'inline-svg',
@@ -108,24 +104,6 @@ export const parseMarkdownToHTML = async (mdContent: string) => {
     content: content.toString(),
     toc: toc as TocItem[],
   };
-};
-
-export const parseHTMLToReactJSX = (htmlContent: string) => {
-  const processor = unified()
-    .use(rehypeParse, {
-      fragment: true,
-    }) //                    [html -> hast] HTMLをhast(HTML抽象構文木)に変換
-    // @ts-ignore
-    .use(rehypeReact, {
-      components: {
-        a: Anchor,
-        img: Image,
-        div: Div,
-      },
-      createElement,
-      Fragment,
-    }); //                   [hast -> jsx] hast(HTML抽象構文木)を一部ReactJSXに変換
-  return processor.processSync(htmlContent).result;
 };
 
 const parseFrontmatter = (frontmatter: string) => {

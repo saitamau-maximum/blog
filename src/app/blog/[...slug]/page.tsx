@@ -12,7 +12,7 @@ import { Toc } from '@/components/blog/toc';
 import { Hero } from '@/components/hero';
 import { ROUTE } from '@/constants/route';
 import { OGP, URL } from '@/constants/url';
-import { parseMarkdownToHTML, parseStrToMarkdown } from '@/lib/markdown';
+import { parseMarkdownToHTML, parseStrToMarkdown } from '@/lib/markdown-server';
 import { createOgp } from '@/lib/ogp';
 import { findFilesInDeep } from '@/util/file';
 

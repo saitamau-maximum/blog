@@ -1,4 +1,4 @@
-import { parseHTMLToReactJSX } from '@/lib/markdown';
+import { parseHTMLToReactJSX } from '@/lib/markdown-client';
 
 import styles from './article.module.css';
 import './prism.css';

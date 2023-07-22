@@ -56,6 +56,7 @@ git checkout -b feat/your-blog-name
 ---
 title: "Maximumとは"
 description: "埼玉大学のプログラミングサークル「Maximum」を紹介します。"
+date: "2021-07-10"
 authors: ["taro", "jiro", "saburo"]
 tags: ["maximum", "埼玉大学", "プログラミングサークル"]
 prev: "previous-blog"
@@ -67,6 +68,7 @@ next: "next-blog"
 | --- | --- | --- | --- |
 | title | ブログのタイトル | ⭕️ | |
 | description | ブログの説明 | ⭕️ | |
+| date | ブログの投稿日 | ⭕️ | `YYYY-MM-DD`の形式で入力してください。例えば2021年7月10日に投稿した場合は`2021-07-10`となります。 |
 | authors | ブログの執筆者 | ⭕️ | 複数人設定できるので、共同執筆も可能です。githubのユーザー名で設定してください。 |
 | tags | ブログのタグ | ⭕️ | 複数設定できます。もしタグがない場合は`[]`としてください。 |
 | prev | 前のブログ(前章) | ❌ | 前のブログがない場合はそもそもこのフィールドを設定しないでください。 |

@@ -96,9 +96,11 @@ tags: ["C言語", "Windows10", "環境構築"]
 
 ここまで来たらもう簡単です。ユーザーネームとパスワードの設定が終わったらUbuntuの画面に以下のように3つコマンドを打ってください。また、このときにさっきのパスワードの入力が求められます。
 
-1. **sudo apt update**
-2. **sudo apt upgrade**
-3. **sudo apt install gcc**
+```bash
+sudo apt update
+sudo apt upgrade
+sudo apt install gcc
+```
 
 また、途中で“Do you want to continue? [Y/n]“みたいなことを聞かれるかもしれませんが、ここでは”y”(“yes”の略)と入力してエンターキーを押せば続行できます。
 逆に“n”(“no”の略)と入力すれば中断されます。
@@ -143,7 +145,7 @@ Remote - WSLをインストールするとVisual Studio Codeの左下にちっ�
 
 ![mkdir コマンドを実行](/images/blog/c-env-for-win10/mkdir.png)
 
-するとこのようにターミナルが開くので、下の画面のように **mkdir <好きな名前>** を打ち込んでください。
+するとこのようにターミナルが開くので、下の画面のように `mkdir <好きな名前>` を打ち込んでください。
 
 ![フォルダを開く](/images/blog/c-env-for-win10/open.png)
 
@@ -172,8 +174,8 @@ Remote - WSLをインストールするとVisual Studio Codeの左下にちっ�
 
 次にターミナルにこのようにコマンドを打ちます。
 
-1. gcc <今作ったファイルの名前>
-2. (1. でエラーメッセージが出なかったら)./a.out
+1. `gcc <今作ったファイルの名前>`
+2. (1. でエラーメッセージが出なかったら) `./a.out`
 
 **見事“Hello, World!”と表示されたなら、おめでとう、<span style="color:red">君はプログラマの第一歩を踏み出した!!!</span>**
 
@@ -191,7 +193,7 @@ C言語によく似た言語に **C++** というものがあります。ここ�
 
 ![g++ をインストールするコマンド](/images/blog/c-env-for-win10/get-g_.png)
 
-C言語のコンパイルにはgccを使いましたが、C++のコンパイルには **g++** を使います。もう一度Ubuntuを開いて、 **sudo apt install g++** と打つと手に入ります。
+C言語のコンパイルにはgccを使いましたが、C++のコンパイルには **g++** を使います。もう一度Ubuntuを開いて、 `sudo apt install g++` と打つと手に入ります。
 
 ![source.cpp の内容](/images/blog/c-env-for-win10/hello_cpp.png)
 
@@ -203,8 +205,8 @@ C言語のコンパイルにはgccを使いましたが、C++のコンパイル�
 
 しっかり保存したら、ターミナルにこのようにコマンドを打ちます。
 
-1. g++ <今作ったファイルの名前>
-2. (1. でエラーメッセージが出なかったら)./a.out
+1. `g++ <今作ったファイルの名前>`
+2. (1. でエラーメッセージが出なかったら) `./a.out`
 
 さっきとほとんど同じですね。
 
@@ -222,4 +224,4 @@ C言語のコンパイルにはgccを使いましたが、C++のコンパイル�
 
 ![設定ファイル](/images/blog/c-env-for-win10/json.png)
 
-すると設定ファイルが開かれるので、そこに **“files.autoSave”: “afterDelay”** と追記し、保存してください。これで自動保存がきくようになります。
+すると設定ファイルが開かれるので、そこに `"files.autoSave": "afterDelay"` と追記し、保存してください。これで自動保存がきくようになります。

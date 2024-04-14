@@ -8,8 +8,6 @@ import { URL } from '@/constants/url';
 import { parseStrToMarkdown } from '@/lib/markdown-server';
 import { findFilesInDeep } from '@/util/file';
 
-import { HOME_BREADCRUMBS } from '../page';
-
 import styles from './page.module.css';
 
 import type { Metadata } from 'next';
@@ -23,8 +21,11 @@ export const metadata = {
   description: DESCRIPTION,
 } satisfies Metadata;
 
-export const BLOG_LIST_BREADCRUMBS = [
-  ...HOME_BREADCRUMBS,
+const BREADCRUMBS = [
+  {
+    title: 'Home',
+    href: ROUTE.TOP,
+  },
   {
     title: TITLE,
     href: ROUTE.BLOG_LIST,
@@ -72,10 +73,7 @@ export default async function BlogList() {
 
   return (
     <>
-      <Hero
-        breadcrumbs={BLOG_LIST_BREADCRUMBS}
-        information={`${blogs.length} posts`}
-      >
+      <Hero breadcrumbs={BREADCRUMBS} information={`${blogs.length} posts`}>
         <div className={styles.heroContent}>
           <h1 className={styles.title}>{TITLE}</h1>
           <p className={styles.description}>{DESCRIPTION}</p>

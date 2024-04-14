@@ -69,8 +69,6 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const blog = await getBlog(params.slug);
-  const slug = params.slug.join('-');
-  const title = blog.meta.title;
   const jsonPath = path.join(OGP.BLOG_CACHE_DIR_PATH, 'blog.json');
   const createJsonDir = async () => {
     try {
@@ -85,18 +83,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     await writeFile(jsonPath, '{}');
   }
 
-  let ogpPath = OGP.OGP_DYNAMIC_IMAGE(params.slug);
-  const json = await readFile(jsonPath, 'utf-8');
-  const cache = JSON.parse(json);
-  if (cache[slug] !== title) {
-    ogpPath = await createOgp(
-      blog.meta.title,
-      blog.meta.authors,
-      blog.meta.slug,
-    );
-    cache[slug] = title;
-    await writeFile(jsonPath, JSON.stringify(cache));
-  }
+  const ogpPath = await createOgp(
+    blog.meta.title,
+    blog.meta.authors,
+    blog.meta.slug,
+  );
 
   return {
     title: blog.meta.title,

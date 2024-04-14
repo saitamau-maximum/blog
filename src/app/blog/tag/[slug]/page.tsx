@@ -9,8 +9,6 @@ import { URL } from '@/constants/url';
 import { parseStrToMarkdown } from '@/lib/markdown-server';
 import { findFilesInDeep } from '@/util/file';
 
-import { BLOG_LIST_BREADCRUMBS } from '../../page';
-
 import styles from './page.module.css';
 
 import type { Metadata } from 'next';
@@ -25,8 +23,15 @@ const TITLE = (tag: string) => `「${tag}」 のブログ一覧`;
 const DESCRIPTION = (tag: string) =>
   `${tag} のタグがついたブログ一覧です。\nサークルの公開している講習会資料や、技術のアウトプットなどを掲載しています。`;
 
-const BLOG_LIST_FILTER_BY_TAG_BREADCRUMBS = (title: string, tag: string) => [
-  ...BLOG_LIST_BREADCRUMBS,
+const BREADCRUMBS = (title: string, tag: string) => [
+  {
+    title: 'Home',
+    href: ROUTE.TOP,
+  },
+  {
+    title: 'ブログ一覧',
+    href: ROUTE.BLOG_LIST,
+  },
   {
     title,
     href: ROUTE.TAGGED_BLOG_LIST(tag),
@@ -121,10 +126,7 @@ export default async function BlogListByTag({ params }: Props) {
   return (
     <>
       <Hero
-        breadcrumbs={BLOG_LIST_FILTER_BY_TAG_BREADCRUMBS(
-          TITLE(tagSlug),
-          params.slug,
-        )}
+        breadcrumbs={BREADCRUMBS(TITLE(tagSlug), params.slug)}
         information={`${blogs.length} posts`}
       >
         <div className={styles.heroContent}>

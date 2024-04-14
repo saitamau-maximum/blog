@@ -7,7 +7,6 @@ import Link from 'next/link';
 import { MdArrowForward } from 'react-icons/md';
 
 import { BlogCardList } from '@/components/blog/card-list';
-import { RelayList } from '@/components/relay/list';
 import { ROUTE } from '@/constants/route';
 import { TEXT } from '@/constants/text';
 import { URL } from '@/constants/url';
@@ -22,7 +21,7 @@ import styles from './page.module.css';
 const LATEST_BLOGS_COUNT = 6;
 const LATEST_RELAYS_COUNT = 3;
 
-export const HOME_BREADCRUMBS = [
+const HOME_BREADCRUMBS = [
   {
     title: 'Home',
     href: ROUTE.TOP,
@@ -120,15 +119,6 @@ export default async function Home() {
         </p>
         <BlogCardList blogs={latestBlogs} />
         <Link href={ROUTE.BLOG_LIST} className={styles.moreLink}>
-          More
-          <MdArrowForward />
-        </Link>
-        <h2>直近のブログリレー</h2>
-        <p>
-          1ヶ月で1つのテーマについて、複数のメンバーが記事を書く企画「ブログリレー」を不定期に開催しています。
-        </p>
-        <RelayList relays={latestRelays} />
-        <Link href={ROUTE.RELAY_LIST} className={styles.moreLink}>
           More
           <MdArrowForward />
         </Link>

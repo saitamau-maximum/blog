@@ -16,8 +16,6 @@ import { parseMarkdownToHTML, parseStrToMarkdown } from '@/lib/markdown-server';
 import { createOgp } from '@/lib/ogp';
 import { findFilesInDeep } from '@/util/file';
 
-import { BLOG_LIST_BREADCRUMBS } from '../page';
-
 import styles from './page.module.css';
 
 import type { Metadata } from 'next';
@@ -28,8 +26,15 @@ interface Props {
   };
 }
 
-const BLOG_DETAIL_BREADCRUMBS = (title: string, href: string) => [
-  ...BLOG_LIST_BREADCRUMBS,
+const BREADCRUMBS = (title: string, href: string) => [
+  {
+    title: 'Home',
+    href: ROUTE.TOP,
+  },
+  {
+    title: 'ブログ一覧',
+    href: ROUTE.BLOG_LIST,
+  },
   {
     title,
     href,
@@ -51,7 +56,6 @@ export async function generateStaticParams() {
   const slugs = await Promise.all(
     files.map(async (file) => {
       const content = await readFile(file, 'utf-8');
-      const res = parseStrToMarkdown(content, file);
       const relativePath = path.relative(URL.BLOG_DIR_PATH, file);
       const slugs = relativePath
         .split('/')
@@ -65,8 +69,6 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const blog = await getBlog(params.slug);
-  const slug = params.slug.join('-');
-  const title = blog.meta.title;
   const jsonPath = path.join(OGP.BLOG_CACHE_DIR_PATH, 'blog.json');
   const createJsonDir = async () => {
     try {
@@ -81,18 +83,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     await writeFile(jsonPath, '{}');
   }
 
-  let ogpPath = OGP.OGP_DYNAMIC_IMAGE(params.slug);
-  const json = await readFile(jsonPath, 'utf-8');
-  const cache = JSON.parse(json);
-  if (cache[slug] !== title) {
-    ogpPath = await createOgp(
-      blog.meta.title,
-      blog.meta.authors,
-      blog.meta.slug,
-    );
-    cache[slug] = title;
-    await writeFile(jsonPath, JSON.stringify(cache));
-  }
+  const ogpPath = await createOgp(
+    blog.meta.title,
+    blog.meta.authors,
+    blog.meta.slug,
+  );
 
   return {
     title: blog.meta.title,
@@ -192,7 +187,7 @@ export default async function BlogDetail({ params }: Props) {
     <>
       <Hero
         title={blog.meta.title}
-        breadcrumbs={BLOG_DETAIL_BREADCRUMBS(
+        breadcrumbs={BREADCRUMBS(
           blog.meta.title,
           ROUTE.BLOG_DETAIL(blog.meta.slug),
         )}

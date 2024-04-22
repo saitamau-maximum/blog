@@ -48,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ja">
+    <html lang="ja" className="light">
       <head>
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script src="/fouc.js" />

@@ -122,6 +122,12 @@ const createAuthorImage = async (authors: string[]) => {
   const imgs: Image[] = [];
   await Promise.all(
     authors.map(async (author) => {
+      const res = await fetch(URL.GITHUB_PROFILE_IMAGE_URL(author));
+      if (!res.ok) {
+        throw new Error(
+          `\`${author}\` の画像が取得できませんでした。存在するGitHubユーザー名を指定してください。`,
+        );
+      }
       const img = await loadImage(URL.GITHUB_PROFILE_IMAGE_URL(author));
       imgs.push(img);
     }),

@@ -101,7 +101,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: blog.meta.description,
       images: [
         {
-          url: ogpPath,
+          url: `${URL.ORIGIN}${ogpPath}`,
         },
       ],
     },
@@ -110,7 +110,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: blog.meta.description,
       images: [
         {
-          url: ogpPath,
+          url: `${URL.ORIGIN}${ogpPath}`,
         },
       ],
     },

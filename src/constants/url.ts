@@ -17,7 +17,7 @@ export const URL = {
   ORIGIN:
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000'
-      : 'https://maximum.vc',
+      : 'https://blog.maximum.vc',
 };
 
 export const OGP = {

@@ -49,7 +49,6 @@ export const LinkCard = ({ href }: Props) => {
   }, [href]);
 
   useEffect(() => {
-    console.log('href', href);
     fetchLinkData();
   }, [fetchLinkData]);
 

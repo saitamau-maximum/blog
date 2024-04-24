@@ -79,7 +79,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   await createCacheDir();
   const joinedSlug = blog.meta.slug.join('-');
   const cachePath = path.join(OGP.BLOG_CACHE_DIR_PATH, `${joinedSlug}.txt`);
-  // もしキャッシュが存在しなければOGP画像を生成する
   let cache = '';
   try {
     cache = await readFile(cachePath, 'utf-8');

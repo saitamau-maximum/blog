@@ -3,9 +3,9 @@ import rehypeParse from 'rehype-parse';
 import rehypeReact from 'rehype-react';
 import { unified } from 'unified';
 
-import { Anchor } from './rehype/anchor';
 import { Div } from './rehype/div';
 import { Image } from './rehype/image';
+import { Paragraph } from './rehype/paragraph';
 
 export const parseHTMLToReactJSX = (htmlContent: string) => {
   const processor = unified()
@@ -15,9 +15,9 @@ export const parseHTMLToReactJSX = (htmlContent: string) => {
     // @ts-ignore
     .use(rehypeReact, {
       components: {
-        a: Anchor,
         img: Image,
         div: Div,
+        p: Paragraph,
       },
       createElement,
       Fragment,

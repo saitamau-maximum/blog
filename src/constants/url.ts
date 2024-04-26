@@ -14,6 +14,10 @@ export const URL = {
   GITHUB_PROFILE_URL: (username: string) => `https://github.com/${username}`,
   GITHUB_PROFILE_IMAGE_URL: (username: string) =>
     `https://github.com/${username}.png`,
+  ORIGIN:
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000'
+      : 'https://blog.maximum.vc',
 };
 
 export const OGP = {

@@ -1,7 +1,7 @@
 'use client';
 import { clsx } from 'clsx';
 import Link from 'next/link';
-import { ReactNode, useEffect } from 'react';
+import { Fragment, ReactNode, useEffect } from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
 import { MdHome } from 'react-icons/md';
 
@@ -41,30 +41,23 @@ export const Hero = ({ children, information, title, breadcrumbs }: Props) => {
         <div className={styles.breadcrumbs}>
           <MdHome size={20} className={styles.breadcrumbItem} />
           {breadcrumbs.map((breadcrumb, index) => (
-            <>
+            <Fragment key={breadcrumb.href}>
               {index !== breadcrumbs.length - 1 ? (
                 <Link
                   href={breadcrumb.href}
-                  key={`${breadcrumb.title}-${index}-breadcrumb`}
                   className={clsx(styles.breadcrumbItem, styles.link)}
                 >
                   {breadcrumb.title}
                 </Link>
               ) : (
-                <span
-                  key={`${breadcrumb.title}-${index}-breadcrumb`}
-                  className={styles.breadcrumbItem}
-                >
+                <span className={styles.breadcrumbItem}>
                   {breadcrumb.title}
                 </span>
               )}
               {index !== breadcrumbs.length - 1 && (
-                <IoIosArrowForward
-                  className={styles.breadcrumbItem}
-                  key={`${breadcrumb.title}-${index}-arrow`}
-                />
+                <IoIosArrowForward className={styles.breadcrumbItem} />
               )}
-            </>
+            </Fragment>
           ))}
         </div>
         <span className={styles.information}>{information}</span>

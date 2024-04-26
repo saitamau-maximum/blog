@@ -22,7 +22,6 @@ import remarkDirective from 'remark-directive';
 import remarkExtractToc from 'remark-extract-toc';
 import remarkCodeTitle from 'remark-flexible-code-titles';
 import remarkGfm from 'remark-gfm';
-import { remarkLinkMeta } from 'remark-link-meta/dist/remark-link-meta';
 import remarkMath from 'remark-math';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
@@ -74,7 +73,6 @@ const mdHtmlProcessor = unified()
   .use(remarkDirective) //        [mdast -> mdast] directiveブロックを変換
   .use(remarkCustomDirectives) // [mdast -> mdast] directiveブロックを拡張
   .use(remarkCodeTitle) //        [mdast -> mdast] codeブロックへタイトル等の構文拡張
-  .use(remarkLinkMeta) //         [mdast -> mdast] リンクのメタデータを取得
   .use(remarkRehype) //           [mdast -> hast ] mdast(Markdown抽象構文木)をhast(HTML抽象構文木)に変換
   .use(rehypeMermaid, {
     strategy: 'inline-svg',

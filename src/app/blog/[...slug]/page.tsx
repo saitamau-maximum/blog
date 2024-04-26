@@ -69,25 +69,36 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const blog = await getBlog(params.slug);
-  const jsonPath = path.join(OGP.BLOG_CACHE_DIR_PATH, 'blog.json');
-  const createJsonDir = async () => {
+  const createCacheDir = async () => {
     try {
       await readdir(OGP.BLOG_CACHE_DIR_PATH);
     } catch (e) {
       await mkdir(OGP.BLOG_CACHE_DIR_PATH, { recursive: true });
     }
   };
-  await createJsonDir();
-  const jsonfile = await readdir(OGP.BLOG_CACHE_DIR_PATH);
-  if (!jsonfile.includes('blog.json')) {
-    await writeFile(jsonPath, '{}');
+  await createCacheDir();
+  const joinedSlug = blog.meta.slug.join('-');
+  const cachePath = path.join(OGP.BLOG_CACHE_DIR_PATH, `${joinedSlug}.txt`);
+  let cache = '';
+  try {
+    cache = await readFile(cachePath, 'utf-8');
+  } catch (e) {
+    // キャッシュが存在しない場合は何もしない
   }
 
-  const ogpPath = await createOgp(
-    blog.meta.title,
-    blog.meta.authors,
-    blog.meta.slug,
-  );
+  const cacheKey = `${blog.meta.title}:${blog.meta.authors.join(',')}`;
+
+  let ogpPath = '';
+  if (cache === cacheKey) {
+    ogpPath = OGP.OGP_DYNAMIC_IMAGE(blog.meta.slug);
+  } else {
+    ogpPath = await createOgp(
+      blog.meta.title,
+      blog.meta.authors,
+      blog.meta.slug,
+    );
+    await writeFile(cachePath, cacheKey);
+  }
 
   return {
     title: blog.meta.title,

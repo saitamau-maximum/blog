@@ -1,67 +1,93 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+
+import { URL as _URL } from '@/constants/url';
 
 import styles from './link-card.module.css';
 
-import type { LinkMeta } from 'remark-link-meta/dist/types';
-
 const getDomain = (url: string) => {
-  const domain = url.match(/https?:\/\/([^/]+)/);
-  return domain ? domain[1] : '';
+  if (url.startsWith('/')) {
+    url = _URL.ORIGIN + url;
+  }
+
+  const match = url.match(/^https?:\/\/([^/]+)/);
+  return match?.[1];
+};
+
+const getUnescapedText = (text: string) => {
+  const div = document.createElement('div');
+  div.innerHTML = text;
+  return div.textContent || div.innerText || '';
 };
 
 interface Props {
-  title: string;
   href: string;
-  description?: LinkMeta['description'];
-  thumbnailurl?: LinkMeta['thumbnailUrl'];
-  iconurl?: LinkMeta['iconUrl'];
+}
+interface LinkData {
+  title: string;
+  description?: string;
+  imageUrl?: string;
+  faviconUrl?: string;
 }
 
-export const LinkCard = ({
-  description,
-  href,
-  iconurl,
-  thumbnailurl,
-  title,
-}: Props) => {
-  const [isIconLoadSuccess, setIsIconLoadSuccess] = useState(true);
-  const [isThumbnailLoadSuccess, setIsThumbnailLoadSuccess] = useState(true);
+export const LinkCard = ({ href }: Props) => {
+  const [linkData, setLinkData] = useState<LinkData | null>(null);
+  const openInNewTab = href.startsWith('http');
+
+  const fetchLinkData = useCallback(async () => {
+    const reqUrl = (href.startsWith('/') ? _URL.ORIGIN : '') + href;
+    const query = new URLSearchParams({ url: reqUrl });
+    const response = await fetch(
+      new URL(`/?${query}`, _URL.OGP_FETCHER_ORIGIN).toString(),
+    );
+    if (response.ok) {
+      const data: LinkData = await response.json();
+      setLinkData(data);
+    }
+  }, [href]);
+
+  useEffect(() => {
+    fetchLinkData();
+  }, [fetchLinkData]);
+
+  if (!linkData) return <div className={styles.container} />;
 
   return (
     <Link
       href={href}
       className={styles.container}
-      rel="noopener noreferrer"
-      target="_blank"
+      rel={openInNewTab ? 'noopener noreferrer' : undefined}
+      target={openInNewTab ? '_blank' : undefined}
     >
       <span className={styles.content}>
-        <span className={styles.title}>{title}</span>
-        <span className={styles.description}>{description}</span>
+        <span className={styles.title}>{getUnescapedText(linkData.title)}</span>
+        {linkData.description && (
+          <span className={styles.description}>
+            {getUnescapedText(linkData.description)}
+          </span>
+        )}
         <span className={styles.domain}>
-          {isIconLoadSuccess && iconurl && (
+          {linkData.faviconUrl && (
             <Image
-              src={iconurl}
-              alt={title}
+              src={linkData.faviconUrl}
+              alt={linkData.title}
               width={16}
               height={16}
-              onError={() => setIsIconLoadSuccess(false)}
               className={styles.icon}
             />
           )}
           {getDomain(href)}
         </span>
       </span>
-      {isThumbnailLoadSuccess && thumbnailurl && (
+      {linkData.imageUrl && (
         <Image
-          src={thumbnailurl}
-          alt={title}
+          src={linkData.imageUrl}
+          alt={linkData.title}
           width={240}
           height={126}
           className={styles.thumbnail}
-          onError={() => setIsThumbnailLoadSuccess(false)}
         />
       )}
     </Link>

@@ -18,6 +18,7 @@ export const URL = {
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000'
       : 'https://blog.maximum.vc',
+  OGP_FETCHER_ORIGIN: 'https://ogp-fetcher.maximum.vc',
 };
 
 export const OGP = {

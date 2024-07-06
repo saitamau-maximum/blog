@@ -41,7 +41,7 @@ const BREADCRUMBS = (title: string, tag: string) => [
 export async function generateStaticParams() {
   const tags = await getTags();
 
-  return tags.map((tag) => ({ slug: tag }));
+  return tags.map((tag) => ({ slug: encodeURIComponent(tag) }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

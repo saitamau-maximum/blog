@@ -6,6 +6,19 @@
   line-height: 1.9;
 }
 
+.content h2 {
+  border-left: 0.25rem solid var(--color-accent-primary);
+  padding-left: 1rem;
+}
+
+:global(.light) .content h3 {
+  border-bottom: 1px solid var(--color-gray-300);
+}
+
+:global(.dark) .content h3 {
+  border-bottom: 1px solid var(--color-gray-500);
+}
+
 .content svg * {
   line-height: 1;
 }

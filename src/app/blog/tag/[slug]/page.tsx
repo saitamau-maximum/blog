@@ -41,7 +41,11 @@ const BREADCRUMBS = (title: string, tag: string) => [
 export async function generateStaticParams() {
   const tags = await getTags();
 
-  return tags.map((tag) => ({ slug: encodeURIComponent(tag) }));
+  return tags.map((tag) =>
+    process.env.NODE_ENV === 'production'
+      ? { slug: tag }
+      : { slug: encodeURIComponent(tag) },
+  );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

@@ -17,6 +17,7 @@ import { refractor } from 'refractor/lib/core.js';
 import rehypeKatex from 'rehype-katex';
 import rehypeMermaid from 'rehype-mermaid';
 import rehypePrismGenerator from 'rehype-prism-plus/generator';
+import rehypeSlug from 'rehype-slug';
 import rehypeStringify from 'rehype-stringify';
 import remarkDirective from 'remark-directive';
 import remarkExtractToc from 'remark-extract-toc';
@@ -25,7 +26,6 @@ import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
-import remarkSlug from 'remark-slug';
 import { unified } from 'unified';
 import { z } from 'zod';
 
@@ -67,7 +67,6 @@ interface TocItem {
 
 const mdHtmlProcessor = unified()
   .use(remarkParse) //            [md    -> mdast] Markdownをmdast(Markdown抽象構文木)に変換
-  .use(remarkSlug) //             [mdast -> mdast] Headingにid付与（Toc Anchor用）
   .use(remarkGfm) //              [mdast -> mdast] table等の拡張md記法変換
   .use(remarkMath) //             [mdast -> mdast] mathブロックを変換
   .use(remarkDirective) //        [mdast -> mdast] directiveブロックを変換
@@ -84,6 +83,7 @@ const mdHtmlProcessor = unified()
   .use(rehypePrism, {
     ignoreMissing: false,
   }) //                           [hast  -> hast ] codeブロックをPrism.jsに対応
+  .use(rehypeSlug) //             [hast  -> hast ] Headingにid付与（Toc Anchor用）
   .use(rehypeStringify); //       [hast  -> html ] hast(HTML抽象構文木)をHTMLに変換
 
 const tocProcessor = unified()

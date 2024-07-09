@@ -2,9 +2,7 @@
 import { Plugin } from 'unified';
 import { visit } from 'unist-util-visit';
 
-import type { Root } from 'remark';
-
-const remarkCustomDirectives: Plugin<[], Root> = () => {
+const remarkCustomDirectives: Plugin<[]> = () => {
   return (tree) => {
     visit(tree, (node) => {
       if (node.type === 'containerDirective' && node.name === 'details') {

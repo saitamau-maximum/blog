@@ -88,7 +88,7 @@ const mdHtmlProcessor = unified()
 
 const tocProcessor = unified()
   .use(remarkParse) //      [md    -> mdast] Markdownをmdast(Markdown抽象構文木)に変換
-  .use(remarkSlug) //       [mdast -> mdast] Headingにid付与（Toc Anchor用）
+  .use(rehypeSlug) //       [mdast -> mdast] Headingにid付与（Toc Anchor用）
   .use(remarkExtractToc, {
     keys: ['data'],
   });

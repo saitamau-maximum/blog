@@ -44,7 +44,7 @@
     "react-icons": "^5.2.1",
     "refractor": "^4.8.1",
     "rehype-katex": "^6.0.3",
-    "rehype-mermaidjs": "^1.0.1",
+    "rehype-mermaid": "^2.1.0",
     "rehype-parse": "^8.0.4",
     "rehype-prism-plus": "^1.5.1",
     "rehype-react": "^7.2.0",

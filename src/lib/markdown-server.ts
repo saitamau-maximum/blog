@@ -15,7 +15,7 @@ import refractorTypescript from 'refractor/lang/typescript';
 import refactorHtml from 'refractor/lang/xml-doc';
 import { refractor } from 'refractor/lib/core.js';
 import rehypeKatex from 'rehype-katex';
-import rehypeMermaid from 'rehype-mermaidjs';
+import rehypeMermaid from 'rehype-mermaid';
 import rehypePrismGenerator from 'rehype-prism-plus/generator';
 import rehypeStringify from 'rehype-stringify';
 import remarkDirective from 'remark-directive';

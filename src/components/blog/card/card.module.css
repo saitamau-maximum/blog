@@ -3,7 +3,9 @@
   height: 100%;
   box-sizing: border-box;
   border-radius: 0.5rem;
-  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+  transition:
+    box-shadow 0.2s ease-in-out,
+    transform 0.2s ease-in-out;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
 }
 

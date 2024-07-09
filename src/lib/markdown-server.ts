@@ -1,3 +1,4 @@
+import rehypeExtractToc from '@stefanprobst/rehype-extract-toc';
 import refactorBash from 'refractor/lang/bash';
 import refractorC from 'refractor/lang/c';
 import refractorCpp from 'refractor/lang/cpp';
@@ -20,7 +21,6 @@ import rehypePrismGenerator from 'rehype-prism-plus/generator';
 import rehypeSlug from 'rehype-slug';
 import rehypeStringify from 'rehype-stringify';
 import remarkDirective from 'remark-directive';
-import remarkExtractToc from 'remark-extract-toc';
 import remarkCodeTitle from 'remark-flexible-code-titles';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
@@ -52,19 +52,6 @@ refractor.register(refactorSql);
 
 const rehypePrism = rehypePrismGenerator(refractor);
 
-interface TocItem {
-  /** ヘッダーのレベル */
-  depth: number;
-  /** ヘッダーのテキスト */
-  value: string;
-  /** ヘッダーの属性データ */
-  data: {
-    id: string;
-  };
-  /** ヘッダーの子要素 */
-  children: TocItem[];
-}
-
 const mdHtmlProcessor = unified()
   .use(remarkParse) //            [md    -> mdast] Markdownをmdast(Markdown抽象構文木)に変換
   .use(remarkGfm) //              [mdast -> mdast] table等の拡張md記法変換
@@ -88,19 +75,19 @@ const mdHtmlProcessor = unified()
 
 const tocProcessor = unified()
   .use(remarkParse) //      [md    -> mdast] Markdownをmdast(Markdown抽象構文木)に変換
-  .use(rehypeSlug) //       [mdast -> mdast] Headingにid付与（Toc Anchor用）
-  .use(remarkExtractToc, {
-    keys: ['data'],
-  });
+  .use(remarkRehype) //     [mdast -> hast ] mdast(Markdown抽象構文木)をhast(HTML抽象構文木)に変換
+  .use(rehypeSlug) //       [hast  -> hast ] Headingにid付与（Toc Anchor用）
+  .use(rehypeExtractToc) // [hast  -> hast ] Tocを抽出
+  .use(rehypeStringify); // [hast  -> html ] hast(HTML抽象構文木)をHTMLに変換
 
 export const parseMarkdownToHTML = async (mdContent: string) => {
   const [content, toc] = await Promise.all([
     await mdHtmlProcessor.process(mdContent),
-    await tocProcessor.run(tocProcessor.parse(mdContent)),
+    await tocProcessor.process(mdContent),
   ]);
   return {
     content: content.toString(),
-    toc: toc as TocItem[],
+    toc: toc.data.toc,
   };
 };
 

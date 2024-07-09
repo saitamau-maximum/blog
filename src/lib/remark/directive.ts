@@ -2,7 +2,7 @@
 import { Plugin } from 'unified';
 import { visit } from 'unist-util-visit';
 
-import type { Root } from 'mdast';
+import type { Root } from 'remark';
 
 const remarkCustomDirectives: Plugin<[], Root> = () => {
   return (tree) => {

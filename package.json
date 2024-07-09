@@ -29,7 +29,6 @@
     ]
   },
   "dependencies": {
-    "@types/mdast": "^3.0.11",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
     "canvas": "^2.11.2",
@@ -38,7 +37,6 @@
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.1",
     "katex": "^0.16.4",
-    "mdast": "^3.0.0",
     "next": "14.2.4",
     "playwright": "^1.33.0",
     "react": "18.3.1",
@@ -51,6 +49,7 @@
     "rehype-prism-plus": "^1.5.1",
     "rehype-react": "^7.2.0",
     "rehype-stringify": "^9.0.3",
+    "remark": "^15.0.1",
     "remark-directive": "^2.0.1",
     "remark-extract-toc": "^1.1.0",
     "remark-flexible-code-titles": "^1.1.2",

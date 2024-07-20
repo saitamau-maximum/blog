@@ -1,3 +1,4 @@
+import rehypeExtractToc from '@stefanprobst/rehype-extract-toc';
 import refactorBash from 'refractor/lang/bash';
 import refractorC from 'refractor/lang/c';
 import refractorCpp from 'refractor/lang/cpp';
@@ -15,17 +16,16 @@ import refractorTypescript from 'refractor/lang/typescript';
 import refactorHtml from 'refractor/lang/xml-doc';
 import { refractor } from 'refractor/lib/core.js';
 import rehypeKatex from 'rehype-katex';
-import rehypeMermaid from 'rehype-mermaidjs';
+import rehypeMermaid from 'rehype-mermaid';
 import rehypePrismGenerator from 'rehype-prism-plus/generator';
+import rehypeSlug from 'rehype-slug';
 import rehypeStringify from 'rehype-stringify';
 import remarkDirective from 'remark-directive';
-import remarkExtractToc from 'remark-extract-toc';
 import remarkCodeTitle from 'remark-flexible-code-titles';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
-import remarkSlug from 'remark-slug';
 import { unified } from 'unified';
 import { z } from 'zod';
 
@@ -52,22 +52,8 @@ refractor.register(refactorSql);
 
 const rehypePrism = rehypePrismGenerator(refractor);
 
-interface TocItem {
-  /** ヘッダーのレベル */
-  depth: number;
-  /** ヘッダーのテキスト */
-  value: string;
-  /** ヘッダーの属性データ */
-  data: {
-    id: string;
-  };
-  /** ヘッダーの子要素 */
-  children: TocItem[];
-}
-
 const mdHtmlProcessor = unified()
   .use(remarkParse) //            [md    -> mdast] Markdownをmdast(Markdown抽象構文木)に変換
-  .use(remarkSlug) //             [mdast -> mdast] Headingにid付与（Toc Anchor用）
   .use(remarkGfm) //              [mdast -> mdast] table等の拡張md記法変換
   .use(remarkMath) //             [mdast -> mdast] mathブロックを変換
   .use(remarkDirective) //        [mdast -> mdast] directiveブロックを変換
@@ -84,23 +70,24 @@ const mdHtmlProcessor = unified()
   .use(rehypePrism, {
     ignoreMissing: false,
   }) //                           [hast  -> hast ] codeブロックをPrism.jsに対応
+  .use(rehypeSlug) //             [hast  -> hast ] Headingにid付与（Toc Anchor用）
   .use(rehypeStringify); //       [hast  -> html ] hast(HTML抽象構文木)をHTMLに変換
 
 const tocProcessor = unified()
   .use(remarkParse) //      [md    -> mdast] Markdownをmdast(Markdown抽象構文木)に変換
-  .use(remarkSlug) //       [mdast -> mdast] Headingにid付与（Toc Anchor用）
-  .use(remarkExtractToc, {
-    keys: ['data'],
-  });
+  .use(remarkRehype) //     [mdast -> hast ] mdast(Markdown抽象構文木)をhast(HTML抽象構文木)に変換
+  .use(rehypeSlug) //       [hast  -> hast ] Headingにid付与（Toc Anchor用）
+  .use(rehypeExtractToc) // [hast  -> hast ] Tocを抽出
+  .use(rehypeStringify); // [hast  -> html ] hast(HTML抽象構文木)をHTMLに変換
 
 export const parseMarkdownToHTML = async (mdContent: string) => {
   const [content, toc] = await Promise.all([
     await mdHtmlProcessor.process(mdContent),
-    await tocProcessor.run(tocProcessor.parse(mdContent)),
+    await tocProcessor.process(mdContent),
   ]);
   return {
     content: content.toString(),
-    toc: toc as TocItem[],
+    toc: toc.data.toc,
   };
 };
 

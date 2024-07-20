@@ -1,22 +1,14 @@
 'use client';
+import { Toc as TocType, TocEntry } from '@stefanprobst/rehype-extract-toc';
 import { clsx } from 'clsx';
 import { useEffect, useRef } from 'react';
 
 import styles from './toc.module.css';
 
-export interface TocItemProps {
-  depth: number;
-  value: string;
-  data: {
-    id: string;
-  };
-  children: TocItemProps[];
-}
-
-const TocItem = ({ children, data, depth, value }: TocItemProps) => {
+const TocItem = ({ children, id, depth, value }: TocEntry) => {
   const observer = useRef<IntersectionObserver>();
   const toc = useRef<HTMLAnchorElement>(null);
-  const targetId = `#${data.id}`;
+  const targetId = `#${id}`;
 
   useEffect(() => {
     observer.current = new IntersectionObserver((entries) => {
@@ -55,18 +47,17 @@ const TocItem = ({ children, data, depth, value }: TocItemProps) => {
         </a>
       </li>
       {depth <= 2 &&
+        children &&
         children.map((child) => <TocItem {...child} key={child.value} />)}
     </ul>
   );
 };
 
-export const Toc = ({ toc }: { toc: TocItemProps[] }) => {
+export const Toc = ({ toc }: { toc?: TocType }) => {
   return (
     <section className={styles.tocList}>
-      {toc.length === 0 && <p>見出しがありません</p>}
-      {toc.map((toc) => (
-        <TocItem {...toc} key={toc.value} />
-      ))}
+      {!toc || (toc.length === 0 && <p>見出しがありません</p>)}
+      {toc && toc.map((toc) => <TocItem {...toc} key={toc.value} />)}
     </section>
   );
 };

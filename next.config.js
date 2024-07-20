@@ -5,7 +5,7 @@ const nextConfig = {
     unoptimized: true,
   },
   experimental: {
-    serverComponentsExternalPackages: ['rehype-mermaidjs'],
+    serverComponentsExternalPackages: ['rehype-mermaid'],
   },
   output: 'export',
   trailingSlash: true,

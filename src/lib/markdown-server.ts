@@ -12,8 +12,10 @@ import refractorJsx from 'refractor/lang/jsx';
 import refractorPython from 'refractor/lang/python';
 import refractorRust from 'refractor/lang/rust';
 import refactorSql from 'refractor/lang/sql';
+import refractorTsx from 'refractor/lang/tsx';
 import refractorTypescript from 'refractor/lang/typescript';
 import refactorHtml from 'refractor/lang/xml-doc';
+import refractorYaml from 'refractor/lang/yaml';
 import { refractor } from 'refractor/lib/core.js';
 import rehypeKatex from 'rehype-katex';
 import rehypeMermaid from 'rehype-mermaid';
@@ -38,6 +40,7 @@ refractor.register(refractorRust);
 refractor.register(refractorTypescript);
 refractor.register(refractorJavascript);
 refractor.register(refractorJsx);
+refractor.register(refractorTsx);
 refractor.register(refractorPython);
 refractor.register(refractorJava);
 refractor.register(refractorC);
@@ -49,6 +52,7 @@ refractor.register(refactorHtml);
 refractor.register(refractorCSS);
 refractor.register(refactorBash);
 refractor.register(refactorSql);
+refractor.register(refractorYaml);
 
 const rehypePrism = rehypePrismGenerator(refractor);
 
